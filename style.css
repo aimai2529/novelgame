@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+body {
+    margin: 0;
+    font-family: "DotGothic16", sans-serif;
+    font-size: 32px;
+    background: #0f1f21;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* タブレットぐらい */
+@media (max-width: 1200px) {
+    #body {
+        font-size: 26px;
+    }
+}
+
+/* スマホ横ぐらい */
+@media (max-width: 900px) {
+    #body {
+        font-size: 22px;
+    }
+}
+
+/* もっと小さい */
+@media (max-width: 600px) {
+    #body {
+        font-size: 18px;
+    }
+}
+
+/* ======================
+GAME GRID
+====================== */
+#game {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 3fr 3fr;
+    gap: 30px;
+    width: 100vw;
+    height: 100vh;
+    padding: 30px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+/* デバッグ用にグリッドで背景がつくものを残しておきます*/
+/* .panel {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    padding: 8px;
+} */
+
+/* layout positions */
+#hud-top-left {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#map {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#status {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+#items {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+#video {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: #000;
+    aspect-ratio: 9 / 16;
+    height: 100%;
+    justify-self: center;
+}
+
+#video #bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* caller face */
+#face {
+    grid-column: 3;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#face img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* ======================
+   STATUS (SAN BAR)
+====================== */
+.label {
+    margin-bottom: 6px;
+}
+
+.san-bar {
+    width: 100%;
+    height: 14px;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.san-value {
+    height: 100%;
+    background: repeating-linear-gradient(to right,
+            #4ac 0,
+            #4ac 25%,
+            #3aa 25%,
+            #3aa 50%);
+    transition: width .25s;
+}
+
+/* ======================
+   ITEMS
+====================== */
+.slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.slot {
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+/* ======================
+   TEXTBOX
+====================== */
+#textbox {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    height: auto;
+    padding: 0 0 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#text {
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 1.4;
+    min-height: calc(1.4em * 6);
+    padding: 1.4em;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#info {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: -12px;
+}
+
+#name {
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.5em;
+    font-weight: bold;
+    width: calc(1em * 8);
+    height: calc(1em * 2);
+}
+
+#choices {
+    flex: 1;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    display: none;
+}
+
+#choices.show {
+    display: block;
+}
+
+#choices button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: rgba(0, 0, 0, 0.1);
+    color: #fff;
+    cursor: pointer;
+}
+
+#choices button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

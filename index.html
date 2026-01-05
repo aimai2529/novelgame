@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>novelgame</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/the-new-css-reset/css/reset.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game">
+        <div id="hud-top-left" class="panel">
+            閉店まで2時間 - 残り4箇所
+        </div>
+
+        <div id="map" class="panel">
+            <!-- マップ画像や拡大ボタンをここに置く -->
+        </div>
+
+        <div id="status" class="panel">
+            <div class="label">正気度</div>
+            <div class="san-bar">
+                <div class="san-value" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <div id="items" class="panel">
+            <div class="label">所持品</div>
+            <div class="slots">
+                <div class="slot"></div>
+                <div class="slot"></div>
+                <div class="slot"></div>
+                <div class="slot"></div>
+                <div class="slot"></div>
+                <div class="slot"></div>
+            </div>
+        </div>
+
+        <div id="video">
+            <img id="bg" />
+        </div>
+
+        <div id="face" class="panel">
+            <img id="call-face" />
+        </div>
+
+        <div id="textbox">
+            <div id="info">
+                <div id="name"></div>
+                <div id="choices"></div>
+            </div>
+            <div id="text"></div>
+        </div>
+    </div>
+
+    <script src="system.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "start",
+        "bg": "room.jpg",
+        "text": "どうする？",
+        "choices": [
+            {
+                "label": "外に出る",
+                "next": "outside"
+            },
+            {
+                "label": "部屋に残る",
+                "next": "stay"
+            }
+        ]
+    },
+    {
+        "id": "outside",
+        "bg": "room.jpg",
+        "text": "冷たい夜風が吹いた。",
+        "next": "end"
+    },
+    {
+        "id": "stay",
+        "bg": "room.jpg",
+        "text": "静かな時間が流れる。",
+        "next": "end"
+    }
+]
