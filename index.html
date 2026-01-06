@@ -13,52 +13,49 @@
 </head>
 
 <body>
-    <div id="game">
-        <div id="hud-top-left" class="panel">
-            閉店まで2時間 - 残り4箇所
-        </div>
-
-        <div id="map" class="panel">
-            <!-- マップ画像や拡大ボタンをここに置く -->
-        </div>
-
-        <div id="status" class="panel">
-            <div class="label">正気度</div>
-            <div class="san-bar">
-                <div class="san-value" style="width: 100%;"></div>
+    <div id="game-wrapper">
+        <div id="game">
+            <div id="hud-top-left" class="panel">
+                閉店まで2時間 <br>- アト4箇所
             </div>
-        </div>
-
-        <div id="items" class="panel">
-            <div class="label">所持品</div>
-            <div class="slots">
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+            <div id="map" class="panel">
+                <!-- マップ画像や拡大ボタンをここに置く -->
             </div>
-        </div>
-
-        <div id="video">
-            <img id="bg" />
-        </div>
-
-        <div id="face" class="panel">
-            <img id="call-face" />
-        </div>
-
-        <div id="textbox">
-            <div id="info">
-                <div id="name"></div>
-                <div id="choices"></div>
+            <div id="status" class="panel">
+                <div class="label">正気度</div>
+                <div class="san-bar">
+                    <div class="san-value" style="width: 100%;"></div>
+                </div>
             </div>
-            <div id="text"></div>
+            <div id="items" class="panel">
+                <div class="label">所持品</div>
+                <div class="slots">
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                </div>
+            </div>
+            <div id="video">
+                <img id="bg" />
+            </div>
+            <div id="face" class="panel">
+                <img id="call-face" />
+            </div>
+            <div id="textbox">
+                <div id="info">
+                    <div id="name"></div>
+                    <div id="choices"></div>
+                </div>
+                <div id="text"></div>
+            </div>
         </div>
     </div>
 
     <script src="system.js"></script>
+    <script src="size.js"></script>
 </body>
 
 </html>
