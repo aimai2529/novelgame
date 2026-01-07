@@ -1,29 +1,326 @@
 [
     {
         "id": "start",
-        "bg": "room.jpg",
-        "text": "どうする？",
+        "text": "クリックで開始",
+        "commands": [
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "op_01"
+    },
+    {
+        "id": "op_01",
+        "name": "ユウジン",
+        "text": "もしもーし、聞こえてるか？聞こえてそうだな。\n なあなあ、お前もカメラつけてくれよ。その方が俺が退屈しないからさ",
+        "bg": "",
+        "face": "friend_normal.png",
+        "commands": [
+            "show(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
         "choices": [
             {
-                "label": "外に出る",
-                "next": "outside"
+                "label": "しょうがないなぁ",
+                "next": "op_A"
             },
             {
-                "label": "部屋に残る",
-                "next": "stay"
+                "label": "やだね",
+                "next": "op_B_1"
             }
         ]
     },
     {
-        "id": "outside",
-        "bg": "room.jpg",
-        "text": "冷たい夜風が吹いた。",
+        "id": "op_B_1",
+        "name": "ユウジン",
+        "text": "つれないなぁ、頼むよ！暇なんだよぉ〜！",
+        "bg": "",
+        "face": "friend_normal.png",
+        "commands": [
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "choices": [
+            {
+                "label": "しょうがないなぁ",
+                "next": "op_A"
+            },
+            {
+                "label": "うるさ",
+                "next": "op_B_2"
+            }
+        ]
+    },
+    {
+        "id": "op_B_2",
+        "name": "ユウジン",
+        "text": "冷たい！ひどい！しくしく……",
+        "bg": "",
+        "face": "friend_cry.png",
+        "commands": [
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "choices": [
+            {
+                "label": "しょうがないなぁ",
+                "next": "op_A"
+            },
+            {
+                "label": "嘘泣きがすぎるだろ",
+                "next": "op_B_3"
+            }
+        ]
+    },
+    {
+        "id": "op_B_3",
+        "name": "ユウジン",
+        "text": "嘘泣きだなんて！俺の心は本当に泣いてるぜ、大親友に冷たくあしらわれてさ",
+        "bg": "",
+        "face": "friend_cry.png",
+        "commands": [
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "choices": [
+            {
+                "label": "しょうがないなぁ",
+                "next": "op_A"
+            },
+            {
+                "label": "やかましいな",
+                "next": "op_B_1"
+            }
+        ]
+    },
+    {
+        "id": "op_A",
+        "name": "ユウジン",
+        "text": "お、サンキューな！\nてか、もう18時だけど、そこのスーパー閉店20時だよな？あんま寄り道すんなよ〜。\n迷わないようにそこのフロアマップ送っといてやるよ笑",
+        "bg": "supermarket.png",
+        "face": "friend_normal.png",
+        "commands": [
+            "show(video)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "choices": [
+            {
+                "label": "余計なお世話",
+                "next": "op_C"
+            },
+            {
+                "label": "いらない",
+                "next": "op_C"
+            }
+        ]
+    },
+    {
+        "id": "op_C",
+        "name": "ユウジン",
+        "text": "もう送っちゃいました〜！",
+        "bg": "supermarket.png",
+        "face": "friend_smile.png",
+        "commands": [
+            "show(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "next": "op_C_2"
+    },
+    {
+        "id": "op_C_2",
+        "name": "ユウジン",
+        "text": "そういえば、夕飯の材料足りなかったから買いに行く、っていってたけど、何が足りなかったんだ？",
+        "bg": "supermarket.png",
+        "face": "friend_normal.png",
+        "commands": [
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "next": "op_C_3"
+    },
+    {
+        "id": "op_C_3",
+        "name": "ユウジン",
+        "text": "人参に豚肉にカレールー……\nえ、全然材料足りてないじゃん。よくそれでカレー作ろうと思ったな？！",
+        "bg": "memo.jpg",
+        "face": "friend_surprise.png",
+        "commands": [
+            "show(items)",
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "choices": [
+            {
+                "label": "カレーが食べたかったんだよ",
+                "next": "op_D"
+            },
+            {
+                "label": "別にいいでしょ",
+                "next": "op_D"
+            }
+        ]
+    },
+    {
+        "id": "op_D",
+        "name": "ユウジン",
+        "text": "たくさん作って俺にお裾分けに来るんだぞ〜笑\n……あ、お湯沸いたわ。カップ麺作ってくる",
+        "bg": "supermarket.png",
+        "face": "friend_normal.png",
+        "commands": [
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "next": "op_glitch_1"
+    },
+    {
+        "id": "op_glitch_1",
+        "text": "（暇なら料理でもしてればいいのに）",
+        "bg": "supermarket.png",
+        "face": "",
+        "commands": [
+            "hide(status)",
+            "hide(hud-top-left)",
+            "glitch"
+        ],
+        "next": "op_glitch_2"
+    },
+    {
+        "id": "op_glitch_2",
+        "text": "（……？なんだ、いまの、何か、変な影が……）",
+        "bg": "supermarket.png",
+        "face": "",
+        "speed": "100",
+        "commands": [
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "next": "op_shadow"
+    },
+    {
+        "id": "op_shadow",
+        "name": "ユウジン",
+        "text": "あれ、どうしたんだよおんなじ場所突っ立って。早速迷子か？",
+        "bg": "supermarket.png",
+        "face": "friend_normal.png",
+        "commands": [
+            "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "choices": [
+            {
+                "label": "いや、今何か変な影が……",
+                "next": "op_E"
+            },
+            {
+                "label": "さっき変なの映らなかったか？",
+                "next": "op_E"
+            }
+        ]
+    },
+    {
+        "id": "op_E",
+        "name": "ユウジン",
+        "text": "え、なに、まさかお前……\n夜のスーパーにびびってるな？おいおい相棒可愛いところあるじゃん〜！まあまあまあわかるぜ。その店、省エネでちょっと照明暗いもんな！ウンウン、でも俺がついてるからな！安心しろよ！",
+        "bg": "supermarket.png",
+        "face": "friend_smile.png",
+        "commands": [
+            "show(status)",
+            "hide(hud-top-left)"
+        ],
+        "choices": [
+            {
+                "label": "うるさ",
+                "next": "op_F"
+            },
+            {
+                "label": "そういうんじゃなくて、本当に……",
+                "next": "op_G"
+            }
+        ]
+    },
+    {
+        "id": "op_F",
+        "name": "ユウジン",
+        "text": "そんな照れんなって！カップ麺食いながら見守っててやるからさ！\nてか、そんなこと言ってないで、早く買い物行けよ。あと２時間で閉店だぞ〜",
+        "bg": "supermarket.png",
+        "face": "friend_normal.png",
+        "commands": [
+            "show(hud-top-left)",
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
         "next": "end"
     },
     {
-        "id": "stay",
-        "bg": "room.jpg",
-        "text": "静かな時間が流れる。",
+        "id": "op_G",
+        "name": "ユウジン",
+        "text": "あ、さては俺をビビらせようとしてるな？そんな簡単にはビビらないぜ〜俺は！\nてか、そんなことしてないで、早く買い物行けよ。あと２時間で閉店だぞ〜",
+        "bg": "supermarket.png",
+        "face": "friend_normal.png",
+        "commands": [
+            "show(hud-top-left)",
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "end"
+    },
+    {
+        "id": "toilet_1",
+        "name": "ユウジン",
+        "text": "トイレか？\nいっトイレ〜　なんつって",
+        "face": "friend_normal.png",
+        "bg": "supermarket.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "end"
+    },
+    {
+        "id": "toilet_2",
+        "name": "ユウジン",
+        "text": "トイレか？\n……二度は言わねぇよ",
+        "face": "friend_normal.png",
+        "bg": "supermarket.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "end"
+    },
+    {
+        "id": "toilet_3",
+        "name": "ユウジン",
+        "text": "トイレか？\n……流石に頻尿だな",
+        "face": "friend_normal.png",
+        "bg": "supermarket.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
         "next": "end"
     }
 ]
