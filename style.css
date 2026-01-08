@@ -160,27 +160,24 @@ GAME GRID
 /* ======================
    STATUS (SAN BAR)
 ====================== */
-.label {
-    margin-bottom: 6px;
-}
-
-.san-bar {
-    width: 100%;
-    height: 14px;
-    background: #111;
-    border-radius: 8px;
+#status {
     overflow: hidden;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.san-value {
-    height: 100%;
-    background: repeating-linear-gradient(to right,
-            #4ac 0,
-            #4ac 25%,
-            #3aa 25%,
-            #3aa 50%);
-    transition: width .25s;
+.label {
+    white-space: nowrap;
+}
+
+#san-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: left;
+    image-rendering: pixelated;
 }
 
 /* ======================

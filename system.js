@@ -1,12 +1,12 @@
 let story;
 let current;
 
-// --- MAP STATE ---
-let mapFloor = 1;          // 1 or 2
-let mapZoom = false;       // zoom on/off
+let mapFloor = 1;
 let mapModal = null;
 let mapOverlayHint = null;
 const mapEl = document.getElementById("map");
+
+let san = 3;
 
 let typingTimer = null;
 let typingDone = false;
@@ -17,7 +17,7 @@ const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
 
-let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);      // toilet event counter (persistent)
+let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
 
 async function loadStory() {
     story = await fetch("story.json").then(r => r.json());
@@ -35,24 +35,19 @@ function findScene(id) {
 
 function updateMapView() {
     if (!mapEl) return;
-    const base = mapZoom
-        ? `img/map_floor${mapFloor}_zoom.png`
-        : `img/map_floor${mapFloor}.png`;
+    const base = `img/map_floor${mapFloor}.png`;
     mapEl.style.backgroundImage = `url(${base})`;
     mapEl.style.backgroundSize = "cover";
     mapEl.style.backgroundPosition = "center";
     if (mapModal) {
         const img = mapModal.querySelector("img");
         if (img) {
-            img.src = mapZoom
-                ? `img/map_floor${mapFloor}_zoom.png`
-                : `img/map_floor${mapFloor}.png`;
+            img.src = `img/map_floor${mapFloor}.png`;
         }
     }
 }
 
 function handleMapClick(e) {
-    // --- ignore clicks on the expand button ---
     if (e.target.closest('#map-expand-btn')) {
         return;
     }
@@ -64,22 +59,19 @@ function handleMapClick(e) {
     const cellW = rect.width / 3;
     const cellH = rect.height / 3;
 
-    const col = Math.floor(x / cellW); // 0–2
-    const row = Math.floor(y / cellH); // 0–2
+    const col = Math.floor(x / cellW);
+    const row = Math.floor(y / cellH);
 
-    // --- center cell toggles floor ---
     if (row === 1 && col === 1) {
         mapFloor = mapFloor === 1 ? 2 : 1;
         updateMapView();
         return;
     }
 
-    // --- other cells represent locations ---
     const locationId = `map_${mapFloor}_${row}_${col}`;
     if (mapModal) {
         console.log("clicked in modal:", locationId);
     }
-    // later: hook into story navigation with show()
     console.log("clicked location:", locationId);
 
     if (locationId === "map_1_0_2" || locationId === "map_2_0_2") {
@@ -107,16 +99,13 @@ function openMapModal() {
     inner.className = "map-modal-inner";
 
     const img = document.createElement("img");
-    img.src = mapZoom
-        ? `img/map_floor${mapFloor}_zoom.png`
-        : `img/map_floor${mapFloor}.png`;
+    img.src = `img/map_floor${mapFloor}.png`;
     img.className = "map-modal-image";
 
     inner.appendChild(img);
     mapModal.appendChild(inner);
     document.body.appendChild(mapModal);
 
-    // click detection in modal
     inner.addEventListener("click", (e) => {
         const rect = inner.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -127,14 +116,12 @@ function openMapModal() {
         const col = Math.floor(x / cellW);
         const row = Math.floor(y / cellH);
 
-        // center cell toggles floor (modal stays open)
         if (row === 1 && col === 1) {
             mapFloor = mapFloor === 1 ? 2 : 1;
             img.src = `img/map_floor${mapFloor}.png`;
             return;
         }
 
-        // other cells: pick location AND close modal
         const locationId = `map_${mapFloor}_${row}_${col}`;
         console.log("clicked (modal):", locationId);
 
@@ -158,7 +145,6 @@ function openMapModal() {
         }
     });
 
-    // close modal when outside clicking
     mapModal.addEventListener("click", (e) => {
         if (e.target === mapModal) {
             mapModal.remove();
@@ -167,7 +153,12 @@ function openMapModal() {
     });
 }
 
-//テキスト送りアニメーション
+function updateSan() {
+    san = Math.max(0, Math.min(3, san));
+    const img = document.getElementById("san-image");
+    img.src = `./img/san_${san}.png`;
+}
+
 function typeText(text, speed = 50) {
     return new Promise(resolve => {
         const el = document.getElementById("text");
@@ -183,7 +174,6 @@ function typeText(text, speed = 50) {
 
         const safe = (t) => (t === "\n" ? "<br>" : t);
 
-        // --- skip only THIS line ---
         textbox.onclick = () => {
             if (!typingDone) {
                 clearInterval(typingTimer);
@@ -191,7 +181,7 @@ function typeText(text, speed = 50) {
                 typingDone = true;
                 el.innerHTML = typingFullText.replace(/\n/g, "<br>");
                 el.classList.add("ready");
-                textbox.onclick = null;   // remove skip handler
+                textbox.onclick = null;
                 resolve();
             }
         };
@@ -203,7 +193,7 @@ function typeText(text, speed = 50) {
                 typingTimer = null;
                 typingDone = true;
                 el.classList.add("ready");
-                textbox.onclick = null;   // remove skip handler
+                textbox.onclick = null;
                 resolve();
             }
         }, speed);
@@ -222,11 +212,16 @@ function runCommands(cmds = []) {
             const el = document.getElementById("text");
             el.classList.add("glitch");
             setTimeout(() => el.classList.remove("glitch"), 300);
+        } else if (cmd === "-san") {
+            san -= 1;
+            updateSan();
+        } else if (cmd === "+san") {
+            san += 1;
+            updateSan();
         } else if (cmd === "initMap") {
             if (mapEl) {
                 mapEl.style.cursor = "pointer";
                 updateMapView();
-                // avoid double-binding
                 mapEl.onclick = handleMapClick;
             }
             if (!document.getElementById("map-expand-btn")) {
@@ -235,11 +230,10 @@ function runCommands(cmds = []) {
                 btn.textContent = "マップを拡大";
                 btn.className = "map-expand-btn";
                 btn.onclick = (e) => {
-                    e.stopPropagation();   // ← prevent click from reaching map
+                    e.stopPropagation();
                     openMapModal();
                 };
 
-                // place directly inside #map so it lives in the same grid area
                 mapEl.style.position = mapEl.style.position || "relative";
                 mapEl.appendChild(btn);
             }
@@ -287,7 +281,6 @@ function show(id) {
     current = findScene(id);
 
     const textbox = document.getElementById("textbox");
-    // --- reset typing + skip state per scene ---
     if (typingTimer) {
         clearInterval(typingTimer);
         typingTimer = null;
@@ -300,7 +293,6 @@ function show(id) {
     if (current.commands) {
         runCommands(current.commands);
     }
-    // keep map visual in sync when returning after reload
     updateMapView();
 
     document.getElementById("bg").src = "img/" + current.bg;
@@ -312,7 +304,6 @@ function show(id) {
         face.removeAttribute("src");
     }
 
-    // 名前（無ければ空）
     const nameBox = document.getElementById("name");
     if (current.name) {
         nameBox.textContent = current.name;
@@ -320,7 +311,6 @@ function show(id) {
         nameBox.textContent = "";
     }
 
-    // テキスト + 速度（sceneごとに調整できる: current.speed）
     const speed = current.speed ?? 50;
     const typingPromise = typeText(current.text, speed);
 
@@ -329,10 +319,9 @@ function show(id) {
     document.getElementById("text").classList.remove("ready");
 
     typingPromise.then(() => {
-        // 選択肢がある場合：テキストが出終わってから表示
+
         if (current.choices) {
             const textbox = document.getElementById("textbox");
-            // make sure old skip handler never leaks into scenes after a choice
             textbox.onclick = null;
 
             choicesBox.innerHTML = "";
@@ -340,9 +329,7 @@ function show(id) {
                 const btn = document.createElement("button");
                 btn.textContent = choice.label;
                 btn.onclick = (e) => {
-                    // prevent the click from also hitting the textbox (which enables skip)
                     e.stopPropagation();
-                    // safety reset, then move to next scene
                     if (typingTimer) {
                         clearInterval(typingTimer);
                         typingTimer = null;
@@ -354,12 +341,10 @@ function show(id) {
             });
             choicesBox.classList.add("show");
         }
-        // 選択肢がない場合：▼が出てクリックで進む
         else if (current.next) {
             const textbox = document.getElementById("textbox");
             textbox.onclick = null;
             textbox.onclick = () => {
-                // if still typing, the skip handler defined in typeText will handle it
                 if (!typingDone) return;
                 show(current.next);
             };
