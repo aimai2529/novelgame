@@ -202,8 +202,20 @@
         "face": "",
         "commands": [
             "hide(status)",
+            "hide(hud-top-left)"
+        ],
+        "next": "op_glitch_1.5"
+    },
+    {
+        "id": "op_glitch_1.5",
+        "bg": "supermarket.png",
+        "text": "　",
+        "face": "",
+        "commands": [
+            "hide(status)",
             "hide(hud-top-left)",
-            "glitch"
+            "glitch",
+            "autoNext(400)"
         ],
         "next": "op_glitch_2"
     },

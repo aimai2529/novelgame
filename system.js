@@ -209,15 +209,28 @@ function runCommands(cmds = []) {
             const id = cmd.match(/hide\((.+)\)/)[1];
             hideEl(id);
         } else if (cmd === "glitch") {
-            const el = document.getElementById("text");
-            el.classList.add("glitch");
-            setTimeout(() => el.classList.remove("glitch"), 300);
+            const wrap = document.getElementById("game-wrapper");
+            if (!wrap) return;
+            wrap.classList.add("glitching");
+            setTimeout(() => {
+                wrap.classList.remove("glitching");
+            }, 400);
         } else if (cmd === "-san") {
             san -= 1;
             updateSan();
         } else if (cmd === "+san") {
             san += 1;
             updateSan();
+        } else if (cmd.startsWith("autoNext(")) {
+            const ms = Number(cmd.match(/autoNext\((\d+)\)/)?.[1] || 0);
+            if (ms > 0) {
+                setTimeout(() => {
+                    // すでに別のシーンに移動していたら暴発しないよう確認
+                    if (current && current.next) {
+                        show(current.next);
+                    }
+                }, ms);
+            }
         } else if (cmd === "initMap") {
             if (mapEl) {
                 mapEl.style.cursor = "pointer";
