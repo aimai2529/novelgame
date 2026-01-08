@@ -43,7 +43,7 @@
         "name": "ユウジン",
         "text": "つれないなぁ、頼むよ！暇なんだよぉ〜！",
         "bg": "",
-        "face": "friend_normal.png",
+        "face": "friend_shikushiku.png",
         "commands": [
             "hide(map)",
             "hide(items)",
@@ -67,7 +67,7 @@
         "name": "ユウジン",
         "text": "冷たい！ひどい！しくしく……",
         "bg": "",
-        "face": "friend_cry.png",
+        "face": "friend_shikushiku.png",
         "commands": [
             "hide(map)",
             "hide(items)",
@@ -91,7 +91,7 @@
         "name": "ユウジン",
         "text": "嘘泣きだなんて！俺の心は本当に泣いてるぜ、大親友に冷たくあしらわれてさ",
         "bg": "",
-        "face": "friend_cry.png",
+        "face": "friend_chira.png",
         "commands": [
             "hide(map)",
             "hide(items)",
@@ -115,7 +115,7 @@
         "name": "ユウジン",
         "text": "お、サンキューな！\nてか、もう18時だけど、そこのスーパー閉店20時だよな？あんま寄り道すんなよ〜。\n迷わないようにそこのフロアマップ送っといてやるよ笑",
         "bg": "supermarket.png",
-        "face": "friend_normal.png",
+        "face": "friend_wara.png",
         "commands": [
             "show(video)",
             "hide(map)",
@@ -139,7 +139,7 @@
         "name": "ユウジン",
         "text": "もう送っちゃいました〜！",
         "bg": "supermarket.png",
-        "face": "friend_smile.png",
+        "face": "friend_aori0.png",
         "commands": [
             "show(map)",
             "hide(items)",
@@ -165,8 +165,8 @@
         "id": "op_C_3",
         "name": "ユウジン",
         "text": "人参に豚肉にカレールー……\nえ、全然材料足りてないじゃん。よくそれでカレー作ろうと思ったな？！",
-        "bg": "memo.jpg",
-        "face": "friend_surprise.png",
+        "bg": "supermarket.png",
+        "face": "friend_aori0.png",
         "commands": [
             "show(items)",
             "hide(status)",
@@ -199,7 +199,7 @@
         "id": "op_glitch_1",
         "text": "（暇なら料理でもしてればいいのに）",
         "bg": "supermarket.png",
-        "face": "",
+        "face": "friend_room.png",
         "commands": [
             "hide(status)",
             "hide(hud-top-left)"
@@ -208,9 +208,9 @@
     },
     {
         "id": "op_glitch_1.5",
-        "bg": "supermarket.png",
+        "bg": "supermarket_shadow.JPG",
         "text": "　",
-        "face": "",
+        "face": "friend_room.png",
         "commands": [
             "hide(status)",
             "hide(hud-top-left)",
@@ -223,7 +223,7 @@
         "id": "op_glitch_2",
         "text": "（……？なんだ、いまの、何か、変な影が……）",
         "bg": "supermarket.png",
-        "face": "",
+        "face": "friend_room.png",
         "speed": "100",
         "commands": [
             "hide(status)",
@@ -236,7 +236,7 @@
         "name": "ユウジン",
         "text": "あれ、どうしたんだよおんなじ場所突っ立って。早速迷子か？",
         "bg": "supermarket.png",
-        "face": "friend_normal.png",
+        "face": "friend_noodle.png",
         "commands": [
             "hide(status)",
             "hide(hud-top-left)"
@@ -257,7 +257,7 @@
         "name": "ユウジン",
         "text": "え、なに、まさかお前……\n夜のスーパーにびびってるな？おいおい相棒可愛いところあるじゃん〜！まあまあまあわかるぜ。その店、省エネでちょっと照明暗いもんな！ウンウン、でも俺がついてるからな！安心しろよ！",
         "bg": "supermarket.png",
-        "face": "friend_smile.png",
+        "face": "friend_unun.png",
         "commands": [
             "show(status)",
             "hide(hud-top-left)"
@@ -278,26 +278,26 @@
         "name": "ユウジン",
         "text": "そんな照れんなって！カップ麺食いながら見守っててやるからさ！\nてか、そんなこと言ってないで、早く買い物行けよ。あと２時間で閉店だぞ〜",
         "bg": "supermarket.png",
-        "face": "friend_normal.png",
+        "face": "friend_aori.png",
         "commands": [
             "show(hud-top-left)",
             "overlay(map, 'クリックで移動')",
             "initMap"
         ],
-        "next": "end"
+        "next": "search"
     },
     {
         "id": "op_G",
         "name": "ユウジン",
         "text": "あ、さては俺をビビらせようとしてるな？そんな簡単にはビビらないぜ〜俺は！\nてか、そんなことしてないで、早く買い物行けよ。あと２時間で閉店だぞ〜",
         "bg": "supermarket.png",
-        "face": "friend_normal.png",
+        "face": "friend_aori.png",
         "commands": [
             "show(hud-top-left)",
             "overlay(map, 'クリックで移動')",
             "initMap"
         ],
-        "next": "end"
+        "next": "search"
     },
     {
         "id": "toilet_1",
@@ -309,7 +309,7 @@
             "overlay(map, 'クリックで移動')",
             "initMap"
         ],
-        "next": "end"
+        "next": "search"
     },
     {
         "id": "toilet_2",
@@ -321,7 +321,7 @@
             "overlay(map, 'クリックで移動')",
             "initMap"
         ],
-        "next": "end"
+        "next": "search"
     },
     {
         "id": "toilet_3",
@@ -333,6 +333,133 @@
             "overlay(map, 'クリックで移動')",
             "initMap"
         ],
-        "next": "end"
+        "next": "search"
+    },
+    {
+        "id": "foods1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "donuts1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "space1",
+        "name": "ユウジン",
+        "text": "……？そこには何もないんじゃないか？",
+        "bg": "supermarket.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "items1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_items.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "divination1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_divination.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wear1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "books1",
+        "name": "ユウジン",
+        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "bg": "shop_books.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "food_test",
+        "name": "テンイン",
+        "text": "いらっしゃいませ！！！",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "-san"
+        ],
+        "choices": [
+            {
+                "label": "ど、どうも……",
+                "next": "search"
+            },
+            {
+                "label": "（逃げる）",
+                "next": "search"
+            }
+        ]
+    },
+    {
+        "id": "search",
+        "name": "ユウジン",
+        "text": "ほら、マップ見て次行く場所考えな",
+        "face": "friend_noodle.png",
+        "bg": "supermarket.png",
+        "commands": [
+            "initMap"
+        ],
+        "next": "search"
     }
 ]

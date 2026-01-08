@@ -9,8 +9,11 @@ const mapEl = document.getElementById("map");
 let san = 3;
 
 let typingTimer = null;
+let scrambleActive = false;
+let scrambleInterval = null;
 let typingDone = false;
 let typingFullText = "";
+let scrambleOnceText = null;
 const choicesBox = document.getElementById("choices");
 
 const face = document.getElementById("call-face");
@@ -74,19 +77,7 @@ function handleMapClick(e) {
     }
     console.log("clicked location:", locationId);
 
-    if (locationId === "map_1_0_2" || locationId === "map_2_0_2") {
-        if (toiletVisited === 0) {
-            toiletVisited = 1;
-            localStorage.setItem("toiletVisited", toiletVisited);
-            show("toilet_1");
-        } else if (toiletVisited > 0 && toiletVisited < 10) {
-            toiletVisited++;
-            localStorage.setItem("toiletVisited", toiletVisited);
-            show("toilet_2");
-        } else {
-            show("toilet_3");
-        }
-    }
+    locationLoad(locationId);
 }
 
 function openMapModal() {
@@ -125,19 +116,7 @@ function openMapModal() {
         const locationId = `map_${mapFloor}_${row}_${col}`;
         console.log("clicked (modal):", locationId);
 
-        if (locationId === "map_1_0_2" || locationId === "map_2_0_2") {
-            if (toiletVisited === 0) {
-                toiletVisited = 1;
-                localStorage.setItem("toiletVisited", toiletVisited);
-                show("toilet_1");
-            } else if (toiletVisited > 0 && toiletVisited < 10) {
-                toiletVisited++;
-                localStorage.setItem("toiletVisited", toiletVisited);
-                show("toilet_2");
-            } else {
-                show("toilet_3");
-            }
-        }
+        locationLoad(locationId);
 
         if (mapModal) {
             mapModal.remove();
@@ -153,10 +132,70 @@ function openMapModal() {
     });
 }
 
+function locationLoad(id) {
+    if (id === "map_1_0_2" || id === "map_2_0_2") {
+        if (toiletVisited === 0) {
+            toiletVisited = 1;
+            localStorage.setItem("toiletVisited", toiletVisited);
+            show("toilet_1");
+        } else if (toiletVisited > 0 && toiletVisited < 10) {
+            toiletVisited++;
+            localStorage.setItem("toiletVisited", toiletVisited);
+            show("toilet_2");
+        } else {
+            show("toilet_3");
+        }
+    } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
+        show("foods1");
+    } else if (id === "map_1_0_1") {
+        show("exit1");
+    } else if (id === "map_1_1_2") {
+        show("donuts1");
+    } else if (id === "map_1_2_2") {
+        show("wagashi1");
+    } else if (id === "map_1_0_0") {
+        show("space1");
+    } else if (id === "map_2_0_0" || id === "map_2_1_0") {
+        show("items1");
+    } else if (id === "map_2_0_1") {
+        show("divination1");
+    } else if (id === "map_2_1_2") {
+        show("wear1");
+    } else if (id === "map_2_2_0" || id === "map_2_2_1" || id === "map_2_2_2") {
+        show("books1");
+    }
+}
+
 function updateSan() {
     san = Math.max(0, Math.min(3, san));
     const img = document.getElementById("san-image");
     img.src = `./img/san_${san}.png`;
+}
+
+function startScrambleText() {
+    const el = document.getElementById("text");
+    if (!el) return;
+
+    // 元の全文を取得（typing前でも使えるように current.text を優先）
+    const source = current?.text || el.innerText;
+    if (!source) return;
+
+    const chars = source.split("");
+    for (let i = chars.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [chars[i], chars[j]] = [chars[j], chars[i]];
+    }
+
+    scrambleOnceText = chars.join("");
+}
+
+function stopScrambleText() {
+    scrambleActive = false;
+    if (scrambleInterval) {
+        clearInterval(scrambleInterval);
+        scrambleInterval = null;
+    }
+    scrambleOnceText = null;
 }
 
 function typeText(text, speed = 50) {
@@ -169,7 +208,8 @@ function typeText(text, speed = 50) {
         el.innerHTML = "";
         el.classList.remove("ready");
         typingDone = false;
-        typingFullText = text;
+        const displayText = scrambleOnceText ?? text;
+        typingFullText = displayText;
         let i = 0;
 
         const safe = (t) => (t === "\n" ? "<br>" : t);
@@ -187,8 +227,8 @@ function typeText(text, speed = 50) {
         };
 
         typingTimer = setInterval(() => {
-            el.innerHTML += safe(text[i++]);
-            if (i >= text.length) {
+            el.innerHTML += safe(displayText[i++]);
+            if (i >= displayText.length) {
                 clearInterval(typingTimer);
                 typingTimer = null;
                 typingDone = true;
@@ -287,11 +327,22 @@ function runCommands(cmds = []) {
                 }, 600);
             }, 1000);
         }
+        else if (cmd === "scrambleText") {
+            startScrambleText();
+        }
+        else if (cmd === "stopScrambleText") {
+            stopScrambleText();
+        }
     });
 }
 
 function show(id) {
     current = findScene(id);
+    stopScrambleText();
+
+    if (san === 1 && Math.random() < 0.3) {
+        startScrambleText();
+    }
 
     const textbox = document.getElementById("textbox");
     if (typingTimer) {

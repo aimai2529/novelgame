@@ -45,11 +45,12 @@ GAME GRID
 }
 
 /* デバッグ用にグリッドで背景がつくものを残しておきます*/
-/* .panel {
-    background: rgba(255, 255, 255, 0.05);
+.panel {
+    /* background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.15);
-    padding: 8px;
-} */
+    padding: 8px; */
+    overflow: hidden;
+}
 
 #hud-top-left {
     grid-column: 1;
@@ -180,9 +181,6 @@ GAME GRID
     image-rendering: pixelated;
 }
 
-/* ======================
-   ITEMS
-====================== */
 .slots {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
