@@ -21,6 +21,7 @@ function showEl(id) { const el = document.getElementById(id); if (el) el.style.d
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
 
 let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
+let loopCount = Number(localStorage.getItem("loopCount") || 0);
 
 async function loadStory() {
     story = await fetch("story.json").then(r => r.json());
@@ -34,6 +35,19 @@ async function loadStory() {
 
 function findScene(id) {
     return story.find(s => s.id === id);
+}
+
+function resetForLoop() {
+    toiletVisited = 0;
+    localStorage.setItem("toiletVisited", toiletVisited);
+
+    san = 3;
+    updateSan();
+
+    loopCount++;
+    localStorage.setItem("loopCount", loopCount);
+
+    console.log("loop:", loopCount);
 }
 
 function updateMapView() {
@@ -332,6 +346,8 @@ function runCommands(cmds = []) {
         }
         else if (cmd === "stopScrambleText") {
             stopScrambleText();
+        } else if (cmd === "loopReset") {
+            resetForLoop();
         }
     });
 }
@@ -404,6 +420,14 @@ function show(id) {
                 choicesBox.appendChild(btn);
             });
             choicesBox.classList.add("show");
+
+            if (current.id === "loop" && san <= 2) {
+                setTimeout(() => {
+                    if (current.id === "loop") {
+                        show(current.choices[0].next);
+                    }
+                }, 700);
+            }
         }
         else if (current.next) {
             const textbox = document.getElementById("textbox");

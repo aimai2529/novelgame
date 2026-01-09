@@ -3,6 +3,7 @@
         "id": "start",
         "text": "クリックで開始",
         "commands": [
+            "loopReset",
             "show(textbox)",
             "hide(face)",
             "hide(map)",
@@ -306,6 +307,7 @@
         "face": "friend_normal.png",
         "bg": "supermarket.png",
         "commands": [
+            "-san",
             "overlay(map, 'クリックで移動')",
             "initMap"
         ],
@@ -346,6 +348,68 @@
             "initMap"
         ],
         "next": "search"
+    },
+    {
+        "id": "exit1",
+        "name": "ユウジン",
+        "text": "ちょちょちょ、帰るのか？夕飯の材料は？？",
+        "bg": "supermarket.png",
+        "face": "friend_surprised.png",
+        "choices": [
+            {
+                "label": "うん。帰る",
+                "next": "exit1_A"
+            },
+            {
+                "label": "帰るわけないじゃん",
+                "next": "exit1_B"
+            }
+        ]
+    },
+    {
+        "id": "exit1_B",
+        "name": "ユウジン",
+        "text": "そうだよな、びっくりした……次はどこいく？",
+        "bg": "supermarket.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "initMap"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "exit1_A",
+        "name": "ユウジン",
+        "text": "お、おう……お前がそれでいいんならいいんだけどよ。夕飯どうすんだよ\n……うちきてカップ麺食うか？",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "choices": [
+            {
+                "label": "いや、どこかで食べて帰るよ",
+                "next": "exit1_C"
+            },
+            {
+                "label": "……じゃあ、そうしようかな",
+                "next": "exit1_D"
+            }
+        ]
+    },
+    {
+        "id": "exit1_C",
+        "name": "ユウジン",
+        "text": "そうか、じゃあ寿司だな！回転寿司行こう。俺が何食べるか選ぶからさ〜！そのまま通話繋げとけよ〜！",
+        "bg": "exit.png",
+        "face": "friend_aori.png",
+        "next": "end01"
+    },
+    {
+        "id": "exit1_D",
+        "name": "ユウジン",
+        "text": "じゃ、お湯沸かして待ってるな！わかってると思うけど、俺ん家のカップ麺はシーフード一択だから。文句言うなよ〜",
+        "bg": "exit.png",
+        "face": "friend_aori.png",
+        "next": "end02"
     },
     {
         "id": "donuts1",
@@ -461,5 +525,58 @@
             "initMap"
         ],
         "next": "search"
+    },
+    {
+        "id": "end01",
+        "text": "END.もうエビの寿司は飽きあき",
+        "speed": 100,
+        "commands": [
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
+        "id": "end02",
+        "text": "END.二人のカップ麺",
+        "speed": 100,
+        "commands": [
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
+        "id": "loop",
+        "text": "もう一度遊ぶ？",
+        "commands": [
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "choices": [
+            {
+                "label": "はい",
+                "next": "start"
+            },
+            {
+                "label": "yes",
+                "next": "start"
+            }
+        ]
     }
 ]
