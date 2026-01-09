@@ -500,9 +500,10 @@
         "name": "テンイン",
         "text": "いらっしゃいませ！！！",
         "bg": "food_test.JPG",
-        "face": "friend_noodle.png",
+        "face": "friend_gya.png",
         "commands": [
-            "-san"
+            "-san",
+            "still(still_foods.png)"
         ],
         "choices": [
             {
@@ -531,6 +532,7 @@
         "text": "END.もうエビの寿司は飽きあき",
         "speed": 100,
         "commands": [
+            "still(still_ebi.png)",
             "show(textbox)",
             "hide(face)",
             "hide(map)",

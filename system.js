@@ -8,6 +8,8 @@ const mapEl = document.getElementById("map");
 
 let san = 3;
 
+let stillEl = null;
+
 let typingTimer = null;
 let scrambleActive = false;
 let scrambleInterval = null;
@@ -186,6 +188,33 @@ function updateSan() {
     img.src = `./img/san_${san}.png`;
 }
 
+function showStill(src) {
+    const textbox = document.getElementById("textbox");
+    if (!textbox) return;
+
+    if (!stillEl) {
+        stillEl = document.createElement("div");
+        stillEl.className = "still-container";
+
+        const img = document.createElement("img");
+        img.className = "still-image";
+        stillEl.appendChild(img);
+
+        textbox.parentNode.insertBefore(stillEl, textbox);
+    }
+
+    const img = stillEl.querySelector("img");
+    img.src = "img/" + src;
+
+    stillEl.classList.add("show");
+}
+
+function clearStill() {
+    if (stillEl) {
+        stillEl.classList.remove("show");
+    }
+}
+
 function startScrambleText() {
     const el = document.getElementById("text");
     if (!el) return;
@@ -348,6 +377,12 @@ function runCommands(cmds = []) {
             stopScrambleText();
         } else if (cmd === "loopReset") {
             resetForLoop();
+        } else if (cmd.startsWith("still(")) {
+            const src = cmd.match(/still\((.+)\)/)?.[1];
+            if (src) showStill(src);
+        }
+        else if (cmd === "clearStill") {
+            clearStill();
         }
     });
 }
@@ -355,6 +390,7 @@ function runCommands(cmds = []) {
 function show(id) {
     current = findScene(id);
     stopScrambleText();
+    clearStill();
 
     if (san === 1 && Math.random() < 0.3) {
         startScrambleText();
