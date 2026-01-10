@@ -278,7 +278,6 @@ body {
 }
 
 .still-container {
-    width: 100%;
     width: 900px;
     display: none;
     position: fixed;
@@ -297,6 +296,26 @@ body {
     object-fit: cover;
     border-radius: 6px;
     border: #ffffff 10px solid;
+}
+
+.screen-container {
+    width: 100%;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.screen-container.show {
+    display: block;
+}
+
+.screen-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
 .glitch-screen {

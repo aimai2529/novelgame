@@ -9,6 +9,7 @@ const mapEl = document.getElementById("map");
 let san = 3;
 
 let stillEl = null;
+let screenEl = null;
 
 let typingTimer = null;
 let scrambleActive = false;
@@ -189,8 +190,7 @@ function updateSan() {
 }
 
 function showStill(src) {
-    const textbox = document.getElementById("textbox");
-    if (!textbox) return;
+    const game = document.getElementById("game");
 
     if (!stillEl) {
         stillEl = document.createElement("div");
@@ -200,7 +200,7 @@ function showStill(src) {
         img.className = "still-image";
         stillEl.appendChild(img);
 
-        textbox.parentNode.insertBefore(stillEl, textbox);
+        game.append(stillEl);
     }
 
     const img = stillEl.querySelector("img");
@@ -212,6 +212,32 @@ function showStill(src) {
 function clearStill() {
     if (stillEl) {
         stillEl.classList.remove("show");
+    }
+}
+
+function showScreen(src) {
+    const game = document.getElementById("game");
+
+    if (!screenEl) {
+        screenEl = document.createElement("div");
+        screenEl.className = "screen-container";
+
+        const img = document.createElement("img");
+        img.className = "screen-image";
+        screenEl.appendChild(img);
+
+        game.append(screenEl);
+    }
+
+    const img = screenEl.querySelector("img");
+    img.src = "img/" + src;
+
+    screenEl.classList.add("show");
+}
+
+function clearScreen() {
+    if (screenEl) {
+        screenEl.classList.remove("show");
     }
 }
 
@@ -383,6 +409,12 @@ function runCommands(cmds = []) {
         }
         else if (cmd === "clearStill") {
             clearStill();
+        } else if (cmd.startsWith("screen(")) {
+            const src = cmd.match(/screen\((.+)\)/)?.[1];
+            if (src) showScreen(src);
+        }
+        else if (cmd === "clearScreen") {
+            clearScreen();
         }
     });
 }
@@ -391,6 +423,7 @@ function show(id) {
     current = findScene(id);
     stopScrambleText();
     clearStill();
+    clearScreen();
 
     if (san === 1 && Math.random() < 0.3) {
         startScrambleText();
@@ -459,10 +492,20 @@ function show(id) {
 
             if (current.id === "loop" && san <= 2) {
                 setTimeout(() => {
+                    const wrap = document.getElementById("game-wrapper");
+                    if (!wrap) return;
+                    wrap.classList.add("glitching");
+                    setTimeout(() => {
+                        wrap.classList.remove("glitching");
+                    }, 500);
+                    showScreen("screen_touch.png");
+                }, 500);
+
+                setTimeout(() => {
                     if (current.id === "loop") {
                         show(current.choices[0].next);
                     }
-                }, 700);
+                }, 1000);
             }
         }
         else if (current.next) {
