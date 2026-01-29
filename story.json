@@ -171,7 +171,8 @@
         "commands": [
             "show(items)",
             "hide(status)",
-            "hide(hud-top-left)"
+            "hide(hud-top-left)",
+            "getItem(note)"
         ],
         "choices": [
             {
@@ -283,7 +284,7 @@
         "commands": [
             "show(hud-top-left)",
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -296,7 +297,7 @@
         "commands": [
             "show(hud-top-left)",
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -309,7 +310,7 @@
         "commands": [
             "-san",
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -321,7 +322,7 @@
         "bg": "supermarket.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -333,7 +334,7 @@
         "bg": "supermarket.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -345,7 +346,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -355,6 +356,9 @@
         "text": "ちょちょちょ、帰るのか？夕飯の材料は？？",
         "bg": "supermarket.png",
         "face": "friend_surprised.png",
+        "commands": [
+            "mapLock"
+        ],
         "choices": [
             {
                 "label": "うん。帰る",
@@ -374,7 +378,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -419,7 +423,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -431,7 +435,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -443,7 +447,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -455,7 +459,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -467,7 +471,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -479,7 +483,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -491,7 +495,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
-            "initMap"
+            "mapUnlock"
         ],
         "next": "search"
     },
@@ -523,7 +527,8 @@
         "face": "friend_noodle.png",
         "bg": "supermarket.png",
         "commands": [
-            "initMap"
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
         ],
         "next": "search"
     },

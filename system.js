@@ -6,10 +6,11 @@ let mapModal = null;
 let mapOverlayHint = null;
 const mapEl = document.getElementById("map");
 
-let san = 3;
-
+let mapLocked = false;
 let stillEl = null;
 let screenEl = null;
+
+let returnSceneId = null;
 
 let typingTimer = null;
 let scrambleActive = false;
@@ -23,8 +24,38 @@ const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
 
+const itemDB = {
+    "note": {
+        name: "買い物メモ",
+        image: "item_note.png",
+        description: "にんじん、豚肉、カレールー……色々と足りない"
+    },
+    "carrot": {
+        name: "にんじん",
+        image: "item_.carrotpng",
+        description: "鮮やかなオレンジ色をした、艶ハリのあるいいにんじんだ"
+    },
+    "meat": {
+        name: "豚肉",
+        image: "item_meat.png",
+        description: "白と薄桃の境界がはっきりした、新鮮そうな肉だ"
+    },
+    "curry": {
+        name: "カレールー",
+        image: "item_curry.png",
+        description: "りんごと蜂蜜が効いた、甘めのルーだ"
+    },
+    "dounut": {
+        name: "ドーナツ",
+        image: "item_dounut.png",
+        description: "毒毒しいと感じるほど鮮やかに彩られたドーナツ"
+    }
+};
+
+let items = JSON.parse(localStorage.getItem("items") || "[]");
 let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
 let loopCount = Number(localStorage.getItem("loopCount") || 0);
+let san = Number(localStorage.getItem("san") ?? 3);
 
 async function loadStory() {
     story = await fetch("story.json").then(r => r.json());
@@ -47,12 +78,104 @@ function resetForLoop() {
     san = 3;
     updateSan();
 
+    items = [];
+    localStorage.setItem("items", JSON.stringify(items));
+    renderItems();
+
     loopCount++;
     localStorage.setItem("loopCount", loopCount);
 
     console.log("loop:", loopCount);
 }
 
+// アイテム関連
+function showItemDetail(itemId) {
+    const data = itemDB[itemId];
+    if (!data) return;
+
+    returnSceneId = current?.id || null;
+
+    stopScrambleText();
+    clearStill();
+    clearScreen();
+
+    choicesBox.classList.remove("show");
+    choicesBox.innerHTML = "";
+
+    const nameBox = document.getElementById("name");
+    nameBox.textContent = data.name;
+
+    const textbox = document.getElementById("textbox");
+    textbox.onclick = null;
+
+    typeText(data.description, 30).then(() => {
+        textbox.onclick = () => {
+            if (returnSceneId) {
+                const back = returnSceneId;
+                returnSceneId = null;
+                show(back);
+            }
+        };
+    });
+}
+
+function renderItems() {
+    const slots = document.querySelectorAll(".slot");
+
+    slots.forEach((slot, index) => {
+        slot.innerHTML = "";
+        slot.onclick = null;
+
+        const itemId = items[index];
+        if (!itemId) return;
+
+        const data = itemDB[itemId];
+        if (!data) return;
+
+        const img = document.createElement("img");
+        img.src = "img/" + data.image;
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "contain";
+        img.style.pointerEvents = "none";
+
+        slot.appendChild(img);
+
+        slot.onclick = () => {
+            showItemDetail(itemId);
+        };
+    });
+}
+
+function addItem(itemId) {
+    if (!itemDB[itemId]) return false;
+
+    if (items.length >= 6) {
+        console.log("アイテム満杯のため取得スキップ");
+        return false;
+    }
+
+    items.push(itemId);
+    localStorage.setItem("items", JSON.stringify(items));
+    renderItems();
+    return true;
+}
+
+function hasItem(itemId) {
+    return items.includes(itemId);
+}
+
+function removeItem(itemId) {
+    const index = items.indexOf(itemId);
+    if (index === -1) return false;
+
+    items.splice(index, 1);
+    localStorage.setItem("items", JSON.stringify(items));
+    renderItems();
+    return true;
+}
+
+// マップ関連
 function updateMapView() {
     if (!mapEl) return;
     const base = `img/map_floor${mapFloor}.png`;
@@ -68,10 +191,11 @@ function updateMapView() {
 }
 
 function handleMapClick(e) {
+    if (mapLocked) return;
+
     if (e.target.closest('#map-expand-btn')) {
         return;
     }
-
     const rect = mapEl.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -149,6 +273,39 @@ function openMapModal() {
     });
 }
 
+function lockMap() {
+    mapLocked = true;
+    if (mapEl) {
+        mapEl.style.pointerEvents = "none";
+        mapEl.style.cursor = "default";
+    }
+    if (document.getElementById("map-expand-btn")) {
+        document.getElementById("map-expand-btn").remove();
+    }
+}
+
+function unlockMap() {
+    mapLocked = false;
+    if (mapEl) {
+        mapEl.style.pointerEvents = "";
+        mapEl.style.cursor = "pointer";
+        mapEl.onclick = handleMapClick;
+    }
+    if (!document.getElementById("map-expand-btn")) {
+        const btn = document.createElement("button");
+        btn.id = "map-expand-btn";
+        btn.textContent = "マップを拡大";
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            openMapModal();
+        };
+
+        mapEl.style.position = mapEl.style.position || "relative";
+        mapEl.appendChild(btn);
+    }
+
+}
+
 function locationLoad(id) {
     if (id === "map_1_0_2" || id === "map_2_0_2") {
         if (toiletVisited === 0) {
@@ -185,6 +342,7 @@ function locationLoad(id) {
 
 function updateSan() {
     san = Math.max(0, Math.min(3, san));
+    localStorage.setItem("san", san);
     const img = document.getElementById("san-image");
     img.src = `./img/san_${san}.png`;
 }
@@ -245,7 +403,6 @@ function startScrambleText() {
     const el = document.getElementById("text");
     if (!el) return;
 
-    // 元の全文を取得（typing前でも使えるように current.text を優先）
     const source = current?.text || el.innerText;
     if (!source) return;
 
@@ -334,30 +491,10 @@ function runCommands(cmds = []) {
             const ms = Number(cmd.match(/autoNext\((\d+)\)/)?.[1] || 0);
             if (ms > 0) {
                 setTimeout(() => {
-                    // すでに別のシーンに移動していたら暴発しないよう確認
                     if (current && current.next) {
                         show(current.next);
                     }
                 }, ms);
-            }
-        } else if (cmd === "initMap") {
-            if (mapEl) {
-                mapEl.style.cursor = "pointer";
-                updateMapView();
-                mapEl.onclick = handleMapClick;
-            }
-            if (!document.getElementById("map-expand-btn")) {
-                const btn = document.createElement("button");
-                btn.id = "map-expand-btn";
-                btn.textContent = "マップを拡大";
-                btn.className = "map-expand-btn";
-                btn.onclick = (e) => {
-                    e.stopPropagation();
-                    openMapModal();
-                };
-
-                mapEl.style.position = mapEl.style.position || "relative";
-                mapEl.appendChild(btn);
             }
         }
         else if (cmd.startsWith("overlay(")) {
@@ -372,17 +509,8 @@ function runCommands(cmds = []) {
             }
 
             const hint = document.createElement("div");
+            hint.className = "map-overlay-hint";
             hint.textContent = msg;
-            hint.style.position = "absolute";
-            hint.style.inset = "0";
-            hint.style.display = "flex";
-            hint.style.alignItems = "center";
-            hint.style.justifyContent = "center";
-            hint.style.background = "rgba(0,0,0,0.35)";
-            hint.style.color = "#fff";
-            hint.style.fontSize = "1.2em";
-            hint.style.opacity = "1";
-            hint.style.transition = "opacity .5s";
 
             target.style.position = target.style.position || "relative";
             target.appendChild(hint);
@@ -395,6 +523,11 @@ function runCommands(cmds = []) {
                     if (mapOverlayHint === hint) mapOverlayHint = null;
                 }, 600);
             }, 1000);
+        } else if (cmd === "mapLock") {
+            lockMap();
+        }
+        else if (cmd === "mapUnlock") {
+            unlockMap();
         }
         else if (cmd === "scrambleText") {
             startScrambleText();
@@ -416,6 +549,25 @@ function runCommands(cmds = []) {
         else if (cmd === "clearScreen") {
             clearScreen();
         }
+        else if (cmd.startsWith("getItem(")) {
+            const id = cmd.match(/getItem\((.+)\)/)?.[1];
+            if (!id) return;
+
+            if (hasItem(id)) {
+                console.log("すでに所持している:", id);
+                return;
+            }
+
+            const success = addItem(id);
+            if (!success) {
+                console.log("取得できなかった:", id);
+            }
+        } else if (cmd.startsWith("removeItem(")) {
+            const id = cmd.match(/removeItem\((.+)\)/)?.[1];
+            if (id) {
+                removeItem(id);
+            }
+        }
     });
 }
 
@@ -424,6 +576,7 @@ function show(id) {
     stopScrambleText();
     clearStill();
     clearScreen();
+    returnSceneId = null;
 
     if (san === 1 && Math.random() < 0.3) {
         startScrambleText();
@@ -466,6 +619,8 @@ function show(id) {
     choicesBox.innerHTML = "";
     choicesBox.classList.remove("show");
     document.getElementById("text").classList.remove("ready");
+
+    renderItems();
 
     typingPromise.then(() => {
 
