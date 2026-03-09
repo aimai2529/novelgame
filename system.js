@@ -58,6 +58,8 @@ let loopCount = Number(localStorage.getItem("loopCount") || 0);
 let san = Number(localStorage.getItem("san") ?? 3);
 
 async function loadStory() {
+    if (story) return;
+
     story = await fetch("story.json").then(r => r.json());
     const saved = localStorage.getItem("novel_save_scene");
     if (saved && findScene(saved)) {
@@ -87,6 +89,159 @@ function resetForLoop() {
 
     console.log("loop:", loopCount);
 }
+
+// 迷路関連
+function renderMaze() {
+    if (!mazeEl) return;
+
+    mazeEl.innerHTML = "";
+
+    for (let y = 0; y < currentMaze.size.h; y++) {
+        for (let x = 0; x < currentMaze.size.w; x++) {
+            const cell = document.createElement("div");
+            cell.className = "maze-cell";
+
+            if (isWall(x, y)) cell.classList.add("wall");
+
+            if (x === mazeState.x && y === mazeState.y) {
+                cell.classList.add("player");
+            }
+
+            const item = currentMaze.items.find(i =>
+                i.x === x &&
+                i.y === y &&
+                !mazeState.clearedItems.includes(i.id)
+            );
+
+            if (item && item.image) {
+                const img = document.createElement("img");
+                img.src = "img/" + item.image;
+                img.className = "maze-item";
+                cell.appendChild(img);
+            }
+
+            mazeEl.appendChild(cell);
+        }
+    }
+}
+
+async function loadMazeData() {
+    if (mazeData) return;
+
+    const res = await fetch("maze.json");
+    mazeData = await res.json();
+}
+
+async function startMaze(mazeId) {
+    await loadMazeData();
+
+    currentMaze = structuredClone(mazeData.mazes[mazeId]);
+
+    mazeState = {
+        x: currentMaze.start.x,
+        y: currentMaze.start.y,
+        clearedItems: [],
+        triggeredEvents: []
+    };
+
+    showMazeUI();
+
+    lockMainUI();
+
+    if (!mazeEl) {
+        mazeEl = document.createElement("div");
+        mazeEl.id = "maze";
+        document.getElementById("game").appendChild(mazeEl);
+    }
+
+    renderMaze();
+}
+
+function isWall(x, y) {
+    return currentMaze.walls.some(w => w.x === x && w.y === y);
+}
+
+function isOutOfBounds(x, y) {
+    return (
+        x < 0 ||
+        y < 0 ||
+        x >= currentMaze.size.w ||
+        y >= currentMaze.size.h
+    );
+}
+
+function movePlayer(dx, dy) {
+    const nx = mazeState.x + dx;
+    const ny = mazeState.y + dy;
+
+    if (isOutOfBounds(nx, ny)) return;
+    if (isWall(nx, ny)) return;
+
+    mazeState.x = nx;
+    mazeState.y = ny;
+
+    checkMazeEvents();
+    renderMaze();
+}
+
+function checkMazeEvents() {
+    currentMaze.items.forEach(item => {
+        if (
+            item.x === mazeState.x &&
+            item.y === mazeState.y &&
+            !mazeState.clearedItems.includes(item.id)
+        ) {
+            addItem(item.id);
+            if (item.image) {
+                showMazeItemPopup(item);
+            }
+            mazeState.clearedItems.push(item.id);
+        }
+    });
+    currentMaze.floorEvents.forEach((ev, index) => {
+        if (
+            ev.x === mazeState.x &&
+            ev.y === mazeState.y &&
+            !mazeState.triggeredEvents.includes(index)
+        ) {
+            triggerFloorEvent(ev);
+            mazeState.triggeredEvents.push(index);
+        }
+    });
+    if (
+        mazeState.x === currentMaze.goal.x &&
+        mazeState.y === currentMaze.goal.y
+    ) {
+        endMaze(true);
+    }
+}
+
+function endMaze(success) {
+    unlockMainUI();
+
+    if (mazeEl) {
+        mazeEl.remove();
+        mazeEl = null;
+    }
+
+    if (returnSceneId) {
+        show(returnSceneId);
+    }
+}
+
+function showMazeItemPopup(item) {
+    const popup = document.createElement("div");
+    popup.className = "maze-item-popup";
+
+    const img = document.createElement("img");
+    img.src = "img/" + item.image;
+
+    popup.appendChild(img);
+    document.getElementById("game").appendChild(popup);
+
+    setTimeout(() => popup.remove(), 800);
+}
+
 
 // アイテム関連
 function showItemDetail(itemId) {
@@ -568,6 +723,12 @@ function runCommands(cmds = []) {
                 removeItem(id);
             }
         }
+        else if (cmd.startsWith("mazeStart(")) {
+            const id = cmd.match(/mazeStart\((.+)\)/)?.[1];
+            if (id) {
+                startMaze(id);
+            }
+        }
     });
 }
 
@@ -675,3 +836,15 @@ function show(id) {
 }
 
 loadStory();
+
+function lockMainUI() {
+    document.getElementById("choices").style.pointerEvents = "none";
+    document.getElementById("textbox").style.pointerEvents = "none";
+    document.getElementById("map").style.pointerEvents = "none";
+}
+
+function unlockMainUI() {
+    document.getElementById("choices").style.pointerEvents = "";
+    document.getElementById("textbox").style.pointerEvents = "";
+    document.getElementById("map").style.pointerEvents = "";
+}
