@@ -341,7 +341,27 @@
     {
         "id": "foods1",
         "name": "ユウジン",
-        "text": "もう今日はやってないみたいだな。他いこうぜ",
+        "text": "食料品売り場に行くんだな！広いからって、迷うなよ～",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……迷わずいけるよ",
+                "next": "foods1_B"
+            },
+            {
+                "label": "やっぱ行くのやめる",
+                "next": "foods1_A"
+            }
+        ]
+    },
+    {
+        "id": "foods1_A",
+        "name": "ユウジン",
+        "text": "行かないのかよ……今日は夕飯の材料買いに来たんだってこと、忘れんなよ！で、次はどうするんだ",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -349,6 +369,27 @@
             "mapUnlock"
         ],
         "next": "search"
+    },
+    {
+        "id": "foods1_B",
+        "name": "ユウジン",
+        "text": "こういう食料品売ってるところって、大抵入ってすぐのところに野菜とか果物とかおいてあるだろ？いわゆる生鮮食品は色とりどりできれいだから、購買意欲？ってやつがわいてくるんだ！目を惹くしな。だから最初のほうにおいてあることが多いんだぜ。あと……",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "target(-1)"
+        ],
+        "choices": [
+            {
+                "label": "（黙ってにんじんを手に取る）",
+                "next": "foods1_C"
+            },
+            {
+                "label": "（黙ってだいこんを手に取る）",
+                "next": "foods1_D"
+            }
+        ]
     },
     {
         "id": "exit1",
@@ -531,6 +572,17 @@
             "mapUnlock"
         ],
         "next": "search"
+    },
+    {
+        "id": "closing_event",
+        "name": "ユウジン",
+        "text": "……ってもう閉店時間じゃん！！早く帰れ帰れ！！",
+        "face": "friend_noodle.png",
+        "bg": "supermarket.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "end3"
     },
     {
         "id": "end01",

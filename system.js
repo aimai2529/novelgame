@@ -20,6 +20,8 @@ let typingFullText = "";
 let scrambleOnceText = null;
 const choicesBox = document.getElementById("choices");
 
+let remainingTargets = Number(localStorage.getItem("remainingTargets") ?? 4);
+
 const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
@@ -88,160 +90,33 @@ function resetForLoop() {
     localStorage.setItem("loopCount", loopCount);
 
     console.log("loop:", loopCount);
+
+    remainingTargets = 4;
+    updateRemainingTargets();
 }
 
-// 迷路関連
-function renderMaze() {
-    if (!mazeEl) return;
+//制限時間関連
+function updateRemainingTargets() {
+    const el = document.getElementById("hud-top-left");
+    if (!el) return;
 
-    mazeEl.innerHTML = "";
+    remainingTargets = Number(localStorage.getItem("remainingTargets") ?? remainingTargets);
+    // 残り時間（分）
+    const remainingMinutes = remainingTargets * 30;
 
-    for (let y = 0; y < currentMaze.size.h; y++) {
-        for (let x = 0; x < currentMaze.size.w; x++) {
-            const cell = document.createElement("div");
-            cell.className = "maze-cell";
-
-            if (isWall(x, y)) cell.classList.add("wall");
-
-            if (x === mazeState.x && y === mazeState.y) {
-                cell.classList.add("player");
-            }
-
-            const item = currentMaze.items.find(i =>
-                i.x === x &&
-                i.y === y &&
-                !mazeState.clearedItems.includes(i.id)
-            );
-
-            if (item && item.image) {
-                const img = document.createElement("img");
-                img.src = "img/" + item.image;
-                img.className = "maze-item";
-                cell.appendChild(img);
-            }
-
-            mazeEl.appendChild(cell);
-        }
-    }
-}
-
-async function loadMazeData() {
-    if (mazeData) return;
-
-    const res = await fetch("maze.json");
-    mazeData = await res.json();
-}
-
-async function startMaze(mazeId) {
-    await loadMazeData();
-
-    currentMaze = structuredClone(mazeData.mazes[mazeId]);
-
-    mazeState = {
-        x: currentMaze.start.x,
-        y: currentMaze.start.y,
-        clearedItems: [],
-        triggeredEvents: []
-    };
-
-    showMazeUI();
-
-    lockMainUI();
-
-    if (!mazeEl) {
-        mazeEl = document.createElement("div");
-        mazeEl.id = "maze";
-        document.getElementById("game").appendChild(mazeEl);
+    let timeText = "";
+    if (remainingMinutes >= 60) {
+        const hour = Math.floor(remainingMinutes / 60);
+        const min = remainingMinutes % 60;
+        timeText = min === 0 ? `${hour}時間` : `${hour}時間${min}分`;
+    } else {
+        timeText = `${remainingMinutes}分`;
     }
 
-    renderMaze();
+    el.innerHTML = `閉店まで${timeText} <br>- アト${remainingTargets}箇所`;
+
+    localStorage.setItem("remainingTargets", remainingTargets);
 }
-
-function isWall(x, y) {
-    return currentMaze.walls.some(w => w.x === x && w.y === y);
-}
-
-function isOutOfBounds(x, y) {
-    return (
-        x < 0 ||
-        y < 0 ||
-        x >= currentMaze.size.w ||
-        y >= currentMaze.size.h
-    );
-}
-
-function movePlayer(dx, dy) {
-    const nx = mazeState.x + dx;
-    const ny = mazeState.y + dy;
-
-    if (isOutOfBounds(nx, ny)) return;
-    if (isWall(nx, ny)) return;
-
-    mazeState.x = nx;
-    mazeState.y = ny;
-
-    checkMazeEvents();
-    renderMaze();
-}
-
-function checkMazeEvents() {
-    currentMaze.items.forEach(item => {
-        if (
-            item.x === mazeState.x &&
-            item.y === mazeState.y &&
-            !mazeState.clearedItems.includes(item.id)
-        ) {
-            addItem(item.id);
-            if (item.image) {
-                showMazeItemPopup(item);
-            }
-            mazeState.clearedItems.push(item.id);
-        }
-    });
-    currentMaze.floorEvents.forEach((ev, index) => {
-        if (
-            ev.x === mazeState.x &&
-            ev.y === mazeState.y &&
-            !mazeState.triggeredEvents.includes(index)
-        ) {
-            triggerFloorEvent(ev);
-            mazeState.triggeredEvents.push(index);
-        }
-    });
-    if (
-        mazeState.x === currentMaze.goal.x &&
-        mazeState.y === currentMaze.goal.y
-    ) {
-        endMaze(true);
-    }
-}
-
-function endMaze(success) {
-    unlockMainUI();
-
-    if (mazeEl) {
-        mazeEl.remove();
-        mazeEl = null;
-    }
-
-    if (returnSceneId) {
-        show(returnSceneId);
-    }
-}
-
-function showMazeItemPopup(item) {
-    const popup = document.createElement("div");
-    popup.className = "maze-item-popup";
-
-    const img = document.createElement("img");
-    img.src = "img/" + item.image;
-
-    popup.appendChild(img);
-    document.getElementById("game").appendChild(popup);
-
-    setTimeout(() => popup.remove(), 800);
-}
-
 
 // アイテム関連
 function showItemDetail(itemId) {
@@ -462,6 +337,11 @@ function unlockMap() {
 }
 
 function locationLoad(id) {
+    if (remainingTargets <= 0) {
+        show("closing_event");
+        return;
+    }
+
     if (id === "map_1_0_2" || id === "map_2_0_2") {
         if (toiletVisited === 0) {
             toiletVisited = 1;
@@ -495,6 +375,7 @@ function locationLoad(id) {
     }
 }
 
+//正気度関連
 function updateSan() {
     san = Math.max(0, Math.min(3, san));
     localStorage.setItem("san", san);
@@ -502,6 +383,7 @@ function updateSan() {
     img.src = `./img/san_${san}.png`;
 }
 
+//スチル関連
 function showStill(src) {
     const game = document.getElementById("game");
 
@@ -553,6 +435,8 @@ function clearScreen() {
         screenEl.classList.remove("show");
     }
 }
+
+//テキスト関連
 
 function startScrambleText() {
     const el = document.getElementById("text");
@@ -621,6 +505,7 @@ function typeText(text, speed = 50) {
     });
 }
 
+//コマンド
 function runCommands(cmds = []) {
     cmds.forEach(cmd => {
         if (cmd.startsWith("show(")) {
@@ -723,11 +608,11 @@ function runCommands(cmds = []) {
                 removeItem(id);
             }
         }
-        else if (cmd.startsWith("mazeStart(")) {
-            const id = cmd.match(/mazeStart\((.+)\)/)?.[1];
-            if (id) {
-                startMaze(id);
-            }
+        else if (cmd.startsWith("target(")) {
+            const value = Number(cmd.match(/target\(([-\d]+)\)/)?.[1] || 0);
+            remainingTargets += value;
+            if (remainingTargets < 0) remainingTargets = 0;
+            updateRemainingTargets();
         }
     });
 }
@@ -782,6 +667,7 @@ function show(id) {
     document.getElementById("text").classList.remove("ready");
 
     renderItems();
+    updateRemainingTargets();
 
     typingPromise.then(() => {
 
