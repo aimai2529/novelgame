@@ -376,9 +376,9 @@
         "text": "こういう食料品売ってるところって、大抵入ってすぐのところに野菜とか果物とかおいてあるだろ？いわゆる生鮮食品は色とりどりできれいだから、購買意欲？ってやつがわいてくるんだ！目を惹くしな。だから最初のほうにおいてあることが多いんだぜ。あと……",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
+        "speed": 30,
         "commands": [
-            "mapLock",
-            "target(-1)"
+            "mapLock"
         ],
         "choices": [
             {
@@ -388,6 +388,325 @@
             {
                 "label": "（黙ってだいこんを手に取る）",
                 "next": "foods1_D"
+            }
+        ]
+    },
+    {
+        "id": "foods1_C",
+        "name": "ユウジン",
+        "text": "総菜が一番最初にあるところも……\nって、全然聞いてねえじゃん！！せっかく俺が雑学披露してやってんのに～",
+        "bg": "shop_food.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "getItem(carrot)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "どうせいま調べたんだろ",
+                "next": "foods1_E"
+            },
+            {
+                "label": "はいはい、すごいすごい",
+                "next": "foods1_F"
+            }
+        ]
+    },
+    {
+        "id": "foods1_D",
+        "name": "ユウジン",
+        "text": "総菜が一番最初にあるところも……\nって、おいおい！！だいこんなんて買う予定なかっただろ！にんじんだよにんじん",
+        "bg": "shop_food.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……ちゃんとこっちのこと見てんのかなって",
+                "next": "foods1_G"
+            },
+            {
+                "label": "ちょっとしたボケだよ",
+                "next": "foods1_G"
+            }
+        ]
+    },
+    {
+        "id": "foods1_E",
+        "name": "ユウジン",
+        "text": "えぇ、なんでばれたの？まあいいや、次行こうぜ次！！\n……カレールーか、いろいろ種類あるよな。どれにするんだ？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(carrot)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（甘めのルーを手に取る）",
+                "next": "foods1_H"
+            },
+            {
+                "label": "（辛めのルーを手に取る）",
+                "next": "foods1_I"
+            }
+        ]
+    },
+    {
+        "id": "foods1_F",
+        "name": "ユウジン",
+        "text": "なんかテキトウだな……まあいいや、次行こうぜ次！！\n……カレールーか、いろいろ種類あるよな。どれにするんだ？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(carrot)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（甘めのルーを手に取る）",
+                "next": "foods1_H"
+            },
+            {
+                "label": "（辛めのルーを手に取る）",
+                "next": "foods1_I"
+            }
+        ]
+    },
+    {
+        "id": "foods1_G",
+        "name": "ユウジン",
+        "text": "なんだよ～かわいいやつだなっ！そんなことしなくても、ちゃんと見てるって～\nほらほら、時間ないんだし次行こうぜ！次は……カレールーか、いろいろ種類あるよな。どれにするんだ？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(carrot)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（甘めのルーを手に取る）",
+                "next": "foods1_H"
+            },
+            {
+                "label": "（辛めのルーを手に取る）",
+                "next": "foods1_I"
+            }
+        ]
+    },
+    {
+        "id": "foods1_H",
+        "name": "ユウジン",
+        "text": "お！俺もカレー作る時それだぜ！うまいよな！あんまり辛いのは苦手なんだよなぁ～",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(curry1)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "やっぱり辛いのにする",
+                "next": "foods1_J"
+            },
+            {
+                "label": "それはよかった",
+                "next": "foods1_L"
+            }
+        ]
+    },
+    {
+        "id": "foods1_I",
+        "name": "ユウジン",
+        "text": "え、そんな辛いのにするのか？！俺辛いの苦手だから食えねぇよ～",
+        "bg": "shop_food.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "getItem(curry2)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "なんで自分も食べる前提なんだよ",
+                "next": "foods1_M"
+            },
+            {
+                "label": "……甘いやつにしてやるよ",
+                "next": "foods1_K"
+            }
+        ]
+    },
+    {
+        "id": "foods1_J",
+        "name": "ユウジン",
+        "text": "なんでだよ！！……ちぇ、お前が作ったカレー食べるの楽しみだったのにな～……いやいや、じょーだんだじょーだん\nんじゃ、ルーも選べたことだし次は豚肉だな！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(curry2)",
+            "removeItem(curry1)",
+            "mapLock"
+        ],
+        "next": "foods1_N"
+    },
+    {
+        "id": "foods1_K",
+        "name": "ユウジン",
+        "text": "え？！マジ？！いやー、やっぱ持つべきものは親友だな！！お前のカレー楽しみにしてるからなっ！\nんじゃ、ルーも選べたことだし次は豚肉だな！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(curry1)",
+            "removeItem(curry2)",
+            "mapLock"
+        ],
+        "next": "foods1_N"
+    },
+    {
+        "id": "foods1_L",
+        "name": "ユウジン",
+        "text": "うんうん、だって作ったカレーおすそ分けに来てくれるって約束だもんな！！\nんじゃ、ルーも選べたことだし次は豚肉だな！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "foods1_N"
+    },
+    {
+        "id": "foods1_M",
+        "name": "ユウジン",
+        "text": "えぇ～、だって作ったカレーおすそ分けに来てくれるって約束だったじゃ～ん……いやいや、じょーだんじょーだん\nんじゃ、ルーも選べたことだし次は豚肉だな！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "foods1_N"
+    },
+    {
+        "id": "foods1_N",
+        "name": "ユウジン",
+        "text": "うーん、旨い豚肉の選び方っ、と……\nこういうのできめが細かいもの、ってよく言うけど、どういうことかいまいちわかんないよな……",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（きめの細かそうな豚肉を手に取る）",
+                "next": "foods1_O"
+            },
+            {
+                "label": "（適当な豚肉を手に取る）",
+                "next": "foods1_O"
+            }
+        ]
+    },
+    {
+        "id": "foods1_O",
+        "name": "？？？",
+        "text": "イラッシャイマセ！！オ買イ上ゲ、アリガトウゴザイマス！！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "speed": "80",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（声のしたほうを振り返る）",
+                "next": "foods1_R"
+            },
+            {
+                "label": "（無視してレジに向かう）",
+                "next": "foods1_P"
+            }
+        ]
+    },
+    {
+        "id": "foods1_P",
+        "name": "ユウジン",
+        "text": "おいおい、話しかけられてたんじゃ……ま、でもあんな勢いで話しかけられる方が怖いか……無視で正解か、びっくりしたな……",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……さっさと会計して次行くわ",
+                "next": "foods1_Q"
+            },
+            {
+                "label": "メモのものは買えたし、いいだろ",
+                "next": "foods1_Q"
+            }
+        ]
+    },
+    {
+        "id": "foods1_Q",
+        "name": "ユウジン",
+        "text": "そうだな、次はどこ行く？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "target(-1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods1_R",
+        "name": "ユウジン",
+        "text": "うわぁあ？！？！？！",
+        "bg": "food_test.JPG",
+        "face": "friend_gya.png",
+        "commands": [
+            "-san",
+            "mapLock"
+        ],
+        "next": "foods1_S"
+    },
+    {
+        "id": "foods1_S",
+        "name": "？？？",
+        "text": "オ肉ハ美味シイデスヨネ！！ワタシハ鶏肉ガスキデスケレド、豚肉モイイデスヨネ！！ドウヤッテ食ベルンデスカ？オ、カレールーヲ買ッテイマスネ！カレーデスカ！イイデスネ！！",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "は、はあ……",
+                "next": "foods1_T"
+            },
+            {
+                "label": "……どちら様……？",
+                "next": "foods1_T"
+            }
+        ]
+    },
+    {
+        "id": "foods1_T",
+        "name": "テンイン",
+        "text": "アア！ワタシハココデ働イテイルモノデス！オ肉ヲ解体シマスヨ！！解体！デモ、オ客様ノ姿ガ見エタノデ、ゴ挨拶シナケレバト！オ買イ上ゲアリガトウゴザイマス！！",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "その、包丁は……？",
+                "next": "foods1_U"
+            },
+            {
+                "label": "血……？",
+                "next": "foods1_U"
             }
         ]
     },

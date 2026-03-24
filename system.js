@@ -34,7 +34,7 @@ const itemDB = {
     },
     "carrot": {
         name: "にんじん",
-        image: "item_.carrotpng",
+        image: "item_carrot.png",
         description: "鮮やかなオレンジ色をした、艶ハリのあるいいにんじんだ"
     },
     "meat": {
@@ -42,10 +42,15 @@ const itemDB = {
         image: "item_meat.png",
         description: "白と薄桃の境界がはっきりした、新鮮そうな肉だ"
     },
-    "curry": {
+    "curry1": {
         name: "カレールー",
         image: "item_curry.png",
         description: "りんごと蜂蜜が効いた、甘めのルーだ"
+    },
+    "curry2": {
+        name: "カレールー",
+        image: "item_curry.png",
+        description: "さわやかな辛さと深いコクの、辛めのルーだ"
     },
     "dounut": {
         name: "ドーナツ",
@@ -100,7 +105,6 @@ function updateRemainingTargets() {
     const el = document.getElementById("hud-top-left");
     if (!el) return;
 
-    remainingTargets = Number(localStorage.getItem("remainingTargets") ?? remainingTargets);
     // 残り時間（分）
     const remainingMinutes = remainingTargets * 30;
 
@@ -116,6 +120,8 @@ function updateRemainingTargets() {
     el.innerHTML = `閉店まで${timeText} <br>- アト${remainingTargets}箇所`;
 
     localStorage.setItem("remainingTargets", remainingTargets);
+    remainingTargets = Number(localStorage.getItem("remainingTargets") ?? remainingTargets);
+
 }
 
 // アイテム関連
