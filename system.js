@@ -12,6 +12,8 @@ let screenEl = null;
 
 let returnSceneId = null;
 
+let charaEl = null;
+
 let typingTimer = null;
 let scrambleActive = false;
 let scrambleInterval = null;
@@ -442,6 +444,28 @@ function clearScreen() {
     }
 }
 
+//キャラクター立ち絵関連
+
+function showChara(src) {
+    const video = document.getElementById("video");
+    if (!video) return;
+
+    if (!charaEl) {
+        charaEl = document.createElement("img");
+        charaEl.className = "chara";
+        video.appendChild(charaEl);
+    }
+
+    charaEl.src = "img/" + src;
+    charaEl.style.display = "block";
+}
+
+function clearChara() {
+    if (charaEl) {
+        charaEl.style.display = "none";
+    }
+}
+
 //テキスト関連
 
 function startScrambleText() {
@@ -619,6 +643,31 @@ function runCommands(cmds = []) {
             remainingTargets += value;
             if (remainingTargets < 0) remainingTargets = 0;
             updateRemainingTargets();
+        } else if (cmd === "textBig") {
+            const text = document.getElementById("text");
+            if (text) text.classList.add("big-text");
+        }
+        else if (cmd === "textNormal") {
+            const text = document.getElementById("text");
+            if (text) text.classList.remove("big-text");
+        } else if (cmd.startsWith("shake")) {
+            const duration = Number(cmd.match(/shake\((\d+)\)/)?.[1] || 500);
+
+            const wrap = document.getElementById("game-wrapper");
+            if (!wrap) return;
+
+            wrap.classList.add("shake");
+
+            setTimeout(() => {
+                wrap.classList.remove("shake");
+            }, duration);
+        }
+        else if (cmd.startsWith("chara(")) {
+            const src = cmd.match(/chara\((.+)\)/)?.[1];
+            if (src) showChara(src);
+        }
+        else if (cmd === "clearChara") {
+            clearChara();
         }
     });
 }

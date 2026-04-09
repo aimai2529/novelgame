@@ -219,7 +219,8 @@ body {
 #text {
     width: 100%;
     line-height: 1.4;
-    min-height: calc(1.4em * 6);
+    /* height: calc(1.4em * 6); */
+    height: 319.2px;
     padding: 1.2em;
     background: rgba(68, 79, 76, 0.6);
     border: 4px solid rgb(0, 0, 0);
@@ -396,4 +397,43 @@ body {
     100% {
         transform: translate(0, 0);
     }
+}
+
+.shake {
+    animation: shake 0.1s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(2px, 2px);
+    }
+
+    25% {
+        transform: translate(-2px, 2px);
+    }
+
+    50% {
+        transform: translate(2px, -2px);
+    }
+
+    75% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(2px, 2px);
+    }
+}
+
+.big-text {
+    font-size: 1.5em;
+}
+
+.chara {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 100%;
+    pointer-events: none;
 }
