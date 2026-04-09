@@ -613,6 +613,7 @@
         "face": "friend_gya.png",
         "speed": "80",
         "commands": [
+            "getItem(meat)",
             "mapLock"
         ],
         "choices": [
@@ -653,7 +654,7 @@
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
-            "mapLock",
+            "mapUnlock",
             "target(-1)"
         ],
         "next": "search"
@@ -707,6 +708,59 @@
             {
                 "label": "血……？",
                 "next": "foods1_U"
+            }
+        ]
+    },
+    {
+        "id": "foods1_U",
+        "name": "？？？",
+        "text": "おい！！その格好で客の前に出るなって何回言ったらわかるんだ！！！！",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "foods1_U1"
+    },
+    {
+        "id": "foods1_U1",
+        "name": "テンイン",
+        "text": "アァ～～～！ゴ来店、アリガトウゴザイマシタァ～～！！",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "foods1_V"
+    },
+    {
+        "id": "foods1_V",
+        "name": "",
+        "text": "（裏から出てきたガタイのいい店員が、店のバックヤードに彼を引きずっていった……）",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "foods1_W"
+    },
+    {
+        "id": "foods1_W",
+        "name": "ユウジン",
+        "text": "なんだったんだあれ……びっくりしたな\nさっさと会計していこうぜ",
+        "bg": "food_test.JPG",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "変な人だったな……",
+                "next": "foods1_Q"
+            },
+            {
+                "label": "買うものは買えたからよかった",
+                "next": "foods1_Q"
             }
         ]
     },
