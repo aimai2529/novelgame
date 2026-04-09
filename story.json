@@ -614,7 +614,9 @@
         "speed": "80",
         "commands": [
             "getItem(meat)",
-            "mapLock"
+            "mapLock",
+            "shake",
+            "textBig"
         ],
         "choices": [
             {
@@ -634,7 +636,8 @@
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
-            "mapLock"
+            "mapLock",
+            "textNormal"
         ],
         "choices": [
             {
@@ -663,11 +666,12 @@
         "id": "foods1_R",
         "name": "ユウジン",
         "text": "うわぁあ？！？！？！",
-        "bg": "food_test.JPG",
+        "bg": "shop_food.png",
         "face": "friend_gya.png",
         "commands": [
             "-san",
-            "mapLock"
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
         ],
         "next": "foods1_S"
     },
@@ -675,10 +679,12 @@
         "id": "foods1_S",
         "name": "？？？",
         "text": "オ肉ハ美味シイデスヨネ！！ワタシハ鶏肉ガスキデスケレド、豚肉モイイデスヨネ！！ドウヤッテ食ベルンデスカ？オ、カレールーヲ買ッテイマスネ！カレーデスカ！イイデスネ！！",
-        "bg": "food_test.JPG",
-        "face": "friend_noodle.png",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
         "commands": [
-            "mapLock"
+            "mapLock",
+            "textNormal",
+            "chara(tenin_nikoniko.png)"
         ],
         "choices": [
             {
@@ -695,10 +701,11 @@
         "id": "foods1_T",
         "name": "テンイン",
         "text": "アア！ワタシハココデ働イテイルモノデス！オ肉ヲ解体シマスヨ！！解体！デモ、オ客様ノ姿ガ見エタノデ、ゴ挨拶シナケレバト！オ買イ上ゲアリガトウゴザイマス！！",
-        "bg": "food_test.JPG",
-        "face": "friend_noodle.png",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
         "commands": [
-            "mapLock"
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
         ],
         "choices": [
             {
@@ -715,10 +722,12 @@
         "id": "foods1_U",
         "name": "？？？",
         "text": "おい！！その格好で客の前に出るなって何回言ったらわかるんだ！！！！",
-        "bg": "food_test.JPG",
+        "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
-            "mapLock"
+            "mapLock",
+            "shake",
+            "chara(tenin_niko.png)"
         ],
         "next": "foods1_U1"
     },
@@ -726,10 +735,11 @@
         "id": "foods1_U1",
         "name": "テンイン",
         "text": "アァ～～～！ゴ来店、アリガトウゴザイマシタァ～～！！",
-        "bg": "food_test.JPG",
+        "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
-            "mapLock"
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
         ],
         "next": "foods1_V"
     },
@@ -737,10 +747,11 @@
         "id": "foods1_V",
         "name": "",
         "text": "（裏から出てきたガタイのいい店員が、店のバックヤードに彼を引きずっていった……）",
-        "bg": "food_test.JPG",
+        "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
-            "mapLock"
+            "mapLock",
+            "clearChara"
         ],
         "next": "foods1_W"
     },
@@ -748,7 +759,7 @@
         "id": "foods1_W",
         "name": "ユウジン",
         "text": "なんだったんだあれ……びっくりしたな\nさっさと会計していこうぜ",
-        "bg": "food_test.JPG",
+        "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
             "mapLock"
