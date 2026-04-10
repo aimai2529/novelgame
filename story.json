@@ -776,10 +776,10 @@
         ]
     },
     {
-        "id": "exit1",
+        "id": "exit01",
         "name": "ユウジン",
         "text": "ちょちょちょ、帰るのか？夕飯の材料は？？",
-        "bg": "supermarket.png",
+        "bg": "exit.png",
         "face": "friend_surprised.png",
         "commands": [
             "mapLock"
@@ -787,16 +787,16 @@
         "choices": [
             {
                 "label": "うん。帰る",
-                "next": "exit1_A"
+                "next": "exit01_A"
             },
             {
                 "label": "帰るわけないじゃん",
-                "next": "exit1_B"
+                "next": "exit01_B"
             }
         ]
     },
     {
-        "id": "exit1_B",
+        "id": "exit01_B",
         "name": "ユウジン",
         "text": "そうだよな、びっくりした……次はどこいく？",
         "bg": "supermarket.png",
@@ -808,7 +808,7 @@
         "next": "search"
     },
     {
-        "id": "exit1_A",
+        "id": "exit01_A",
         "name": "ユウジン",
         "text": "お、おう……お前がそれでいいんならいいんだけどよ。夕飯どうすんだよ\n……うちきてカップ麺食うか？",
         "bg": "exit.png",
@@ -816,16 +816,16 @@
         "choices": [
             {
                 "label": "いや、どこかで食べて帰るよ",
-                "next": "exit1_C"
+                "next": "exit01_C"
             },
             {
                 "label": "……じゃあ、そうしようかな",
-                "next": "exit1_D"
+                "next": "exit01_D"
             }
         ]
     },
     {
-        "id": "exit1_C",
+        "id": "exit01_C",
         "name": "ユウジン",
         "text": "そうか、じゃあ寿司だな！回転寿司行こう。俺が何食べるか選ぶからさ〜！そのまま通話繋げとけよ〜！",
         "bg": "exit.png",
@@ -833,12 +833,164 @@
         "next": "end01"
     },
     {
-        "id": "exit1_D",
+        "id": "exit01_D",
         "name": "ユウジン",
         "text": "じゃ、お湯沸かして待ってるな！わかってると思うけど、俺ん家のカップ麺はシーフード一択だから。文句言うなよ〜",
         "bg": "exit.png",
         "face": "friend_aori.png",
         "next": "end02"
+    },
+    {
+        "id": "exit02",
+        "name": "ユウジン",
+        "text": "お、帰るのか？",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "うん。帰る",
+                "next": "exit02_A"
+            },
+            {
+                "label": "まだ帰らない",
+                "next": "exit02_B"
+            }
+        ]
+    },
+    {
+        "id": "exit02_B",
+        "name": "ユウジン",
+        "text": "まだ買い物してくのか？\nほどほどにしとけよ～",
+        "bg": "supermarket.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "exit02_A",
+        "name": "ユウジン",
+        "text": "うんうん、ちゃんと買うもん買えてて偉いな～",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "choices": [
+            {
+                "label": "そりゃどーも",
+                "next": "exit02_C"
+            },
+            {
+                "label": "馬鹿にしてるだろ",
+                "next": "exit02_C"
+            }
+        ]
+    },
+    {
+        "id": "exit02_C",
+        "name": "ユウジン",
+        "text": "まあまあ、ほら、早く帰って作らないと！それで俺におすそ分けしに来てくれるんだろ？",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "choices": [
+            {
+                "label": "行かないけど……？",
+                "next": "exit02_D"
+            },
+            {
+                "label": "そうだな",
+                "next": "exit02_E"
+            }
+        ]
+    },
+    {
+        "id": "exit02_D",
+        "name": "ユウジン",
+        "text": "ちぇ、だめか～……\n……それはそれとして、気を付けて帰れよな～",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "next": "end03"
+    },
+    {
+        "id": "exit02_E",
+        "name": "ユウジン",
+        "text": "……マジで……？！冗談のつもりだったんだけど……\nいや、食いてえ！お前のカレー！楽しみにしてるな！",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "next": "end04"
+    },
+    {
+        "id": "exit03",
+        "name": "ユウジン",
+        "text": "お、帰るのか？",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "うん。帰る",
+                "next": "exit03_A"
+            },
+            {
+                "label": "まだ帰らない",
+                "next": "exit02_B"
+            }
+        ]
+    },
+    {
+        "id": "exit03_A",
+        "name": "ユウジン",
+        "text": "うんうん、ちゃんと買うもん買えてて偉いな～",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "choices": [
+            {
+                "label": "そりゃどーも",
+                "next": "exit02_C"
+            },
+            {
+                "label": "馬鹿にしてるだろ",
+                "next": "exit02_C"
+            }
+        ]
+    },
+    {
+        "id": "exit03_C",
+        "name": "ユウジン",
+        "text": "まあまあ、ほら、早く帰って作らないと！それで俺におすそ分けしに来てくれるんだろ？",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "choices": [
+            {
+                "label": "行かないけど……？",
+                "next": "exit03_D"
+            },
+            {
+                "label": "辛いの、苦手じゃなかった？",
+                "next": "exit03_E"
+            }
+        ]
+    },
+    {
+        "id": "exit03_D",
+        "name": "ユウジン",
+        "text": "ちぇ～……ていうか、そもそも辛口のカレー作るんだもんな……\n……ま、気を付けて帰れよな～",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "next": "end03"
+    },
+    {
+        "id": "exit03_E",
+        "name": "ユウジン",
+        "text": "そうじゃん、辛口のルー買ってたわ。な～～～んで辛口にしちゃったんだよ～～～",
+        "bg": "exit.png",
+        "face": "friend_shikushiku.png",
+        "next": "end03"
     },
     {
         "id": "donuts1",
@@ -987,6 +1139,36 @@
     {
         "id": "end02",
         "text": "END.二人のカップ麺",
+        "speed": 100,
+        "commands": [
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
+        "id": "end03",
+        "text": "END.このカレーは全部自分の",
+        "speed": 100,
+        "commands": [
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
+        "id": "end04",
+        "text": "END.カレー作りすぎちゃって",
         "speed": 100,
         "commands": [
             "show(textbox)",

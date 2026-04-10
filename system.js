@@ -365,7 +365,7 @@ function locationLoad(id) {
     } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
         show("foods1");
     } else if (id === "map_1_0_1") {
-        show("exit1");
+        show(getExitScene());
     } else if (id === "map_1_1_2") {
         show("donuts1");
     } else if (id === "map_1_2_2") {
@@ -381,6 +381,18 @@ function locationLoad(id) {
     } else if (id === "map_2_2_0" || id === "map_2_2_1" || id === "map_2_2_2") {
         show("books1");
     }
+}
+
+//出口エンド分岐
+function getExitScene() {
+    const hasCarrot = hasItem("carrot");
+    const hasMeat = hasItem("meat");
+    const hasCurry1 = hasItem("curry1");
+    const hasCurry2 = hasItem("curry2");
+
+    if (hasCarrot && hasMeat && hasCurry1) return "exit02";
+    if (hasCarrot && hasMeat && hasCurry2) return "exit03";
+    return "exit01";
 }
 
 //正気度関連
