@@ -21,7 +21,6 @@
         "face": "friend_normal.png",
         "bg": "supermarket.png",
         "commands": [
-            "-san",
             "overlay(map, 'クリックで移動')",
             "mapUnlock"
         ],

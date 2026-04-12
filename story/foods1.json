@@ -318,6 +318,7 @@
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
+            "overlay(map, 'クリックで移動')",
             "mapUnlock",
             "target(-1)",
             "foods(1)"

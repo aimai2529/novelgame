@@ -44,6 +44,11 @@ const itemDB = {
         image: "item_meat.png",
         description: "白と薄桃の境界がはっきりした、新鮮そうな肉だ"
     },
+    "meat2": {
+        name: "自慢の肉",
+        image: "item_meat.png",
+        description: "サービスでもらった、なんのものかわからない肉塊"
+    },
     "curry1": {
         name: "カレールー",
         image: "item_curry.png",
@@ -58,6 +63,12 @@ const itemDB = {
         name: "ドーナツ",
         image: "item_dounut.png",
         description: "毒毒しいと感じるほど鮮やかに彩られたドーナツ"
+    },
+    "note2": {
+        name: "求人票？",
+        image: "item_note.png",
+        description: "血塗れでぐしゃぐしゃの求人票。「面接は雑貨屋でやります！いっぱいきてください！」と可愛らしい文字で書いてある。"
+
     }
 };
 
@@ -74,6 +85,8 @@ async function loadStory() {
         "story/story.json",
         "story/op.json",
         "story/foods1.json",
+        "story/foods2.json",
+        "story/foods3.json",
         "story/exit.json"
     ];
 
@@ -386,8 +399,10 @@ function locationLoad(id) {
             show("foods1");
         } else if (foodsVisited === 1) {
             show("foods2");
-        } else {
+        } else if (foodsVisited === 2) {
             show("foods3");
+        } else {
+            show("foods4");
         }
     } else if (id === "map_1_0_1") {
         show(getExitScene());
