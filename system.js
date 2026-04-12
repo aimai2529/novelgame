@@ -63,13 +63,29 @@ const itemDB = {
 
 let items = JSON.parse(localStorage.getItem("items") || "[]");
 let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
+let foodsVisited = Number(localStorage.getItem("foodsVisited") || 0);
 let loopCount = Number(localStorage.getItem("loopCount") || 0);
 let san = Number(localStorage.getItem("san") ?? 3);
 
 async function loadStory() {
     if (story) return;
 
-    story = await fetch("story.json").then(r => r.json());
+    const files = [
+        "story/story.json",
+        "story/op.json",
+        "story/foods1.json",
+        "story/exit.json"
+    ];
+
+    let all = [];
+
+    for (const file of files) {
+        const data = await fetch(file).then(r => r.json());
+        all = all.concat(data);
+    }
+
+    story = all;
+
     const saved = localStorage.getItem("novel_save_scene");
     if (saved && findScene(saved)) {
         show(saved);
@@ -85,6 +101,9 @@ function findScene(id) {
 function resetForLoop() {
     toiletVisited = 0;
     localStorage.setItem("toiletVisited", toiletVisited);
+
+    foodsVisited = 0;
+    localStorage.setItem("foodsVisited", foodsVisited);
 
     san = 3;
     updateSan();
@@ -363,7 +382,13 @@ function locationLoad(id) {
             show("toilet_3");
         }
     } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
-        show("foods1");
+        if (foodsVisited === 0) {
+            show("foods1");
+        } else if (foodsVisited === 1) {
+            show("foods2");
+        } else {
+            show("foods3");
+        }
     } else if (id === "map_1_0_1") {
         show(getExitScene());
     } else if (id === "map_1_1_2") {
@@ -680,6 +705,15 @@ function runCommands(cmds = []) {
         }
         else if (cmd === "clearChara") {
             clearChara();
+        } else if (cmd.startsWith("foods(")) {
+            const value = Number(cmd.match(/foods\(([-\d]+)\)/)?.[1] || 0);
+
+            foodsVisited += value;
+            if (foodsVisited < 0) foodsVisited = 0;
+
+            localStorage.setItem("foodsVisited", foodsVisited);
+
+            console.log("foodsVisited:", foodsVisited);
         }
     });
 }
