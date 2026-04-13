@@ -24,6 +24,8 @@ const choicesBox = document.getElementById("choices");
 
 let remainingTargets = Number(localStorage.getItem("remainingTargets") ?? 4);
 
+let executedScenes = JSON.parse(localStorage.getItem("executedScenes") || "[]");
+
 const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
@@ -87,6 +89,7 @@ async function loadStory() {
         "story/foods1.json",
         "story/foods2.json",
         "story/foods3.json",
+        "story/foods4.json",
         "story/exit.json"
     ];
 
@@ -124,6 +127,9 @@ function resetForLoop() {
     items = [];
     localStorage.setItem("items", JSON.stringify(items));
     renderItems();
+
+    executedScenes = [];
+    localStorage.setItem("executedScenes", JSON.stringify(executedScenes));
 
     loopCount++;
     localStorage.setItem("loopCount", loopCount);
@@ -755,8 +761,17 @@ function show(id) {
     localStorage.setItem("novel_save_scene", id);
 
     if (current.commands) {
-        runCommands(current.commands);
+
+        if (!executedScenes.includes(current.id)) {
+            runCommands(current.commands);
+
+            if (id.includes('_') && !id.includes('_A')) {
+                executedScenes.push(current.id);
+                localStorage.setItem("executedScenes", JSON.stringify(executedScenes));
+            }
+        }
     }
+
     updateMapView();
 
     document.getElementById("bg").src = "img/" + current.bg;

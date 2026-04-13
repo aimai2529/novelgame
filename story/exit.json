@@ -11,16 +11,16 @@
         "choices": [
             {
                 "label": "うん。帰る",
-                "next": "exit01_A"
+                "next": "exit01_B"
             },
             {
                 "label": "帰るわけないじゃん",
-                "next": "exit01_B"
+                "next": "exit01_A"
             }
         ]
     },
     {
-        "id": "exit01_B",
+        "id": "exit01_A",
         "name": "ユウジン",
         "text": "そうだよな、びっくりした……次はどこいく？",
         "bg": "supermarket.png",
@@ -32,7 +32,7 @@
         "next": "search"
     },
     {
-        "id": "exit01_A",
+        "id": "exit01_B",
         "name": "ユウジン",
         "text": "お、おう……お前がそれでいいんならいいんだけどよ。夕飯どうすんだよ\n……うちきてカップ麺食うか？",
         "bg": "exit.png",
@@ -76,16 +76,16 @@
         "choices": [
             {
                 "label": "うん。帰る",
-                "next": "exit02_A"
+                "next": "exit02_B"
             },
             {
                 "label": "まだ帰らない",
-                "next": "exit02_B"
+                "next": "exit02_A"
             }
         ]
     },
     {
-        "id": "exit02_B",
+        "id": "exit02_A",
         "name": "ユウジン",
         "text": "まだ買い物してくのか？\nほどほどにしとけよ～",
         "bg": "supermarket.png",
@@ -97,7 +97,7 @@
         "next": "search"
     },
     {
-        "id": "exit02_A",
+        "id": "exit02_B",
         "name": "ユウジン",
         "text": "うんうん、ちゃんと買うもん買えてて偉いな～",
         "bg": "exit.png",
@@ -158,16 +158,16 @@
         "choices": [
             {
                 "label": "うん。帰る",
-                "next": "exit03_A"
+                "next": "exit03_B"
             },
             {
                 "label": "まだ帰らない",
-                "next": "exit02_B"
+                "next": "exit02_A"
             }
         ]
     },
     {
-        "id": "exit03_A",
+        "id": "exit03_B",
         "name": "ユウジン",
         "text": "うんうん、ちゃんと買うもん買えてて偉いな～",
         "bg": "exit.png",
