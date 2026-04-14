@@ -1,0 +1,338 @@
+[
+    {
+        "id": "foods2",
+        "name": "ユウジン",
+        "text": "あれ？もう一回食料品店に行くのか？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "うん、行ってくる",
+                "next": "foods2_B"
+            },
+            {
+                "label": "いや、行かない",
+                "next": "foods2_A"
+            }
+        ]
+    },
+    {
+        "id": "foods2_A",
+        "name": "ユウジン",
+        "text": "ま、もう買いたいものはもれなく買えてるからな。次はどうする？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods2_B",
+        "name": "ユウジン",
+        "text": "どうしたんだよ～、なんか買い忘れてるものでもあったか？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "目的なくぶらつくの、楽しくない？",
+                "next": "foods2_C"
+            },
+            {
+                "label": "さっき話しかけてきた人が気になって",
+                "next": "foods2_D"
+            }
+        ]
+    },
+    {
+        "id": "foods2_C",
+        "name": "ユウジン",
+        "text": "確かに、わからないでもないな！でも俺、それしてるといつの間にかお菓子とかカップ麺を買っちゃってるんだよな……",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "お前の家、いつでもお菓子あるもんな",
+                "next": "foods2_E"
+            },
+            {
+                "label": "健康には気をつけなよ",
+                "next": "foods2_F"
+            }
+        ]
+    },
+    {
+        "id": "foods2_D",
+        "name": "ユウジン",
+        "text": "あぁ、さっきの……\n……なんていうか、あんまりかかわらない方がいいんじゃないの……？",
+        "bg": "shop_food.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "気になるじゃん",
+                "next": "foods2_G"
+            },
+            {
+                "label": "やっぱりそうかな……",
+                "next": "foods2_G"
+            }
+        ]
+    },
+    {
+        "id": "foods2_E",
+        "name": "ユウジン",
+        "text": "おう、だからいつでも来てくれよな！\n……っていうか、さっき変な店員……？がいたけど、いいのか？またばったり会ったら怖くね……？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "まぁ大丈夫でしょ",
+                "next": "foods2_G"
+            },
+            {
+                "label": "確かに、そうかも……",
+                "next": "foods2_G"
+            }
+        ]
+    },
+    {
+        "id": "foods2_F",
+        "name": "ユウジン",
+        "text": "うぐ……だ、大丈夫だ！まだ、まだな……\nそっ、それより！さっき変な店員……？がいたけど、いいのか？またばったり会ったら怖くね……？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "まぁ大丈夫でしょ",
+                "next": "foods2_G"
+            },
+            {
+                "label": "確かに、そうかも……",
+                "next": "foods2_G"
+            }
+        ]
+    },
+    {
+        "id": "foods2_G",
+        "name": "？？？",
+        "text": "アッ！！！オ客様！マタ来テクレタンデスカ！？",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "speed": "80",
+        "commands": [
+            "mapLock",
+            "shake",
+            "textBig"
+        ],
+        "choices": [
+            {
+                "label": "（声のしたほうを振り返る）",
+                "next": "foods2_H"
+            },
+            {
+                "label": "（無視して通り過ぎる）",
+                "next": "foods2_Q"
+            }
+        ]
+    },
+    {
+        "id": "foods2_H",
+        "name": "テンイン",
+        "text": "アァ、ヤッパリソウダ！マタ会エテトッテモウレシイデス！！ココノオ肉ヲキニイッテクレマシタカ！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "textNormal",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "いや、まだ食べてない……",
+                "next": "foods2_I"
+            },
+            {
+                "label": "ま、まあ、そんなところです……",
+                "next": "foods2_I"
+            }
+        ]
+    },
+    {
+        "id": "foods2_I",
+        "name": "テンイン",
+        "text": "ココノオ肉ハトッテモオイシイデスカラ、キットキニイッテクレルト思イマシタ！丹精込メテ捌キマシタカラネ！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "そうなんですね……",
+                "next": "foods2_J"
+            },
+            {
+                "label": "お店で捌いてるなんて、すごいですね",
+                "next": "foods2_J"
+            }
+        ]
+    },
+    {
+        "id": "foods2_J",
+        "name": "テンイン",
+        "text": "ソウデスソウデス！ソウダ！！親愛ナルオ客様ニ、オ肉のサービスデス！他デハナカナカ食ベラレナイ、自慢ノオ肉デス！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "textNormal",
+            "chara(tenin_normal.png)"
+        ],
+        "choices": [
+            {
+                "label": "なんの肉……？",
+                "next": "foods2_K"
+            },
+            {
+                "label": "結構です",
+                "next": "foods2_K"
+            }
+        ]
+    },
+    {
+        "id": "foods2_K",
+        "name": "テンイン",
+        "text": "ホラ、遠慮ナサラズニ！！！コレヲ食ベレバミンナ笑顔ニ！アナタモ笑顔ニナリマショウ！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "next": "foods2_L"
+    },
+    {
+        "id": "foods2_L",
+        "text": "（有無を言わさず、何かの肉をかばんに押し込まれた……）",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(meat2)",
+            "mapLock",
+            "chara(tenin_niko.png)"
+        ],
+        "next": "foods2_M"
+    },
+    {
+        "id": "foods2_M",
+        "name": "テンイン",
+        "text": "贈リ物ヲシマシタ！コレデワタシタチ、オ友達デスネ！！仲良シハ嬉シイデスネ！マタ会イマショウ！！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "は、はぁ……",
+                "next": "foods2_N"
+            },
+            {
+                "label": "そうですね……？",
+                "next": "foods2_N"
+            }
+        ]
+    },
+    {
+        "id": "foods2_N",
+        "name": "ユウジン",
+        "text": "……バックヤードに戻っていったな……\nなんなんだ、あの店員……",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "clearChara"
+        ],
+        "choices": [
+            {
+                "label": "お肉くれたし、いい人なのかも？",
+                "next": "foods2_O"
+            },
+            {
+                "label": "勢いがすごい人だったな……",
+                "next": "foods2_P"
+            }
+        ]
+    },
+    {
+        "id": "foods2_O",
+        "name": "ユウジン",
+        "text": "いやぁ……そう、かなぁ…………？\nま、さっさと次のところ行こうぜ",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "foods(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods2_P",
+        "name": "ユウジン",
+        "text": "ほんとにな。あんまかかわらない方がいいと思うぜ\n気ぃ取り直して、次はどこ行く？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "foods(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods2_Q",
+        "name": "テンイン",
+        "text": "嫌ダナァ、無視シナイデクダサイヨ！マタ会エテトッテモウレシイデス！！ココノオ肉ヲキニイッテクレマシタカ！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "textNormal",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "いや、まだ食べてない……",
+                "next": "foods2_I"
+            },
+            {
+                "label": "ま、まあ、そんなところです……",
+                "next": "foods2_I"
+            }
+        ]
+    }
+]

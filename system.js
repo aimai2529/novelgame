@@ -24,6 +24,8 @@ const choicesBox = document.getElementById("choices");
 
 let remainingTargets = Number(localStorage.getItem("remainingTargets") ?? 4);
 
+let executedScenes = JSON.parse(localStorage.getItem("executedScenes") || "[]");
+
 const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
@@ -44,6 +46,11 @@ const itemDB = {
         image: "item_meat.png",
         description: "白と薄桃の境界がはっきりした、新鮮そうな肉だ"
     },
+    "meat2": {
+        name: "自慢の肉",
+        image: "item_meat.png",
+        description: "サービスでもらった、なんのものかわからない肉塊"
+    },
     "curry1": {
         name: "カレールー",
         image: "item_curry.png",
@@ -58,18 +65,43 @@ const itemDB = {
         name: "ドーナツ",
         image: "item_dounut.png",
         description: "毒毒しいと感じるほど鮮やかに彩られたドーナツ"
+    },
+    "note2": {
+        name: "求人票？",
+        image: "item_note.png",
+        description: "血塗れでぐしゃぐしゃの求人票。「面接は雑貨屋でやります！いっぱいきてください！」と可愛らしい文字で書いてある。"
+
     }
 };
 
 let items = JSON.parse(localStorage.getItem("items") || "[]");
 let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
+let foodsVisited = Number(localStorage.getItem("foodsVisited") || 0);
 let loopCount = Number(localStorage.getItem("loopCount") || 0);
 let san = Number(localStorage.getItem("san") ?? 3);
 
 async function loadStory() {
     if (story) return;
 
-    story = await fetch("story.json").then(r => r.json());
+    const files = [
+        "story/story.json",
+        "story/op.json",
+        "story/foods1.json",
+        "story/foods2.json",
+        "story/foods3.json",
+        "story/foods4.json",
+        "story/exit.json"
+    ];
+
+    let all = [];
+
+    for (const file of files) {
+        const data = await fetch(file).then(r => r.json());
+        all = all.concat(data);
+    }
+
+    story = all;
+
     const saved = localStorage.getItem("novel_save_scene");
     if (saved && findScene(saved)) {
         show(saved);
@@ -86,12 +118,18 @@ function resetForLoop() {
     toiletVisited = 0;
     localStorage.setItem("toiletVisited", toiletVisited);
 
+    foodsVisited = 0;
+    localStorage.setItem("foodsVisited", foodsVisited);
+
     san = 3;
     updateSan();
 
     items = [];
     localStorage.setItem("items", JSON.stringify(items));
     renderItems();
+
+    executedScenes = [];
+    localStorage.setItem("executedScenes", JSON.stringify(executedScenes));
 
     loopCount++;
     localStorage.setItem("loopCount", loopCount);
@@ -363,9 +401,17 @@ function locationLoad(id) {
             show("toilet_3");
         }
     } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
-        show("foods1");
+        if (foodsVisited === 0) {
+            show("foods1");
+        } else if (foodsVisited === 1) {
+            show("foods2");
+        } else if (foodsVisited === 2) {
+            show("foods3");
+        } else {
+            show("foods4");
+        }
     } else if (id === "map_1_0_1") {
-        show("exit1");
+        show(getExitScene());
     } else if (id === "map_1_1_2") {
         show("donuts1");
     } else if (id === "map_1_2_2") {
@@ -381,6 +427,18 @@ function locationLoad(id) {
     } else if (id === "map_2_2_0" || id === "map_2_2_1" || id === "map_2_2_2") {
         show("books1");
     }
+}
+
+//出口エンド分岐
+function getExitScene() {
+    const hasCarrot = hasItem("carrot");
+    const hasMeat = hasItem("meat");
+    const hasCurry1 = hasItem("curry1");
+    const hasCurry2 = hasItem("curry2");
+
+    if (hasCarrot && hasMeat && hasCurry1) return "exit02";
+    if (hasCarrot && hasMeat && hasCurry2) return "exit03";
+    return "exit01";
 }
 
 //正気度関連
@@ -493,7 +551,7 @@ function stopScrambleText() {
     scrambleOnceText = null;
 }
 
-function typeText(text, speed = 50) {
+function typeText(text, speed = 60) {
     return new Promise(resolve => {
         const el = document.getElementById("text");
         const textbox = document.getElementById("textbox");
@@ -624,13 +682,11 @@ function runCommands(cmds = []) {
             if (!id) return;
 
             if (hasItem(id)) {
-                console.log("すでに所持している:", id);
                 return;
             }
 
             const success = addItem(id);
             if (!success) {
-                console.log("取得できなかった:", id);
             }
         } else if (cmd.startsWith("removeItem(")) {
             const id = cmd.match(/removeItem\((.+)\)/)?.[1];
@@ -668,6 +724,15 @@ function runCommands(cmds = []) {
         }
         else if (cmd === "clearChara") {
             clearChara();
+        } else if (cmd.startsWith("foods(")) {
+            const value = Number(cmd.match(/foods\(([-\d]+)\)/)?.[1] || 0);
+
+            foodsVisited += value;
+            if (foodsVisited < 0) foodsVisited = 0;
+
+            localStorage.setItem("foodsVisited", foodsVisited);
+
+            console.log("foodsVisited:", foodsVisited);
         }
     });
 }
@@ -694,8 +759,17 @@ function show(id) {
     localStorage.setItem("novel_save_scene", id);
 
     if (current.commands) {
-        runCommands(current.commands);
+
+        if (!executedScenes.includes(current.id)) {
+            runCommands(current.commands);
+
+            if (id.includes('_') && !id.includes('_A')) {
+                executedScenes.push(current.id);
+                localStorage.setItem("executedScenes", JSON.stringify(executedScenes));
+            }
+        }
     }
+
     updateMapView();
 
     document.getElementById("bg").src = "img/" + current.bg;

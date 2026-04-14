@@ -1,0 +1,262 @@
+[
+    {
+        "id": "foods4",
+        "name": "ユウジン",
+        "text": "ちょ、食料品店行くのか？！やめとけって！！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "なんでだよ、行くけど",
+                "next": "foods4_B"
+            },
+            {
+                "label": "わ、わかったよ……",
+                "next": "foods4_A"
+            }
+        ]
+    },
+    {
+        "id": "foods4_A",
+        "name": "ユウジン",
+        "text": "変なことに首突っ込むなよな……早く帰ろうぜ？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods4_B",
+        "name": "ユウジン",
+        "text": "んなっ……だってもう行く用事ないだろ！荷物もいっぱいだしさ、帰った方がいいって！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "心配しすぎだよ、行っても大丈夫だって",
+                "next": "foods4_C"
+            },
+            {
+                "label": "せっかく友達になったからさ",
+                "next": "foods4_C"
+            }
+        ]
+    },
+    {
+        "id": "foods4_C",
+        "name": "ユウジン",
+        "text": "いやいやいや、だってさっきの店員、ナタ持ってたぜ！！血塗れだしよ！冷静になって考えてみろって。明らかにやばいやつじゃん！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "まあ、そういうこともあるんじゃない？",
+                "next": "foods4_D"
+            },
+            {
+                "label": "仕事中に駆けつけてくれていい人じゃん",
+                "next": "foods4_D"
+            }
+        ]
+    },
+    {
+        "id": "foods4_D",
+        "name": "ユウジン",
+        "text": "そっ……んなわけないだろ……ちょっと落ち着けって\n…………な？帰ってさ、カレー作ろうぜ？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "しつこいなぁ、大丈夫だって",
+                "next": "foods4_E"
+            },
+            {
+                "label": "…………わかったよ、帰る",
+                "next": "foods4_F"
+            }
+        ]
+    },
+    {
+        "id": "foods4_E",
+        "name": "テンイン",
+        "text": "ワァ！今日ハ本当ニヨク会イマスネ！ワタシ、トッテモウレシイデス！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "speed": "80",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "友達ですから",
+                "next": "foods4_H"
+            },
+            {
+                "label": "こちらこそ、会えてうれしいです",
+                "next": "foods4_H"
+            }
+        ]
+    },
+    {
+        "id": "foods4_F",
+        "name": "テンイン",
+        "text": "ア　レ　？　帰　ッ　テ　シ　マ　ウ　ン　デ　ス　カ　？　",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "speed": "120",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（振り返る）",
+                "next": "foods4_G"
+            }
+        ]
+    },
+    {
+        "id": "foods4_G",
+        "name": "テンイン",
+        "text": "ソンナ、寂シイコト言イワナイデ！折角マタ会エタンデスカラ！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "speed": "80",
+        "commands": [
+            "mapLock",
+            "chara(tenin_normal.png)"
+        ],
+        "choices": [
+            {
+                "label": "え、いや…………",
+                "next": "foods4_H"
+            },
+            {
+                "label": "か、帰ります……",
+                "next": "foods4_H"
+            }
+        ]
+    },
+    {
+        "id": "foods4_H",
+        "name": "テンイン",
+        "text": "ア！モシカシテ、ココデ働クト決メテクレマシタカ！？ヤッパリアナタモ、人ヲ笑顔ニスルノガ好キナンデスネ！ワタシモデスヨ！！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "textNormal",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "まだ決めてないですよ……",
+                "next": "foods4_I"
+            },
+            {
+                "label": "そうですね……？",
+                "next": "foods4_I"
+            }
+        ]
+    },
+    {
+        "id": "foods4_I",
+        "name": "テンイン",
+        "text": "早クオ客様ヲ笑顔ニシタイト思ウノハ善イコトデス！デモ、今日ハモウ閉店ナノデ、働ケマセン……残念デス……",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_normal.png)"
+        ],
+        "choices": [
+            {
+                "label": "今日は帰ります",
+                "next": "foods4_J"
+            },
+            {
+                "label": "夕飯まだなので……",
+                "next": "foods4_J"
+            }
+        ]
+    },
+    {
+        "id": "foods4_J",
+        "name": "テンイン",
+        "text": "…………ソウダ！！アリマスヨ！スグニオ客様ノ笑顔ノタメニナレルコトガ！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "textNormal",
+            "chara(tenin_niko.png)"
+        ],
+        "next": "foods4_K"
+    },
+    {
+        "id": "foods4_K",
+        "name": "テンイン",
+        "text": "アナタモ美味シクナリマショウ！！美味シイモノハ人ヲ笑顔ニシマス！！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "speed": "100",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "next": "foods4_L"
+    },
+    {
+        "id": "foods4_L",
+        "name": "テンイン",
+        "text": "難シイコトハアリマセン！アナタハソコデジットシテイテクダサイネ！ワタシニマカセテ、安心シテクダサイ！！",
+        "bg": "shop_food.png",
+        "commands": [
+            "mapLock",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)",
+            "still(still_tenin1.png)"
+        ],
+        "next": "foods4_M"
+    },
+    {
+        "id": "foods4_M",
+        "name": "テンイン",
+        "text": "オ客様ノ笑顔ノタメニナリマショウ！",
+        "bg": "shop_food.png",
+        "speed": "100",
+        "commands": [
+            "mapLock",
+            "textBig",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)",
+            "still(still_tenin1.png)"
+        ],
+        "next": "end05"
+    }
+]
