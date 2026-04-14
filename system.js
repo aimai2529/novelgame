@@ -551,7 +551,7 @@ function stopScrambleText() {
     scrambleOnceText = null;
 }
 
-function typeText(text, speed = 50) {
+function typeText(text, speed = 60) {
     return new Promise(resolve => {
         const el = document.getElementById("text");
         const textbox = document.getElementById("textbox");
@@ -682,13 +682,11 @@ function runCommands(cmds = []) {
             if (!id) return;
 
             if (hasItem(id)) {
-                console.log("すでに所持している:", id);
                 return;
             }
 
             const success = addItem(id);
             if (!success) {
-                console.log("取得できなかった:", id);
             }
         } else if (cmd.startsWith("removeItem(")) {
             const id = cmd.match(/removeItem\((.+)\)/)?.[1];

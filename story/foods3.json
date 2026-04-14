@@ -14,7 +14,7 @@
                 "next": "foods3_B"
             },
             {
-                "label": "行かないから大丈夫",
+                "label": "行かないよ、大丈夫",
                 "next": "foods3_A"
             }
         ]

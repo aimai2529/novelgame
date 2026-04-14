@@ -240,6 +240,23 @@
         "next": "loop"
     },
     {
+        "id": "end05",
+        "text": "END.みんなの笑顔のために",
+        "speed": 100,
+        "commands": [
+            "still(still_tenin2.png)",
+            "textNormal",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
         "id": "loop",
         "text": "もう一度遊ぶ？",
         "commands": [

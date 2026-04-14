@@ -10,7 +10,7 @@
         ],
         "choices": [
             {
-                "label": "心配しすぎだよ、行っても大丈夫だって",
+                "label": "なんでだよ、行くけど",
                 "next": "foods4_B"
             },
             {
@@ -34,7 +34,7 @@
     {
         "id": "foods4_B",
         "name": "ユウジン",
-        "text": "ま、マジで？\n……そんなにあの肉屋気に入ったのか？",
+        "text": "んなっ……だってもう行く用事ないだろ！荷物もいっぱいだしさ、帰った方がいいって！",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -42,11 +42,11 @@
         ],
         "choices": [
             {
-                "label": "まあ、そんなところ",
+                "label": "心配しすぎだよ、行っても大丈夫だって",
                 "next": "foods4_C"
             },
             {
-                "label": "”オ友達”になったしな",
+                "label": "せっかく友達になったからさ",
                 "next": "foods4_C"
             }
         ]
@@ -54,7 +54,7 @@
     {
         "id": "foods4_C",
         "name": "ユウジン",
-        "text": "やめといた方がいいと思うんだけどなぁ……次は何を押し付けられるかわかんないぜ……？",
+        "text": "いやいやいや、だってさっきの店員、ナタ持ってたぜ！！血塗れだしよ！冷静になって考えてみろって。明らかにやばいやつじゃん！",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -62,96 +62,92 @@
         ],
         "choices": [
             {
-                "label": "それもそれで楽しみじゃん",
+                "label": "まあ、そういうこともあるんじゃない？",
                 "next": "foods4_D"
             },
             {
-                "label": "大丈夫だって、いい人だよ",
+                "label": "仕事中に駆けつけてくれていい人じゃん",
                 "next": "foods4_D"
             }
         ]
     },
     {
         "id": "foods4_D",
-        "name": "テンイン",
-        "text": "アレアレッ！マタ来テクレタンデスネ！！！ウレシイナァ！！",
+        "name": "ユウジン",
+        "text": "そっ……んなわけないだろ……ちょっと落ち着けって\n…………な？帰ってさ、カレー作ろうぜ？",
         "bg": "shop_food.png",
-        "face": "friend_gya.png",
-        "speed": "80",
+        "face": "friend_noodle.png",
         "commands": [
-            "mapLock",
-            "shake",
-            "textBig"
+            "mapLock"
         ],
         "choices": [
             {
-                "label": "（声のしたほうを振り返る）",
+                "label": "しつこいなぁ、大丈夫だって",
                 "next": "foods4_E"
+            },
+            {
+                "label": "…………わかったよ、帰る",
+                "next": "foods4_F"
             }
         ]
     },
     {
         "id": "foods4_E",
         "name": "テンイン",
-        "text": "ドウシマシタカ？オ肉ガタリマセンデシタカ？",
+        "text": "ワァ！今日ハ本当ニヨク会イマスネ！ワタシ、トッテモウレシイデス！",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
+        "speed": "80",
         "commands": [
             "mapLock",
-            "textNormal",
             "chara(tenin_nikoniko.png)"
         ],
         "choices": [
             {
-                "label": "店員さんに会いに来たんです",
-                "next": "foods4_F"
+                "label": "友達ですから",
+                "next": "foods4_H"
             },
             {
-                "label": "店員さんとお話ししたくて",
-                "next": "foods4_F"
+                "label": "こちらこそ、会えてうれしいです",
+                "next": "foods4_H"
             }
         ]
     },
     {
         "id": "foods4_F",
         "name": "テンイン",
-        "text": "ナント、ワタシデスカ？！イイデスヨ、ナンデモ聞イテクダサイ！",
+        "text": "ア　レ　？　帰　ッ　テ　シ　マ　ウ　ン　デ　ス　カ　？　",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
+        "speed": "120",
         "commands": [
-            "mapLock",
-            "textNormal",
-            "chara(tenin_normal.png)"
+            "mapLock"
         ],
         "choices": [
             {
-                "label": "なんでそんな恰好してるんですか？",
+                "label": "（振り返る）",
                 "next": "foods4_G"
-            },
-            {
-                "label": "さっきのお肉はなんの肉ですか？",
-                "next": "foods4_J"
             }
         ]
     },
     {
         "id": "foods4_G",
         "name": "テンイン",
-        "text": "ツイ先程マデ、新鮮ナオ肉を解体シテイタノデ！オ客様ガ見エテ、急イデ出テキタンデス！",
+        "text": "ソンナ、寂シイコト言イワナイデ！折角マタ会エタンデスカラ！",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
+        "speed": "80",
         "commands": [
             "mapLock",
-            "textNormal",
             "chara(tenin_normal.png)"
         ],
         "choices": [
             {
-                "label": "加工するとき帽子はかぶらないんです？",
+                "label": "え、いや…………",
                 "next": "foods4_H"
             },
             {
-                "label": "ほかの店員さんは帽子かぶってません？",
+                "label": "か、帰ります……",
                 "next": "foods4_H"
             }
         ]
@@ -159,7 +155,7 @@
     {
         "id": "foods4_H",
         "name": "テンイン",
-        "text": "エ？帽子ヲカブッテオ客様ニゴ挨拶スルノハ失礼デスヨ？",
+        "text": "ア！モシカシテ、ココデ働クト決メテクレマシタカ！？ヤッパリアナタモ、人ヲ笑顔ニスルノガ好キナンデスネ！ワタシモデスヨ！！",
         "bg": "shop_food.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -167,48 +163,58 @@
             "textNormal",
             "chara(tenin_nikoniko.png)"
         ],
-        "next": "foods4_I"
+        "choices": [
+            {
+                "label": "まだ決めてないですよ……",
+                "next": "foods4_I"
+            },
+            {
+                "label": "そうですね……？",
+                "next": "foods4_I"
+            }
+        ]
     },
     {
         "id": "foods4_I",
-        "name": "ユウジン",
-        "text": "なんでその良識はあるのにナタ持ってきてるんだよこいつ",
+        "name": "テンイン",
+        "text": "早クオ客様ヲ笑顔ニシタイト思ウノハ善イコトデス！デモ、今日ハモウ閉店ナノデ、働ケマセン……残念デス……",
         "bg": "shop_food.png",
-        "face": "friend_gya.png",
+        "face": "friend_noodle.png",
         "commands": [
             "mapLock",
-            "chara(tenin_niko.png)"
+            "chara(tenin_normal.png)"
         ],
-        "next": "foods4_L"
+        "choices": [
+            {
+                "label": "今日は帰ります",
+                "next": "foods4_J"
+            },
+            {
+                "label": "夕飯まだなので……",
+                "next": "foods4_J"
+            }
+        ]
     },
     {
         "id": "foods4_J",
         "name": "テンイン",
-        "text": "サッキノハ、肩ノオ肉デス！旨味ガギュット詰マッテ、オイシイデスヨ！！",
+        "text": "…………ソウダ！！アリマスヨ！スグニオ客様ノ笑顔ノタメニナレルコトガ！！",
         "bg": "shop_food.png",
         "face": "friend_gya.png",
         "commands": [
             "mapLock",
             "textNormal",
-            "chara(tenin_normal.png)"
+            "chara(tenin_niko.png)"
         ],
-        "choices": [
-            {
-                "label": "貴重な部位なんです？",
-                "next": "foods4_K"
-            },
-            {
-                "label": "そんなにおいしいんですね",
-                "next": "foods4_K"
-            }
-        ]
+        "next": "foods4_K"
     },
     {
         "id": "foods4_K",
         "name": "テンイン",
-        "text": "ハイ、他デハキット食ベラレマセン！チイサイ子モ大好キナンデス！",
+        "text": "アナタモ美味シクナリマショウ！！美味シイモノハ人ヲ笑顔ニシマス！！！",
         "bg": "shop_food.png",
         "face": "friend_gya.png",
+        "speed": "100",
         "commands": [
             "mapLock",
             "chara(tenin_nikoniko.png)"
@@ -218,112 +224,39 @@
     {
         "id": "foods4_L",
         "name": "テンイン",
-        "text": "次ニ聞キタイコトハ……ト、言イタイ所デスガ、仕事ニ戻ラナケレバ！怒ラレテシマイマスネ～",
+        "text": "難シイコトハアリマセン！アナタハソコデジットシテイテクダサイネ！ワタシニマカセテ、安心シテクダサイ！！",
         "bg": "shop_food.png",
-        "face": "friend_noodle.png",
         "commands": [
             "mapLock",
-            "chara(tenin_niko.png)"
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)",
+            "still(still_tenin1.png)"
         ],
-        "choices": [
-            {
-                "label": "引き留めてしまってごめんなさい",
-                "next": "foods4_M"
-            },
-            {
-                "label": "もっと話したかったな……",
-                "next": "foods4_M"
-            }
-        ]
+        "next": "foods4_M"
     },
     {
         "id": "foods4_M",
         "name": "テンイン",
-        "text": "ソウダ！！アナタモココデ働キマショウ！ソウシマショウ！キットチイサイ子モアナタノコトヲ気ニ入リマス！",
+        "text": "オ客様ノ笑顔ノタメニナリマショウ！",
         "bg": "shop_food.png",
-        "face": "friend_noodle.png",
+        "speed": "100",
         "commands": [
             "mapLock",
-            "chara(tenin_nikoniko.png)"
+            "textBig",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)",
+            "still(still_tenin1.png)"
         ],
-        "choices": [
-            {
-                "label": "そ、そんな急に……",
-                "next": "foods4_N"
-            },
-            {
-                "label": "小さい子……？子供が多いんですか？",
-                "next": "foods4_N"
-            }
-        ]
-    },
-    {
-        "id": "foods4_N",
-        "name": "テンイン",
-        "text": "コレ！差シアゲマス！！！楽シミニシテマスカラネ！ソレデハ！！！",
-        "bg": "shop_food.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "mapLock",
-            "getItem(note2)",
-            "chara(tenin_nikoniko.png)"
-        ],
-        "next": "foods4_O"
-    },
-    {
-        "id": "foods4_O",
-        "name": "ユウジン",
-        "text": "いっ……たな…………なんだよ、今度は何押し付けられてんだ？",
-        "bg": "shop_food.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "mapLock",
-            "clearChara"
-        ],
-        "choices": [
-            {
-                "label": "バイトの募集……？",
-                "next": "foods4_P"
-            },
-            {
-                "label": "求人票……みたい",
-                "next": "foods4_P"
-            }
-        ]
-    },
-    {
-        "id": "foods4_P",
-        "name": "ユウジン",
-        "text": "血でぐっちゃぐちゃじゃん……\nん？「面接は雑貨屋でやります」って書いてある……？しかも、手書きっぽくね？どういうことだ……？",
-        "bg": "shop_food.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "mapLock",
-            "clearChara"
-        ],
-        "choices": [
-            {
-                "label": "正規のものじゃない……？",
-                "next": "foods4_Q"
-            },
-            {
-                "label": "雑貨屋の求人ってこと？",
-                "next": "foods4_Q"
-            }
-        ]
-    },
-    {
-        "id": "foods4_Q",
-        "name": "ユウジン",
-        "text": "うーん、わかんねぇけど……あんまかかわんない方がよさそう、だな\n気にせず次行こうぜ",
-        "bg": "shop_food.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock",
-            "target(-1)",
-            "foods(1)"
-        ],
-        "next": "search"
+        "next": "end05"
     }
 ]
