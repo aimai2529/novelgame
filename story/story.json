@@ -135,27 +135,6 @@
         "next": "search"
     },
     {
-        "id": "food_test",
-        "name": "テンイン",
-        "text": "いらっしゃいませ！！！",
-        "bg": "food_test.JPG",
-        "face": "friend_gya.png",
-        "commands": [
-            "-san",
-            "still(still_foods.png)"
-        ],
-        "choices": [
-            {
-                "label": "ど、どうも……",
-                "next": "search"
-            },
-            {
-                "label": "（逃げる）",
-                "next": "search"
-            }
-        ]
-    },
-    {
         "id": "search",
         "name": "ユウジン",
         "text": "ほら、マップ見て次行く場所考えな",
@@ -163,6 +142,12 @@
         "bg": "supermarket.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
+            "show(face)",
+            "show(map)",
+            "show(items)",
+            "show(status)",
+            "show(hud-top-left)",
+            "show(video)",
             "mapUnlock"
         ],
         "next": "search"
