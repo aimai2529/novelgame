@@ -80,6 +80,70 @@ let foodsVisited = Number(localStorage.getItem("foodsVisited") || 0);
 let loopCount = Number(localStorage.getItem("loopCount") || 0);
 let san = Number(localStorage.getItem("san") ?? 3);
 
+const importantImage = [
+    "map_floor1.png",
+    "map_floor2.png",
+    "san_0.png",
+    "san_1.png",
+    "san_2.png",
+    "san_3.png",
+    "screen_touch.png",
+    "still_ebi.png",
+    "still_foods.png",
+    "still_tenin1.png",
+    "still_tenin2.png",
+    "tenin_nikoniko.png",
+    "tenin_niko.png",
+    "tenin_normal.png",
+]
+
+//画像読み込み
+function collectImages() {
+    const paths = new Set();
+
+    importantImage.forEach(image => {
+        paths.add("img/" + image);
+    })
+
+    story.forEach(scene => {
+        if (scene.bg) paths.add("img/" + scene.bg);
+        if (scene.face) paths.add("img/" + scene.face);
+    });
+
+    Object.values(itemDB).forEach(item => {
+        paths.add("img/" + item.image);
+    });
+
+    return Array.from(paths);
+}
+
+function preloadImages(paths) {
+    let loaded = 0;
+    const total = paths.length;
+
+    const loadingText = document.getElementById("loading-text");
+
+    return new Promise(resolve => {
+        paths.forEach(src => {
+            const img = new Image();
+            img.src = src;
+
+            img.onload = img.onerror = () => {
+                loaded++;
+
+                // 👇 進捗表示更新
+                if (loadingText) {
+                    loadingText.textContent = `Loading... ${loaded}/${total}`;
+                }
+
+                if (loaded === total) {
+                    resolve();
+                }
+            };
+        });
+    });
+}
+
 async function loadStory() {
     if (story) return;
 
@@ -101,6 +165,12 @@ async function loadStory() {
     }
 
     story = all;
+
+    const images = collectImages();
+    await preloadImages(images);
+
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("game").style.display = "grid";
 
     const saved = localStorage.getItem("novel_save_scene");
     if (saved && findScene(saved)) {
@@ -124,7 +194,7 @@ function resetForLoop() {
     san = 3;
     updateSan();
 
-    items = [];
+    items = ["note"];
     localStorage.setItem("items", JSON.stringify(items));
     renderItems();
 
@@ -593,6 +663,48 @@ function typeText(text, speed = 60) {
     });
 }
 
+//スキップボタン
+function isOpScene(id) {
+    return id.startsWith("op_");
+}
+
+function createSkipButtonIfNeeded() {
+
+    // 既存ボタン消す
+    const old = document.getElementById("skip-btn");
+    if (old && !isOpScene(current.id)) old.remove();
+
+    // 条件：2周目以降＆OPシーン
+    if (loopCount < 2 || !isOpScene(current.id) || old) return;
+
+    const btn = document.createElement("div");
+    btn.id = "skip-btn";
+    btn.textContent = "▶ 行先選択までスキップ";
+
+    btn.style.position = "absolute";
+    btn.style.right = "10px";
+    btn.style.bottom = "30px";
+    btn.style.fontSize = "32px";
+    btn.style.opacity = "0";
+    btn.style.transition = "opacity 0.5s";
+    btn.style.cursor = "pointer";
+
+    const textbox = document.getElementById("textbox");
+    textbox.appendChild(btn);
+
+    // フェードイン
+    setTimeout(() => {
+        btn.style.opacity = "0.6";
+    }, 1000);
+
+    // クリックでスキップ
+    btn.onclick = (e) => {
+        e.stopPropagation();
+
+        show("search");
+    };
+}
+
 //コマンド
 function runCommands(cmds = []) {
     cmds.forEach(cmd => {
@@ -681,10 +793,6 @@ function runCommands(cmds = []) {
             const id = cmd.match(/getItem\((.+)\)/)?.[1];
             if (!id) return;
 
-            if (hasItem(id)) {
-                return;
-            }
-
             const success = addItem(id);
             if (!success) {
             }
@@ -755,6 +863,8 @@ function show(id) {
     }
     typingDone = false;
     textbox.onclick = null;
+
+    createSkipButtonIfNeeded();
 
     localStorage.setItem("novel_save_scene", id);
 

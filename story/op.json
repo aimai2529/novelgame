@@ -156,8 +156,7 @@
         "commands": [
             "show(items)",
             "hide(status)",
-            "hide(hud-top-left)",
-            "getItem(note)"
+            "hide(hud-top-left)"
         ],
         "choices": [
             {
