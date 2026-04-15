@@ -602,10 +602,10 @@ function createSkipButtonIfNeeded() {
 
     // 既存ボタン消す
     const old = document.getElementById("skip-btn");
-    if (old) old.remove();
+    if (old && !isOpScene(current.id)) old.remove();
 
     // 条件：2周目以降＆OPシーン
-    if (loopCount < 2 || !isOpScene(current.id)) return;
+    if (loopCount < 2 || !isOpScene(current.id) || old) return;
 
     const btn = document.createElement("div");
     btn.id = "skip-btn";
