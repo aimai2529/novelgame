@@ -593,6 +593,48 @@ function typeText(text, speed = 60) {
     });
 }
 
+//スキップボタン
+function isOpScene(id) {
+    return id.startsWith("op_");
+}
+
+function createSkipButtonIfNeeded() {
+
+    // 既存ボタン消す
+    const old = document.getElementById("skip-btn");
+    if (old) old.remove();
+
+    // 条件：2周目以降＆OPシーン
+    if (loopCount < 2 || !isOpScene(current.id)) return;
+
+    const btn = document.createElement("div");
+    btn.id = "skip-btn";
+    btn.textContent = "▶ 行先選択までスキップ";
+
+    btn.style.position = "absolute";
+    btn.style.right = "10px";
+    btn.style.bottom = "30px";
+    btn.style.fontSize = "32px";
+    btn.style.opacity = "0";
+    btn.style.transition = "opacity 0.5s";
+    btn.style.cursor = "pointer";
+
+    const textbox = document.getElementById("textbox");
+    textbox.appendChild(btn);
+
+    // フェードイン
+    setTimeout(() => {
+        btn.style.opacity = "0.6";
+    }, 1000);
+
+    // クリックでスキップ
+    btn.onclick = (e) => {
+        e.stopPropagation();
+
+        show("search");
+    };
+}
+
 //コマンド
 function runCommands(cmds = []) {
     cmds.forEach(cmd => {
@@ -755,6 +797,8 @@ function show(id) {
     }
     typingDone = false;
     textbox.onclick = null;
+
+    createSkipButtonIfNeeded();
 
     localStorage.setItem("novel_save_scene", id);
 
