@@ -51,30 +51,6 @@
         "next": "search"
     },
     {
-        "id": "donuts1",
-        "name": "ユウジン",
-        "text": "もう今日はやってないみたいだな。他いこうぜ",
-        "bg": "shop_donut.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
-        "id": "wagashi1",
-        "name": "ユウジン",
-        "text": "もう今日はやってないみたいだな。他いこうぜ",
-        "bg": "shop_wagashi.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
         "id": "space1",
         "name": "ユウジン",
         "text": "……？そこには何もないんじゃないか？",
@@ -229,7 +205,7 @@
         "text": "END.みんなの笑顔のために",
         "speed": 100,
         "commands": [
-            "still(still_tenin2.png)",
+            "still(still_tenin3.png)",
             "textNormal",
             "show(textbox)",
             "hide(face)",
@@ -251,7 +227,8 @@
             "hide(items)",
             "hide(status)",
             "hide(hud-top-left)",
-            "hide(video)"
+            "hide(video)",
+            "clearChara"
         ],
         "choices": [
             {

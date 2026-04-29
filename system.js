@@ -61,9 +61,9 @@ const itemDB = {
         image: "item_curry.png",
         description: "さわやかな辛さと深いコクの、辛めのルーだ"
     },
-    "dounut": {
+    "donut": {
         name: "ドーナツ",
-        image: "item_dounut.png",
+        image: "item_donut.png",
         description: "毒毒しいと感じるほど鮮やかに彩られたドーナツ"
     },
     "note2": {
@@ -77,6 +77,11 @@ const itemDB = {
 let items = JSON.parse(localStorage.getItem("items") || "[]");
 let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
 let foodsVisited = Number(localStorage.getItem("foodsVisited") || 0);
+let donutVisited = Number(localStorage.getItem("donutVisited") || 0);
+let wagashiVisited = Number(localStorage.getItem("wagashiVisited") || 0);
+let wearVisited = Number(localStorage.getItem("wearVisited") || 0);
+let booksVisited = Number(localStorage.getItem("booksVisited") || 0);
+let goodsVisited = Number(localStorage.getItem("goodsVisited") || 0);
 let loopCount = Number(localStorage.getItem("loopCount") || 0);
 let san = Number(localStorage.getItem("san") ?? 3);
 
@@ -92,6 +97,7 @@ const importantImage = [
     "still_foods.png",
     "still_tenin1.png",
     "still_tenin2.png",
+    "still_tenin3.png",
     "tenin_nikoniko.png",
     "tenin_niko.png",
     "tenin_normal.png",
@@ -131,7 +137,6 @@ function preloadImages(paths) {
             img.onload = img.onerror = () => {
                 loaded++;
 
-                // 👇 進捗表示更新
                 if (loadingText) {
                     loadingText.textContent = `Loading... ${loaded}/${total}`;
                 }
@@ -154,6 +159,11 @@ async function loadStory() {
         "story/foods2.json",
         "story/foods3.json",
         "story/foods4.json",
+        "story/foods5.json",
+        "story/donut1.json",
+        "story/donut2.json",
+        "story/donut3.json",
+        "story/wagashi1.json",
         "story/exit.json"
     ];
 
@@ -190,6 +200,21 @@ function resetForLoop() {
 
     foodsVisited = 0;
     localStorage.setItem("foodsVisited", foodsVisited);
+
+    donutVisited = 0;
+    localStorage.setItem("donutVisited", donutVisited);
+
+    wagashiVisited = 0;
+    localStorage.setItem("wagashitVisited", wagashiVisited);
+
+    wearVisited = 0;
+    localStorage.setItem("wearVisited", wearVisited);
+
+    booksVisited = 0;
+    localStorage.setItem("booksVisited", booksVisited);
+
+    goodsVisited = 0;
+    localStorage.setItem("goodsVisited", goodsVisited);
 
     san = 3;
     updateSan();
@@ -471,8 +496,11 @@ function locationLoad(id) {
             show("toilet_3");
         }
     } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
+        const hasDonut = hasItem("donut");
         if (foodsVisited === 0) {
             show("foods1");
+        } else if (hasDonut) {
+            show("foods5");
         } else if (foodsVisited === 1) {
             show("foods2");
         } else if (foodsVisited === 2) {
@@ -483,9 +511,23 @@ function locationLoad(id) {
     } else if (id === "map_1_0_1") {
         show(getExitScene());
     } else if (id === "map_1_1_2") {
-        show("donuts1");
+        if (remainingTargets <= 2) {
+            show("donut3");
+        } else if (donutVisited === 0) {
+            show("donut1");
+        } else if (donutVisited === 1) {
+            show("donut2");
+        }
     } else if (id === "map_1_2_2") {
-        show("wagashi1");
+        if (wagashiVisited === 0) {
+            show("wagashi1");
+        } else if (wagashiVisited === 1) {
+            show("wagashi2");
+        } else if (wagashiVisited === 2) {
+            show("wagashi3");
+        } else {
+            show("wagashi4");
+        }
     } else if (id === "map_1_0_0") {
         show("space1");
     } else if (id === "map_2_0_0" || id === "map_2_1_0") {
@@ -832,16 +874,43 @@ function runCommands(cmds = []) {
         }
         else if (cmd === "clearChara") {
             clearChara();
-        } else if (cmd.startsWith("foods(")) {
+        }
+        else if (cmd.startsWith("foods(")) {
             const value = Number(cmd.match(/foods\(([-\d]+)\)/)?.[1] || 0);
-
             foodsVisited += value;
             if (foodsVisited < 0) foodsVisited = 0;
-
             localStorage.setItem("foodsVisited", foodsVisited);
-
-            console.log("foodsVisited:", foodsVisited);
         }
+        else if (cmd.startsWith("donut(")) {
+            const value = Number(cmd.match(/donut\(([-\d]+)\)/)?.[1] || 0);
+            donutVisited += value;
+            if (donutVisited < 0) donutVisited = 0;
+            localStorage.setItem("donutVisited", donutVisited);
+        } else if (cmd.startsWith("wagashi(")) {
+            const value = Number(cmd.match(/wagashi\(([-\d]+)\)/)?.[1] || 0);
+            wagashiVisited += value;
+            if (wagashiVisited < 0) wagashiVisited = 0;
+            localStorage.setItem("wagashiVisited", wagashiVisited);
+        }
+        else if (cmd.startsWith("wear(")) {
+            const value = Number(cmd.match(/wear\(([-\d]+)\)/)?.[1] || 0);
+            wearVisited += value;
+            if (wearVisited < 0) wearVisited = 0;
+            localStorage.setItem("wearVisited", wearVisited);
+        }
+        else if (cmd.startsWith("books(")) {
+            const value = Number(cmd.match(/books\(([-\d]+)\)/)?.[1] || 0);
+            booksVisited += value;
+            if (booksVisited < 0) booksVisited = 0;
+            localStorage.setItem("booksVisited", booksVisited);
+        }
+        else if (cmd.startsWith("goods(")) {
+            const value = Number(cmd.match(/goods\(([-\d]+)\)/)?.[1] || 0);
+            goodsVisited += value;
+            if (goodsVisited < 0) goodsVisited = 0;
+            localStorage.setItem("goodsVisited", goodsVisited);
+        }
+
     });
 }
 
@@ -851,6 +920,7 @@ function show(id) {
     clearStill();
     clearScreen();
     returnSceneId = null;
+    updateSan();
 
     if (san === 1 && Math.random() < 0.3) {
         startScrambleText();

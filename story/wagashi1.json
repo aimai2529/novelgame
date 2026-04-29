@@ -1,0 +1,226 @@
+[
+    {
+        "id": "wagashi1",
+        "name": "ユウジン",
+        "text": "お！和菓子屋寄っていくのか？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "うん、寄っていこうかな",
+                "next": "wagashi1_B"
+            },
+            {
+                "label": "いや、やめとく",
+                "next": "wagashi1_A"
+            }
+        ]
+    },
+    {
+        "id": "wagashi1_A",
+        "name": "ユウジン",
+        "text": "そ、そうなのか……そっか……じゃあ次はどうする……？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_shikushiku.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi1_B",
+        "name": "ユウジン",
+        "text": "ここの和菓子、めちゃくちゃ美味いんだぜ！食うなら絶対に買ってすぐ出来立てを食べたほうがいいね",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "speed": 50,
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "甘いの好きじゃないの？",
+                "next": "wagashi1_C"
+            },
+            {
+                "label": "意外だな、そんなこと言うなんて",
+                "next": "wagashi1_C"
+            }
+        ]
+    },
+    {
+        "id": "wagashi1_C",
+        "name": "ユウジン",
+        "text": "甘いのは好きだけどさ、それ以上に甘いんだよ……なんていうかな、脳に直接響く甘さ……みたいな？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wagashi1_D"
+    },
+    {
+        "id": "wagashi1_D",
+        "name": "ドーナツヤ",
+        "text": "らーしゃっせー。テイクアウトっすかぁ？イートインすかぁ？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "テイクアウトで",
+                "next": "wagashi1_E"
+            },
+            {
+                "label": "イートインで",
+                "next": "wagashi1_H"
+            }
+        ]
+    },
+    {
+        "id": "wagashi1_E",
+        "name": "ユウジン",
+        "text": "俺の分はいらないからなっ！",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "getItem(wagashi)",
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……今度もってくわ",
+                "next": "wagashi1_F"
+            },
+            {
+                "label": "全部自分で食べるし",
+                "next": "wagashi1_G"
+            }
+        ]
+    },
+    {
+        "id": "wagashi1_F",
+        "name": "ユウジン",
+        "text": "いらねっつってるだろ！？\n……まあいいか、一緒に食おうな。次はどこいくんだ？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wagashi(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi1_G",
+        "name": "ユウジン",
+        "text": "めっっっっちゃ甘いから覚悟して食えよ、食う時も電話繋ごうぜ笑\n……んじゃ、次はどこいくんだ？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wagashi(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi1_H",
+        "name": "ユウジン",
+        "text": "おま、食ってくのかよ！夕飯食えんくなるだろ",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "別に食べれるし",
+                "next": "wagashi1_I"
+            },
+            {
+                "label": "めっちゃおなかすいちゃってさ",
+                "next": "wagashi1_I"
+            }
+        ]
+    },
+    {
+        "id": "wagashi1_I",
+        "name": "ユウジン",
+        "text": "まぁ、お前がいいならいいんだけどさ……めっっっっっっちゃ甘いから覚悟して食えよ……",
+        "bg": "shop_wagashi.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wagashi1_J"
+    },
+    {
+        "id": "wagashi1_J",
+        "name": "",
+        "text": "（脳みそをぐちゃぐちゃにされるような甘さだ……）",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "-san",
+            "mapLock"
+        ],
+        "next": "wagashi1_K"
+    },
+    {
+        "id": "wagashi1_K",
+        "name": "ユウジン",
+        "text": "………………どうだ？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "死ぬほど甘いな……",
+                "next": "wagashi1_L"
+            },
+            {
+                "label": "お前にも買っていこうかな",
+                "next": "wagashi1_M"
+            }
+        ]
+    },
+    {
+        "id": "wagashi1_L",
+        "name": "ユウジン",
+        "text": "そうだろ！？わかるぜ〜\n気を取り直して、次だ次！",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wagashi(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi1_M",
+        "name": "ユウジン",
+        "text": "いらねぇいらねえ！！！次いけ次！",
+        "bg": "shop_wagashi.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wagashi(1)"
+        ],
+        "next": "search"
+    }
+]
