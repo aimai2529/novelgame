@@ -4,6 +4,7 @@
         "text": "クリックで開始",
         "commands": [
             "loopReset",
+            "stopScrambleText",
             "show(textbox)",
             "hide(face)",
             "hide(map)",
@@ -63,10 +64,10 @@
         "next": "search"
     },
     {
-        "id": "items1",
+        "id": "goods1",
         "name": "ユウジン",
         "text": "もう今日はやってないみたいだな。他いこうぜ",
-        "bg": "shop_items.png",
+        "bg": "shop_goods.png",
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
@@ -223,6 +224,7 @@
         "text": "もう一度遊ぶ？",
         "commands": [
             "show(textbox)",
+            "show(choices)",
             "hide(face)",
             "hide(map)",
             "hide(items)",

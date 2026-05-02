@@ -2,60 +2,53 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N回目のおつかい</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/the-new-css-reset/css/reset.min.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N回目のおつかい-TOP</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div id="game-wrapper" class="glitch-screen">
-        <div id="loading-screen">
-            <div id="loading-text">Loading... 0/0</div>
-        </div>
-        <div id="game">
-            <div id="hud-top-left" class="panel">
-                閉店まで2時間 <br>- アト4箇所
-            </div>
-            <div id="map" class="panel">
-            </div>
-            <div id="status" class="panel">
-                <!-- <div class="label">正気度</div> -->
-                <img id="san-image" src="./img/san_3.png" alt="正気度">
-            </div>
-            <div id="items" class="panel">
-                <div class="label">所持品</div>
-                <div class="slots">
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                    <div class="slot"></div>
-                    <div class="slot"></div>
+
+    <div class="outer">
+        <div class="device-frame">
+            <main class="screen">
+
+                <!-- LINE風エリア -->
+                <section class="chat" id="chat">
+                    <!-- JSでメッセージ追加 -->
+                </section>
+                <div class="scroll-indicator" id="scrollIndicator">▼</div>
+
+                <!-- 本文 -->
+                <section class="content">
+                    <h1>Webノベルゲーム<br>N回目のおつかい</h1>
+
+                    <p class="summary">
+                        これは、何度も繰り返される“おつかい”の物語。<br>
+                        ほんの少しの違和感と、小さな選択が、やがて大きな分岐を生む。
+                    </p>
+
+                    <p class="notice">
+                        ※本作品には軽度のホラー・不穏表現が含まれます。<br>
+                        苦手な方はご注意ください。
+                    </p>
+                    <p class="notice">
+                        ※本作品には軽度のホラー・不穏表現が含まれます。<br>
+                        苦手な方はご注意ください。
+                    </p>
+                </section>
+
+                <!-- 固定ボタン -->
+                <div class="bottom">
+                    <a href="./game" class="start-btn">電話にでてあげる</a>
                 </div>
-            </div>
-            <div id="video">
-                <img id="bg" />
-            </div>
-            <div id="face" class="panel">
-                <img id="call-face" />
-            </div>
-            <div id="textbox">
-                <div id="info">
-                    <div id="name"></div>
-                    <div id="choices"></div>
-                </div>
-                <div id="text"></div>
-            </div>
+
+            </main>
         </div>
     </div>
 
-    <script src="system.js"></script>
-    <script src="size.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

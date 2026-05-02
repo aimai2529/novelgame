@@ -110,7 +110,7 @@
         "next": "search"
     },
     {
-        "id": "foods5_E",
+        "id": "foods5_F",
         "name": "ユウジン",
         "text": "ほら！！！！！いわんこっちゃない！！！！！",
         "bg": "shop_food.png",
@@ -120,7 +120,7 @@
             "textNormal",
             "chara(tenin_nikoniko.png)"
         ],
-        "next": "foods5_F"
+        "next": "foods5_G"
     },
     {
         "id": "foods5_G",
@@ -186,6 +186,7 @@
             "overlay(map, 'クリックで移動')",
             "mapUnlock",
             "target(-1)",
+            "clearChara",
             "foods(1)"
         ],
         "next": "search"
