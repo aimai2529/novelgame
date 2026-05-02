@@ -22,9 +22,31 @@ let typingFullText = "";
 let scrambleOnceText = null;
 const choicesBox = document.getElementById("choices");
 
-let remainingTargets = Number(localStorage.getItem("remainingTargets") ?? 4);
+// localStorage ラッパー関数
+const storage = {
+    set: (key, value) => {
+        localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : value);
+    },
+    get: (key, defaultValue = null) => {
+        const value = localStorage.getItem(key);
+        return value !== null ? value : defaultValue;
+    },
+    getNumber: (key, defaultValue = 0) => {
+        return Number(storage.get(key, defaultValue));
+    },
+    getJSON: (key, defaultValue = []) => {
+        const value = storage.get(key);
+        try {
+            return value ? JSON.parse(value) : defaultValue;
+        } catch {
+            return defaultValue;
+        }
+    }
+};
 
-let executedScenes = JSON.parse(localStorage.getItem("executedScenes") || "[]");
+let remainingTargets = storage.getNumber("remainingTargets", 4);
+
+let executedScenes = storage.getJSON("executedScenes", []);
 
 const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
@@ -61,9 +83,9 @@ const itemDB = {
         image: "item_curry.png",
         description: "さわやかな辛さと深いコクの、辛めのルーだ"
     },
-    "dounut": {
+    "donut": {
         name: "ドーナツ",
-        image: "item_dounut.png",
+        image: "item_donut.png",
         description: "毒毒しいと感じるほど鮮やかに彩られたドーナツ"
     },
     "note2": {
@@ -74,11 +96,23 @@ const itemDB = {
     }
 };
 
-let items = JSON.parse(localStorage.getItem("items") || "[]");
-let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
-let foodsVisited = Number(localStorage.getItem("foodsVisited") || 0);
-let loopCount = Number(localStorage.getItem("loopCount") || 0);
-let san = Number(localStorage.getItem("san") ?? 3);
+let items = storage.getJSON("items", []);
+
+let visited = {
+    toilet: storage.getNumber("toiletVisited", 0),
+    foods: storage.getNumber("foodsVisited", 0),
+    donut: storage.getNumber("donutVisited", 0),
+    wagashi: storage.getNumber("wagashiVisited", 0),
+    wear: storage.getNumber("wearVisited", 0),
+    books: storage.getNumber("booksVisited", 0),
+    goods: storage.getNumber("goodsVisited", 0),
+};
+
+let loopCount = storage.getNumber("loopCount", 0);
+let san = storage.getNumber("san", 3);
+let sanZeroTriggered = false;
+let sanZeroPending = false;
+let sanZeroAdvance = false;
 
 const importantImage = [
     "map_floor1.png",
@@ -92,6 +126,7 @@ const importantImage = [
     "still_foods.png",
     "still_tenin1.png",
     "still_tenin2.png",
+    "still_tenin3.png",
     "tenin_nikoniko.png",
     "tenin_niko.png",
     "tenin_normal.png",
@@ -131,7 +166,6 @@ function preloadImages(paths) {
             img.onload = img.onerror = () => {
                 loaded++;
 
-                // 👇 進捗表示更新
                 if (loadingText) {
                     loadingText.textContent = `Loading... ${loaded}/${total}`;
                 }
@@ -154,6 +188,15 @@ async function loadStory() {
         "story/foods2.json",
         "story/foods3.json",
         "story/foods4.json",
+        "story/foods5.json",
+        "story/donut1.json",
+        "story/donut2.json",
+        "story/donut3.json",
+        "story/donut3b.json",
+        "story/wagashi1.json",
+        "story/wagashi2.json",
+        "story/wagashi3.json",
+        "story/wagashi3b.json",
         "story/exit.json"
     ];
 
@@ -172,7 +215,7 @@ async function loadStory() {
     document.getElementById("loading-screen").style.display = "none";
     document.getElementById("game").style.display = "grid";
 
-    const saved = localStorage.getItem("novel_save_scene");
+    const saved = storage.get("novel_save_scene");
     if (saved && findScene(saved)) {
         show(saved);
     } else {
@@ -185,24 +228,26 @@ function findScene(id) {
 }
 
 function resetForLoop() {
-    toiletVisited = 0;
-    localStorage.setItem("toiletVisited", toiletVisited);
+    sanZeroTriggered = false;
 
-    foodsVisited = 0;
-    localStorage.setItem("foodsVisited", foodsVisited);
+    Object.keys(visited).forEach(key => {
+        visited[key] = 0;
+        const storageKey = key + "Visited";
+        storage.set(storageKey, 0);
+    });
 
     san = 3;
     updateSan();
 
     items = ["note"];
-    localStorage.setItem("items", JSON.stringify(items));
+    storage.set("items", items);
     renderItems();
 
     executedScenes = [];
-    localStorage.setItem("executedScenes", JSON.stringify(executedScenes));
+    storage.set("executedScenes", executedScenes);
 
     loopCount++;
-    localStorage.setItem("loopCount", loopCount);
+    storage.set("loopCount", loopCount);
 
     console.log("loop:", loopCount);
 
@@ -229,8 +274,7 @@ function updateRemainingTargets() {
 
     el.innerHTML = `閉店まで${timeText} <br>- アト${remainingTargets}箇所`;
 
-    localStorage.setItem("remainingTargets", remainingTargets);
-    remainingTargets = Number(localStorage.getItem("remainingTargets") ?? remainingTargets);
+    storage.set("remainingTargets", remainingTargets);
 
 }
 
@@ -302,7 +346,7 @@ function addItem(itemId) {
     }
 
     items.push(itemId);
-    localStorage.setItem("items", JSON.stringify(items));
+    storage.set("items", items);
     renderItems();
     return true;
 }
@@ -316,7 +360,7 @@ function removeItem(itemId) {
     if (index === -1) return false;
 
     items.splice(index, 1);
-    localStorage.setItem("items", JSON.stringify(items));
+    storage.set("items", items);
     renderItems();
     return true;
 }
@@ -336,21 +380,28 @@ function updateMapView() {
     }
 }
 
-function handleMapClick(e) {
-    if (mapLocked) return;
-
-    if (e.target.closest('#map-expand-btn')) {
-        return;
-    }
-    const rect = mapEl.getBoundingClientRect();
+function getMapCellFromClick(e, container) {
+    const rect = container.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     const cellW = rect.width / 3;
     const cellH = rect.height / 3;
 
-    const col = Math.floor(x / cellW);
-    const row = Math.floor(y / cellH);
+    return {
+        row: Math.floor(y / cellH),
+        col: Math.floor(x / cellW)
+    };
+}
+
+function handleMapClick(e) {
+    if (mapLocked) return;
+
+    if (e.target.closest('#map-expand-btn')) {
+        return;
+    }
+
+    const { row, col } = getMapCellFromClick(e, mapEl);
 
     if (row === 1 && col === 1) {
         mapFloor = mapFloor === 1 ? 2 : 1;
@@ -385,14 +436,7 @@ function openMapModal() {
     document.body.appendChild(mapModal);
 
     inner.addEventListener("click", (e) => {
-        const rect = inner.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const cellW = rect.width / 3;
-        const cellH = rect.height / 3;
-        const col = Math.floor(x / cellW);
-        const row = Math.floor(y / cellH);
+        const { row, col } = getMapCellFromClick(e, inner);
 
         if (row === 1 && col === 1) {
             mapFloor = mapFloor === 1 ? 2 : 1;
@@ -419,37 +463,49 @@ function openMapModal() {
     });
 }
 
-function lockMap() {
-    mapLocked = true;
-    if (mapEl) {
-        mapEl.style.pointerEvents = "none";
-        mapEl.style.cursor = "default";
-    }
-    if (document.getElementById("map-expand-btn")) {
-        document.getElementById("map-expand-btn").remove();
+function createMapExpandButton() {
+    if (!mapEl || document.getElementById("map-expand-btn")) return;
+
+    const btn = document.createElement("button");
+    btn.id = "map-expand-btn";
+    btn.textContent = "マップを拡大";
+    btn.onclick = (e) => {
+        e.stopPropagation();
+        openMapModal();
+    };
+
+    mapEl.style.position = mapEl.style.position || "relative";
+    mapEl.appendChild(btn);
+}
+
+function removeMapExpandButton() {
+    const existing = document.getElementById("map-expand-btn");
+    if (existing) {
+        existing.remove();
     }
 }
 
+function setMapEnabled(enabled) {
+    mapLocked = !enabled;
+    if (!mapEl) return;
+
+    mapEl.style.pointerEvents = enabled ? "" : "none";
+    mapEl.style.cursor = enabled ? "pointer" : "default";
+    mapEl.onclick = enabled ? handleMapClick : null;
+
+    if (enabled) {
+        createMapExpandButton();
+    } else {
+        removeMapExpandButton();
+    }
+}
+
+function lockMap() {
+    setMapEnabled(false);
+}
+
 function unlockMap() {
-    mapLocked = false;
-    if (mapEl) {
-        mapEl.style.pointerEvents = "";
-        mapEl.style.cursor = "pointer";
-        mapEl.onclick = handleMapClick;
-    }
-    if (!document.getElementById("map-expand-btn")) {
-        const btn = document.createElement("button");
-        btn.id = "map-expand-btn";
-        btn.textContent = "マップを拡大";
-        btn.onclick = (e) => {
-            e.stopPropagation();
-            openMapModal();
-        };
-
-        mapEl.style.position = mapEl.style.position || "relative";
-        mapEl.appendChild(btn);
-    }
-
+    setMapEnabled(true);
 }
 
 function locationLoad(id) {
@@ -459,23 +515,26 @@ function locationLoad(id) {
     }
 
     if (id === "map_1_0_2" || id === "map_2_0_2") {
-        if (toiletVisited === 0) {
-            toiletVisited = 1;
-            localStorage.setItem("toiletVisited", toiletVisited);
+        if (visited.toilet === 0) {
+            visited.toilet = 1;
+            storage.set("toiletVisited", visited.toilet);
             show("toilet_1");
-        } else if (toiletVisited > 0 && toiletVisited < 10) {
-            toiletVisited++;
-            localStorage.setItem("toiletVisited", toiletVisited);
+        } else if (visited.toilet > 0 && visited.toilet < 10) {
+            visited.toilet++;
+            storage.set("toiletVisited", visited.toilet);
             show("toilet_2");
         } else {
             show("toilet_3");
         }
     } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
-        if (foodsVisited === 0) {
+        const hasDonut = hasItem("donut");
+        if (visited.foods === 0) {
             show("foods1");
-        } else if (foodsVisited === 1) {
+        } else if (hasDonut) {
+            show("foods5");
+        } else if (visited.foods === 1) {
             show("foods2");
-        } else if (foodsVisited === 2) {
+        } else if (visited.foods === 2) {
             show("foods3");
         } else {
             show("foods4");
@@ -483,13 +542,29 @@ function locationLoad(id) {
     } else if (id === "map_1_0_1") {
         show(getExitScene());
     } else if (id === "map_1_1_2") {
-        show("donuts1");
+        if (remainingTargets === 2) {
+            show("donut3");
+        } else if (remainingTargets === 1) {
+            show("donut3b");
+        } else if (visited.donut === 0) {
+            show("donut1");
+        } else if (visited.donut === 1) {
+            show("donut2");
+        }
     } else if (id === "map_1_2_2") {
-        show("wagashi1");
+        if (visited.wagashi === 0) {
+            show("wagashi1");
+        } else if (visited.wagashi === 1) {
+            show("wagashi2");
+        } else if (visited.wagashi === 2) {
+            show("wagashi3");
+        } else {
+            show("wagashi3b");
+        }
     } else if (id === "map_1_0_0") {
         show("space1");
     } else if (id === "map_2_0_0" || id === "map_2_1_0") {
-        show("items1");
+        show("goods1");
     } else if (id === "map_2_0_1") {
         show("divination1");
     } else if (id === "map_2_1_2") {
@@ -501,6 +576,10 @@ function locationLoad(id) {
 
 //出口エンド分岐
 function getExitScene() {
+    if (visited.wagashi >= 3) {
+        return "exit04";
+    }
+
     const hasCarrot = hasItem("carrot");
     const hasMeat = hasItem("meat");
     const hasCurry1 = hasItem("curry1");
@@ -512,11 +591,64 @@ function getExitScene() {
 }
 
 //正気度関連
+function triggerSanZero() {
+    if (sanZeroTriggered) return;
+    sanZeroTriggered = true;
+    sanZeroPending = true;
+    sanZeroAdvance = false;
+
+    stopScrambleText();
+    clearStill();
+    clearScreen();
+    lockMap();
+    choicesBox.style.pointerEvents = "none";
+
+    const screen = document.getElementById("game-wrapper");
+    if (screen) {
+        screen.classList.add("glitch-screen");
+        screen.onclick = handleSanZeroClick;
+    }
+}
+
+function handleSanZeroClick() {
+    if (!sanZeroPending) return;
+    sanZeroPending = false;
+
+    const screen = document.getElementById("game-wrapper");
+    if (screen) {
+        screen.classList.add("glitch-screen", "glitching");
+        screen.onclick = null;
+    }
+
+    hideEl("face");
+    hideEl("map");
+    hideEl("items");
+    hideEl("status");
+    hideEl("hud-top-left");
+    hideEl("video");
+    hideEl("choices");
+    hideEl("textbox");
+
+    setTimeout(() => {
+        if (screen) {
+            screen.classList.remove("glitching");
+        }
+        sanZeroAdvance = true;
+        show("loop");
+        sanZeroAdvance = false;
+        san = 1
+    }, 1000);
+}
+
 function updateSan() {
     san = Math.max(0, Math.min(3, san));
-    localStorage.setItem("san", san);
+    storage.set("san", san);
     const img = document.getElementById("san-image");
-    img.src = `./img/san_${san}.png`;
+    if (img) img.src = `./img/san_${san}.png`;
+
+    if (san === 0) {
+        triggerSanZero();
+    }
 }
 
 //スチル関連
@@ -564,6 +696,7 @@ function showScreen(src) {
     img.src = "img/" + src;
 
     screenEl.classList.add("show");
+    return screenEl;
 }
 
 function clearScreen() {
@@ -670,34 +803,23 @@ function isOpScene(id) {
 
 function createSkipButtonIfNeeded() {
 
-    // 既存ボタン消す
     const old = document.getElementById("skip-btn");
     if (old && !isOpScene(current.id)) old.remove();
 
-    // 条件：2周目以降＆OPシーン
     if (loopCount < 2 || !isOpScene(current.id) || old) return;
 
     const btn = document.createElement("div");
     btn.id = "skip-btn";
+    btn.classList.add("skip-btn");
     btn.textContent = "▶ 行先選択までスキップ";
-
-    btn.style.position = "absolute";
-    btn.style.right = "10px";
-    btn.style.bottom = "30px";
-    btn.style.fontSize = "32px";
-    btn.style.opacity = "0";
-    btn.style.transition = "opacity 0.5s";
-    btn.style.cursor = "pointer";
 
     const textbox = document.getElementById("textbox");
     textbox.appendChild(btn);
 
-    // フェードイン
     setTimeout(() => {
-        btn.style.opacity = "0.6";
+        btn.classList.add("visible");
     }, 1000);
 
-    // クリックでスキップ
     btn.onclick = (e) => {
         e.stopPropagation();
 
@@ -832,16 +954,43 @@ function runCommands(cmds = []) {
         }
         else if (cmd === "clearChara") {
             clearChara();
-        } else if (cmd.startsWith("foods(")) {
-            const value = Number(cmd.match(/foods\(([-\d]+)\)/)?.[1] || 0);
-
-            foodsVisited += value;
-            if (foodsVisited < 0) foodsVisited = 0;
-
-            localStorage.setItem("foodsVisited", foodsVisited);
-
-            console.log("foodsVisited:", foodsVisited);
         }
+        else if (cmd.startsWith("foods(")) {
+            const value = Number(cmd.match(/foods\(([-\d]+)\)/)?.[1] || 0);
+            visited.foods += value;
+            if (visited.foods < 0) visited.foods = 0;
+            storage.set("foodsVisited", visited.foods);
+        }
+        else if (cmd.startsWith("donut(")) {
+            const value = Number(cmd.match(/donut\(([-\d]+)\)/)?.[1] || 0);
+            visited.donut += value;
+            if (visited.donut < 0) visited.donut = 0;
+            storage.set("donutVisited", visited.donut);
+        } else if (cmd.startsWith("wagashi(")) {
+            const value = Number(cmd.match(/wagashi\(([-\d]+)\)/)?.[1] || 0);
+            visited.wagashi += value;
+            if (visited.wagashi < 0) visited.wagashi = 0;
+            storage.set("wagashiVisited", visited.wagashi);
+        }
+        else if (cmd.startsWith("wear(")) {
+            const value = Number(cmd.match(/wear\(([-\d]+)\)/)?.[1] || 0);
+            visited.wear += value;
+            if (visited.wear < 0) visited.wear = 0;
+            storage.set("wearVisited", visited.wear);
+        }
+        else if (cmd.startsWith("books(")) {
+            const value = Number(cmd.match(/books\(([-\d]+)\)/)?.[1] || 0);
+            visited.books += value;
+            if (visited.books < 0) visited.books = 0;
+            storage.set("booksVisited", visited.books);
+        }
+        else if (cmd.startsWith("goods(")) {
+            const value = Number(cmd.match(/goods\(([-\d]+)\)/)?.[1] || 0);
+            visited.goods += value;
+            if (visited.goods < 0) visited.goods = 0;
+            storage.set("goodsVisited", visited.goods);
+        }
+
     });
 }
 
@@ -851,6 +1000,8 @@ function show(id) {
     clearStill();
     clearScreen();
     returnSceneId = null;
+    updateSan();
+    if (san === 0 && !sanZeroAdvance) return;
 
     if (san === 1 && Math.random() < 0.3) {
         startScrambleText();
@@ -866,7 +1017,7 @@ function show(id) {
 
     createSkipButtonIfNeeded();
 
-    localStorage.setItem("novel_save_scene", id);
+    storage.set("novel_save_scene", id);
 
     if (current.commands) {
 
@@ -875,7 +1026,7 @@ function show(id) {
 
             if (id.includes('_') && !id.includes('_A')) {
                 executedScenes.push(current.id);
-                localStorage.setItem("executedScenes", JSON.stringify(executedScenes));
+                storage.set("executedScenes", executedScenes);
             }
         }
     }

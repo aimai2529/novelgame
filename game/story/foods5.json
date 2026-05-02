@@ -1,0 +1,194 @@
+[
+    {
+        "id": "foods5",
+        "name": "ユウジン",
+        "text": "食料品売り場行くのか～？もう食いもんは十分買ったろ！",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "いやいや、行くよ",
+                "next": "foods5_B"
+            },
+            {
+                "label": "そうだな、行かないよ",
+                "next": "foods5_A"
+            }
+        ]
+    },
+    {
+        "id": "foods5_A",
+        "name": "ユウジン",
+        "text": "もう荷物もいっぱいだもんな～。じゃ、次はどうする？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods5_B",
+        "name": "ユウジン",
+        "text": "えぇ、お前ってそんなに食い意地張ってたっけ……？",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "失礼だな",
+                "next": "foods5_C"
+            },
+            {
+                "label": "なんか買ってくって決まったわけじゃ……",
+                "next": "foods5_C"
+            }
+        ]
+    },
+    {
+        "id": "foods5_C",
+        "name": "ユウジン",
+        "text": "なんか買ってく用事ないんならさっさと出ろよ～、またあの変な奴に絡まれる前にさ",
+        "bg": "shop_food.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "失礼だな",
+                "next": "foods5_D"
+            },
+            {
+                "label": "変な奴て",
+                "next": "foods5_D"
+            }
+        ]
+    },
+    {
+        "id": "foods5_D",
+        "name": "？？？",
+        "text": "イラッシャイマセ！！オ客様！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "speed": "80",
+        "commands": [
+            "mapLock",
+            "shake",
+            "textBig"
+        ],
+        "choices": [
+            {
+                "label": "（声のしたほうを振り返る）",
+                "next": "foods5_F"
+            },
+            {
+                "label": "（無視して食料品店を出る）",
+                "next": "foods5_E"
+            }
+        ]
+    },
+    {
+        "id": "foods5_E",
+        "name": "ユウジン",
+        "text": "ほら！！！！！いわんこっちゃないだろ！！！！\nも、もういいだろ！ほかのところ行こうぜ！！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "textNormal",
+            "foods(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "foods5_F",
+        "name": "ユウジン",
+        "text": "ほら！！！！！いわんこっちゃない！！！！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "textNormal",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "next": "foods5_G"
+    },
+    {
+        "id": "foods5_G",
+        "name": "テンイン",
+        "text": "ワァ！オ客様、オ荷物タクサンデスネ！！……ソノドーナツ、オ好キナンデスカ？",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "まぁ、はい",
+                "next": "foods5_H"
+            },
+            {
+                "label": "いや、これは友達の……",
+                "next": "foods5_H"
+            }
+        ]
+    },
+    {
+        "id": "foods5_H",
+        "name": "テンイン",
+        "text": "イイデスネ！！ココデ働ク人ハミンナソノドーナツガ好キナンデス！特ニ雑貨屋ノチイサイ子ガ大好キナンデス！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_nikoniko.png)"
+        ],
+        "choices": [
+            {
+                "label": "そ、そうなんですね……",
+                "next": "foods5_I"
+            },
+            {
+                "label": "カラフルでかわいいですもんね",
+                "next": "foods5_I"
+            }
+        ]
+    },
+    {
+        "id": "foods5_I",
+        "name": "テンイン",
+        "text": "ダカラオ客様モ、タクサン食ベテクダサイネ！！ソレデハ！ワタシハ仕事ニ戻リマスノデ！！",
+        "bg": "shop_food.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "mapLock",
+            "chara(tenin_niko.png)"
+        ],
+        "next": "foods5_J"
+    },
+    {
+        "id": "foods5_J",
+        "name": "ユウジン",
+        "text": "……今回はおとなしく戻っていったな…………いや、おとなしくはないか。まあいい、次行こうぜ次",
+        "bg": "shop_food.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "clearChara",
+            "foods(1)"
+        ],
+        "next": "search"
+    }
+]

@@ -227,6 +227,7 @@
         "text": "難シイコトハアリマセン！アナタハソコデジットシテイテクダサイネ！ワタシニマカセテ、安心シテクダサイ！！",
         "bg": "shop_food.png",
         "commands": [
+            "clearChara",
             "mapLock",
             "show(textbox)",
             "hide(face)",
@@ -255,7 +256,7 @@
             "hide(status)",
             "hide(hud-top-left)",
             "hide(video)",
-            "still(still_tenin1.png)"
+            "still(still_tenin2.png)"
         ],
         "next": "end05"
     }

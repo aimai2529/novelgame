@@ -215,5 +215,33 @@
         "bg": "exit.png",
         "face": "friend_shikushiku.png",
         "next": "end03"
+    },
+    {
+        "id": "exit04",
+        "name": "ユウジン",
+        "text": "お、帰るのか？",
+        "bg": "exit.png",
+        "face": "friend_surprised.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "今日はもう帰る",
+                "next": "exit04_B"
+            },
+            {
+                "label": "少しだけ見ていく",
+                "next": "exit02_A"
+            }
+        ]
+    },
+    {
+        "id": "exit04_B",
+        "name": "ユウジン",
+        "text": "そうか、じゃあ気をつけて帰れよ。今度は和菓子もいっしょに見て回ろうな。",
+        "bg": "exit.png",
+        "face": "friend_noodle.png",
+        "next": "end04"
     }
 ]

@@ -4,6 +4,7 @@
         "text": "クリックで開始",
         "commands": [
             "loopReset",
+            "stopScrambleText",
             "show(textbox)",
             "hide(face)",
             "hide(map)",
@@ -51,30 +52,6 @@
         "next": "search"
     },
     {
-        "id": "donuts1",
-        "name": "ユウジン",
-        "text": "もう今日はやってないみたいだな。他いこうぜ",
-        "bg": "shop_donut.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
-        "id": "wagashi1",
-        "name": "ユウジン",
-        "text": "もう今日はやってないみたいだな。他いこうぜ",
-        "bg": "shop_wagashi.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
         "id": "space1",
         "name": "ユウジン",
         "text": "……？そこには何もないんじゃないか？",
@@ -87,10 +64,10 @@
         "next": "search"
     },
     {
-        "id": "items1",
+        "id": "goods1",
         "name": "ユウジン",
         "text": "もう今日はやってないみたいだな。他いこうぜ",
-        "bg": "shop_items.png",
+        "bg": "shop_goods.png",
         "face": "friend_noodle.png",
         "commands": [
             "overlay(map, 'クリックで移動')",
@@ -148,7 +125,8 @@
             "show(status)",
             "show(hud-top-left)",
             "show(video)",
-            "mapUnlock"
+            "mapUnlock",
+            "textNormal"
         ],
         "next": "search"
     },
@@ -229,7 +207,7 @@
         "text": "END.みんなの笑顔のために",
         "speed": 100,
         "commands": [
-            "still(still_tenin2.png)",
+            "still(still_tenin3.png)",
             "textNormal",
             "show(textbox)",
             "hide(face)",
@@ -246,12 +224,14 @@
         "text": "もう一度遊ぶ？",
         "commands": [
             "show(textbox)",
+            "show(choices)",
             "hide(face)",
             "hide(map)",
             "hide(items)",
             "hide(status)",
             "hide(hud-top-left)",
-            "hide(video)"
+            "hide(video)",
+            "clearChara"
         ],
         "choices": [
             {
