@@ -124,7 +124,8 @@
             "show(status)",
             "show(hud-top-left)",
             "show(video)",
-            "mapUnlock"
+            "mapUnlock",
+            "textNormal"
         ],
         "next": "search"
     },

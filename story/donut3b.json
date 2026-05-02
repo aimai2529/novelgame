@@ -1,0 +1,203 @@
+[
+    {
+        "id": "donut3b",
+        "name": "ユウジン",
+        "text": "この時間のドーナツ屋……もう夜飯食べる気ないだろ！！",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "そんなことないし……行くけど",
+                "next": "donut3b_B"
+            },
+            {
+                "label": "そうだな……行かないよ",
+                "next": "donut3b_A"
+            }
+        ]
+    },
+    {
+        "id": "donut3b_A",
+        "name": "ユウジン",
+        "text": "よかった……じゃあ次はどこに行くんだ？",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "donut3b_B",
+        "name": "ユウジン",
+        "text": "お、おう……まあ勝手にしたらいいけどよ……\nいっつも俺にカップ麺食いすぎって言うくせにさぁ……",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "自分のことは気にしないもんだよね",
+                "next": "donut3b_C"
+            },
+            {
+                "label": "それとこれとは話が違うから",
+                "next": "donut3b_C"
+            }
+        ]
+    },
+    {
+        "id": "donut3b_C",
+        "name": "ユウジン",
+        "text": "そうか……そうなのか……？\nていうか、この時間だとそのドーナツ屋……",
+        "bg": "shop_donut.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "donut3b_D"
+    },
+    {
+        "id": "donut3b_D",
+        "name": "ドーナツヤ",
+        "text": "あ、らーしゃっせー。もう持ち帰り分終わっちゃったんすよー、大丈夫っすかぁ？イートインはできるっすけど",
+        "bg": "shop_donut.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "そうなんですね、大丈夫ですよ",
+                "next": "donut3b_H"
+            },
+            {
+                "label": "あ～……じゃあいいです、ごめんなさい",
+                "next": "donut3b_E"
+            }
+        ]
+    },
+    {
+        "id": "donut3b_E",
+        "name": "ドーナツヤ",
+        "text": "さーせん。またおこしくださいませー。",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "donut3b_F"
+    },
+    {
+        "id": "donut3b_F",
+        "name": "ユウジン",
+        "text": "………………そうなんだよなぁ、この時間だと、イートインしかやってないんだよ",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "早く言えよ",
+                "next": "donut3b_G"
+            },
+            {
+                "label": "知ってたんだ",
+                "next": "donut3b_G"
+            }
+        ]
+    },
+    {
+        "id": "donut3b_G",
+        "name": "ユウジン",
+        "text": "いや、言おうとしたんだけどな！！ちょっとぉ……おそかったな！\nま、まあ！気を取り直して、次行こうぜ！な！",
+        "bg": "shop_donut.png",
+        "face": "friend_chira.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "donut(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "donut3b_H",
+        "name": "ドーナツヤ",
+        "text": "お、あざっす。じゃ、はい。ドーナツどうぞ。ごゆっくり～",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "donut3b_I"
+    },
+    {
+        "id": "donut3b_I",
+        "name": "ユウジン",
+        "text": "うわぁ、相変わらず色鮮やかだなぁ……",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……いただきます",
+                "next": "donut3b_J"
+            }
+        ]
+    },
+    {
+        "id": "donut3b_J",
+        "name": "",
+        "text": "（……鼻血でも出てきそうな甘さだ……）",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "-san",
+            "mapLock"
+        ],
+        "next": "donut3b_K"
+    },
+    {
+        "id": "donut3b_K",
+        "name": "ユウジン",
+        "text": "いやぁ、めっちゃ甘いだろ、それ。俺なんてそれ初めて食ったとき、甘すぎて鼻血出たもんな",
+        "bg": "shop_donut.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……大げさだなぁ",
+                "next": "donut3b_L"
+            },
+            {
+                "label": "わからないでもない",
+                "next": "donut3b_L"
+            }
+        ]
+    },
+    {
+        "id": "donut3b_L",
+        "name": "ユウジン",
+        "text": "ほら、甘いもの食った後は動け！次はどこ行く？",
+        "bg": "shop_donut.png",
+        "face": "friend_gya.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "donut(1)"
+        ],
+        "next": "search"
+    }
+]

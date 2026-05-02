@@ -160,7 +160,12 @@
         "commands": [
             "mapLock"
         ],
-        "next": "donut1_J"
+        "choices": [
+            {
+                "label": "いただきます",
+                "next": "donut1_J"
+            }
+        ]
     },
     {
         "id": "donut1_J",

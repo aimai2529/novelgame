@@ -1,8 +1,8 @@
 [
     {
-        "id": "wagashi1",
+        "id": "wagashi2",
         "name": "ユウジン",
-        "text": "お！和菓子屋寄っていくのか？",
+        "text": "おぉ！また和菓子屋寄っていくのか？",
         "bg": "shop_wagashi.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -10,19 +10,19 @@
         ],
         "choices": [
             {
-                "label": "うん、寄っていこうかな",
-                "next": "wagashi1_B"
+                "label": "うん、寄っていく",
+                "next": "wagashi2_B"
             },
             {
                 "label": "いや、やめとく",
-                "next": "wagashi1_A"
+                "next": "wagashi2_A"
             }
         ]
     },
     {
-        "id": "wagashi1_A",
+        "id": "wagashi2_A",
         "name": "ユウジン",
-        "text": "そ、そうなのか……そっか……じゃあ次はどうする……？",
+        "text": "そうだよな……うん……じゃあ次はどうする……？",
         "bg": "shop_wagashi.png",
         "face": "friend_shikushiku.png",
         "commands": [
@@ -32,9 +32,9 @@
         "next": "search"
     },
     {
-        "id": "wagashi1_B",
+        "id": "wagashi2_B",
         "name": "ユウジン",
-        "text": "ここの和菓子、めちゃくちゃ美味いんだぜ！食うなら絶対に買ってすぐ出来立てを食べたほうがいいね",
+        "text": "ここの和菓子お前も気に入ったんだな！いやあ、同志が増えてうれしいぜ！",
         "bg": "shop_wagashi.png",
         "face": "friend_noodle.png",
         "speed": 50,
@@ -43,53 +43,39 @@
         ],
         "choices": [
             {
-                "label": "そこまで言うなら食べていこうかな",
-                "next": "wagashi1_E"
+                "label": "確かに、おいしかった",
+                "next": "wagashi2_D"
             },
             {
-                "label": "いや、夕飯食べられなくなるし……",
-                "next": "wagashi1_C"
+                "label": "……同志は、ちょっと",
+                "next": "wagashi2_C"
             }
         ]
     },
     {
-        "id": "wagashi1_C",
+        "id": "wagashi2_C",
         "name": "ユウジン",
-        "text": "いーや、お前のカレーなんて食えんくなってもいいわ。そこの和菓子まじでうっまいんだって。うますぎて心が浄化される気がするもん。特に美味いのは豆大福な。ちょっと硬めの粒あんはしっかり甘いんだけど後味はスッキリしてんだ。で、それを包む餅はふわふわでもちもちなんだけどふわっととろける食感なんだよ。練り込まれてる豆もいい食感のアクセントになっててな。全体の大きさもちょうど良くて満足感はあれどもうちょっと食べたいな、と思える大きさで一度食べるともう行くたびに食べたくなっちゃうからな",
-        "bg": "shop_wagashi.png",
-        "face": "friend_noodle.png",
-        "speed": 30,
-        "commands": [
-            "mapLock"
-        ],
-        "choices": [
-            {
-                "label": "わ、わかったわかった、食べていくよ",
-                "next": "wagashi1_E"
-            },
-            {
-                "label": "（語っている間にそっと店を出る）",
-                "next": "wagashi1_D"
-            }
-        ]
-    },
-    {
-        "id": "wagashi1_D",
-        "name": "ユウジン",
-        "text": "……って、おーい！！こんだけ語ったんだから食ってけよ！！！",
+        "text": "なんでだよっ！！いいだろうがよ！！！同志でよ！！",
         "bg": "shop_wagashi.png",
         "face": "friend_gya.png",
         "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock",
-            "target(-1)",
-            "textBig",
-            "shake"
+            "mapLock"
         ],
-        "next": "search"
+        "next": "wagashi2_E"
     },
     {
-        "id": "wagashi1_E",
+        "id": "wagashi2_D",
+        "name": "ユウジン",
+        "text": "ふふん、そうだろうそうだろう！",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wagashi2_E"
+    },
+    {
+        "id": "wagashi2_E",
         "name": "ワガシヤ",
         "text": "いらっしゃいませ。お求めのものはお決まりですか？",
         "bg": "shop_wagashi.png",
@@ -100,16 +86,16 @@
         "choices": [
             {
                 "label": "豆大福で",
-                "next": "wagashi1_F"
+                "next": "wagashi2_F"
             },
             {
                 "label": "どら焼きで",
-                "next": "wagashi1_G"
+                "next": "wagashi2_G"
             }
         ]
     },
     {
-        "id": "wagashi1_F",
+        "id": "wagashi2_F",
         "name": "ワガシヤ",
         "text": "かしこまりました\n……どうぞ、お品物です",
         "bg": "shop_wagashi.png",
@@ -117,10 +103,10 @@
         "commands": [
             "mapLock"
         ],
-        "next": "wagashi1_H"
+        "next": "wagashi2_H"
     },
     {
-        "id": "wagashi1_G",
+        "id": "wagashi2_G",
         "name": "ワガシヤ",
         "text": "かしこまりました\n……どうぞ、お品物です",
         "bg": "shop_wagashi.png",
@@ -128,26 +114,26 @@
         "commands": [
             "mapLock"
         ],
-        "next": "wagashi1_M"
+        "next": "wagashi2_M"
     },
     {
-        "id": "wagashi1_H",
+        "id": "wagashi2_H",
         "name": "ユウジン",
-        "text": "いいね〜〜〜やっぱ豆大福だよな！早速食ってみろって、まじ美味いぞ！",
+        "text": "いいね〜〜〜やっぱ豆大福だよな！ほらほら、餅がふわふわのうちに食えよ！",
         "bg": "shop_wagashi.png",
-        "face": "friend_wara.png",
+        "face": "friend_noodle.png",
         "commands": [
             "mapLock"
         ],
         "choices": [
             {
                 "label": "いただきます",
-                "next": "wagashi1_I"
+                "next": "wagashi2_I"
             }
         ]
     },
     {
-        "id": "wagashi1_I",
+        "id": "wagashi2_I",
         "name": "",
         "text": "（ふわふわの餅、程よい甘さの餡、頬が落ちそうな美味しさだ）",
         "bg": "shop_wagashi.png",
@@ -156,12 +142,12 @@
             "+san",
             "mapLock"
         ],
-        "next": "wagashi1_J"
+        "next": "wagashi2_J"
     },
     {
-        "id": "wagashi1_J",
+        "id": "wagashi2_J",
         "name": "ユウジン",
-        "text": "どうだ、びっくりするほど美味いだろ、それ",
+        "text": "やっぱり、何度食っても美味いだろ",
         "bg": "shop_wagashi.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -169,19 +155,19 @@
         ],
         "choices": [
             {
-                "label": "本当においしいな、これ",
-                "next": "wagashi1_K"
+                "label": "ホッとする味だね",
+                "next": "wagashi2_K"
             },
             {
-                "label": "なんか悔しいけど、美味い",
-                "next": "wagashi1_L"
+                "label": "まあ、うん。おいしい",
+                "next": "wagashi2_L"
             }
         ]
     },
     {
-        "id": "wagashi1_K",
+        "id": "wagashi2_K",
         "name": "ユウジン",
-        "text": "だよなだよな！今度一緒に食おうぜ！\nっと、次はどこいく？",
+        "text": "わかるわ～、俺も食いたくなってきたな……\nじゃなくて、次はどこいく？",
         "bg": "shop_wagashi.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -193,9 +179,9 @@
         "next": "search"
     },
     {
-        "id": "wagashi1_L",
+        "id": "wagashi2_L",
         "name": "ユウジン",
-        "text": "一言余計だぞ〜〜\nまあいい、次はどこいく？",
+        "text": "なんだよ素直じゃないなぁ～～～\nまあいいや、次はどこいく？",
         "bg": "shop_wagashi.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -207,9 +193,9 @@
         "next": "search"
     },
     {
-        "id": "wagashi1_M",
+        "id": "wagashi2_M",
         "name": "ユウジン",
-        "text": "わかってないな〜そこは豆大福だろ〜。ま、そのどら焼きもめっちゃ美味いんだけどな、早速食べてみろよ！",
+        "text": "まぁまぁまぁまぁ、どら焼きもうまいよな。わかる。ほら、さっそく食べろよ",
         "bg": "shop_wagashi.png",
         "face": "friend_wara.png",
         "commands": [
@@ -218,12 +204,12 @@
         "choices": [
             {
                 "label": "いただきます",
-                "next": "wagashi1_N"
+                "next": "wagashi2_N"
             }
         ]
     },
     {
-        "id": "wagashi1_N",
+        "id": "wagashi2_N",
         "name": "",
         "text": "（卵のやさしい風味がする皮にたっぷりの餡が挟まっている。安心する美味しさだ）",
         "bg": "shop_wagashi.png",
@@ -232,12 +218,12 @@
             "+san",
             "mapLock"
         ],
-        "next": "wagashi1_O"
+        "next": "wagashi2_O"
     },
     {
-        "id": "wagashi1_O",
+        "id": "wagashi2_O",
         "name": "ユウジン",
-        "text": "どうだ、美味いだろ、それ",
+        "text": "やっぱり、何度食っても美味いだろ",
         "bg": "shop_wagashi.png",
         "face": "friend_noodle.png",
         "commands": [
@@ -246,11 +232,11 @@
         "choices": [
             {
                 "label": "本当においしいな、これ",
-                "next": "wagashi1_K"
+                "next": "wagashi2_K"
             },
             {
                 "label": "なんか悔しいけど、美味い",
-                "next": "wagashi1_L"
+                "next": "wagashi2_L"
             }
         ]
     }

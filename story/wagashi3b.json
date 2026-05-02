@@ -1,0 +1,211 @@
+[
+    {
+        "id": "wagashi3b",
+        "name": "ユウジン",
+        "text": "ま、また和菓子屋いくのか？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "うん、行くよ",
+                "next": "wagashi3b_B"
+            },
+            {
+                "label": "いや、やめとく",
+                "next": "wagashi3b_A"
+            }
+        ]
+    },
+    {
+        "id": "wagashi3b_A",
+        "name": "ユウジン",
+        "text": "そ、そうだよな、さすがにな。夕飯食えなくなるもんな",
+        "bg": "shop_wagashi.png",
+        "face": "friend_shikushiku.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi3b_B",
+        "name": "ユウジン",
+        "text": "きにいってくれたのはうれしいんだけどさ……さすがに食いすぎじゃね……？\nお前、ご飯の前におやつ食って飯入らなくなるタイプだろ",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……そんなことないし",
+                "next": "wagashi3b_C"
+            },
+            {
+                "label": "確かにそうかも",
+                "next": "wagashi3b_C"
+            }
+        ]
+    },
+    {
+        "id": "wagashi3b_C",
+        "name": "ユウジン",
+        "text": "…………俺と一緒だな！！！さすが俺の相棒！！",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wagashi3b_E"
+    },
+    {
+        "id": "wagashi3b_E",
+        "name": "ワガシヤ",
+        "text": "いらっしゃいませ。お求めのものはお決まりですか？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "豆大福で",
+                "next": "wagashi3b_F"
+            },
+            {
+                "label": "どら焼きで",
+                "next": "wagashi3b_G"
+            }
+        ]
+    },
+    {
+        "id": "wagashi3b_F",
+        "name": "ワガシヤ",
+        "text": "かしこまりました\n……どうぞ、お品物です",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wagashi3b_H"
+    },
+    {
+        "id": "wagashi3b_G",
+        "name": "ワガシヤ",
+        "text": "かしこまりました\n……どうぞ、お品物です",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wagashi3b_M"
+    },
+    {
+        "id": "wagashi3b_H",
+        "name": "ユウジン",
+        "text": "豆大福…………うまいけど、結構腹にたまるぜ？ま、それも覚悟で買ったんだもんな。残さず食えよ？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_wara.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "いただきます",
+                "next": "wagashi3b_I"
+            }
+        ]
+    },
+    {
+        "id": "wagashi3b_I",
+        "name": "",
+        "text": "（ふわふわの餅、程よい甘さの餡、頬が落ちそうな美味しさだ\n…………さすがにおなかがいっぱいになってきた）",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "+san",
+            "mapLock"
+        ],
+        "next": "wagashi3b_J"
+    },
+    {
+        "id": "wagashi3b_J",
+        "name": "ユウジン",
+        "text": "どうだ、さすがにおなかいっぱいか？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "…………うん",
+                "next": "wagashi3b_K"
+            },
+            {
+                "label": "そ、そんなことないし",
+                "next": "wagashi3b_L"
+            }
+        ]
+    },
+    {
+        "id": "wagashi3b_K",
+        "name": "ユウジン",
+        "text": "はははっ！そうだろうな！\nじゃ、気を取り直してさ、次はどこいく？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wagashi(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi3b_L",
+        "name": "ユウジン",
+        "text": "ふーん、ま、そういうことにしておいてやるよ！\n次はどこいく？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wagashi(1)"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wagashi3b_M",
+        "name": "ユウジン",
+        "text": "どら焼き…………結構腹にたまるぜ？ま、それも覚悟で買ったんだもんな。残さず食えよ？",
+        "bg": "shop_wagashi.png",
+        "face": "friend_wara.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "いただきます",
+                "next": "wagashi3b_N"
+            }
+        ]
+    },
+    {
+        "id": "wagashi3b_N",
+        "name": "",
+        "text": "（卵のやさしい風味がする皮にたっぷりの餡が挟まっている。安心する美味しさだ\n…………さすがにおなかがいっぱいになってきた）",
+        "bg": "shop_wagashi.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "+san",
+            "mapLock"
+        ],
+        "next": "wagashi3b_J"
+    }
+]

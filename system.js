@@ -75,13 +75,18 @@ const itemDB = {
 };
 
 let items = JSON.parse(localStorage.getItem("items") || "[]");
-let toiletVisited = Number(localStorage.getItem("toiletVisited") || 0);
-let foodsVisited = Number(localStorage.getItem("foodsVisited") || 0);
-let donutVisited = Number(localStorage.getItem("donutVisited") || 0);
-let wagashiVisited = Number(localStorage.getItem("wagashiVisited") || 0);
-let wearVisited = Number(localStorage.getItem("wearVisited") || 0);
-let booksVisited = Number(localStorage.getItem("booksVisited") || 0);
-let goodsVisited = Number(localStorage.getItem("goodsVisited") || 0);
+
+// 訪問フラグをオブジェクトで統一管理
+let visited = {
+    toilet: Number(localStorage.getItem("toiletVisited") || 0),
+    foods: Number(localStorage.getItem("foodsVisited") || 0),
+    donut: Number(localStorage.getItem("donutVisited") || 0),
+    wagashi: Number(localStorage.getItem("wagashiVisited") || 0),
+    wear: Number(localStorage.getItem("wearVisited") || 0),
+    books: Number(localStorage.getItem("booksVisited") || 0),
+    goods: Number(localStorage.getItem("goodsVisited") || 0),
+};
+
 let loopCount = Number(localStorage.getItem("loopCount") || 0);
 let san = Number(localStorage.getItem("san") ?? 3);
 
@@ -163,7 +168,11 @@ async function loadStory() {
         "story/donut1.json",
         "story/donut2.json",
         "story/donut3.json",
+        "story/donut3b.json",
         "story/wagashi1.json",
+        "story/wagashi2.json",
+        "story/wagashi3.json",
+        "story/wagashi3b.json",
         "story/exit.json"
     ];
 
@@ -195,26 +204,12 @@ function findScene(id) {
 }
 
 function resetForLoop() {
-    toiletVisited = 0;
-    localStorage.setItem("toiletVisited", toiletVisited);
-
-    foodsVisited = 0;
-    localStorage.setItem("foodsVisited", foodsVisited);
-
-    donutVisited = 0;
-    localStorage.setItem("donutVisited", donutVisited);
-
-    wagashiVisited = 0;
-    localStorage.setItem("wagashitVisited", wagashiVisited);
-
-    wearVisited = 0;
-    localStorage.setItem("wearVisited", wearVisited);
-
-    booksVisited = 0;
-    localStorage.setItem("booksVisited", booksVisited);
-
-    goodsVisited = 0;
-    localStorage.setItem("goodsVisited", goodsVisited);
+    // 訪問フラグを全てリセット
+    Object.keys(visited).forEach(key => {
+        visited[key] = 0;
+        const storageKey = key + "Visited";
+        localStorage.setItem(storageKey, 0);
+    });
 
     san = 3;
     updateSan();
@@ -484,26 +479,26 @@ function locationLoad(id) {
     }
 
     if (id === "map_1_0_2" || id === "map_2_0_2") {
-        if (toiletVisited === 0) {
-            toiletVisited = 1;
-            localStorage.setItem("toiletVisited", toiletVisited);
+        if (visited.toilet === 0) {
+            visited.toilet = 1;
+            localStorage.setItem("toiletVisited", visited.toilet);
             show("toilet_1");
-        } else if (toiletVisited > 0 && toiletVisited < 10) {
-            toiletVisited++;
-            localStorage.setItem("toiletVisited", toiletVisited);
+        } else if (visited.toilet > 0 && visited.toilet < 10) {
+            visited.toilet++;
+            localStorage.setItem("toiletVisited", visited.toilet);
             show("toilet_2");
         } else {
             show("toilet_3");
         }
     } else if (id === "map_1_1_0" || id === "map_1_2_0" || id === "map_1_2_1") {
         const hasDonut = hasItem("donut");
-        if (foodsVisited === 0) {
+        if (visited.foods === 0) {
             show("foods1");
         } else if (hasDonut) {
             show("foods5");
-        } else if (foodsVisited === 1) {
+        } else if (visited.foods === 1) {
             show("foods2");
-        } else if (foodsVisited === 2) {
+        } else if (visited.foods === 2) {
             show("foods3");
         } else {
             show("foods4");
@@ -511,22 +506,24 @@ function locationLoad(id) {
     } else if (id === "map_1_0_1") {
         show(getExitScene());
     } else if (id === "map_1_1_2") {
-        if (remainingTargets <= 2) {
+        if (remainingTargets === 2) {
             show("donut3");
-        } else if (donutVisited === 0) {
+        } else if (remainingTargets === 1) {
+            show("donut3b");
+        } else if (visited.donut === 0) {
             show("donut1");
-        } else if (donutVisited === 1) {
+        } else if (visited.donut === 1) {
             show("donut2");
         }
     } else if (id === "map_1_2_2") {
-        if (wagashiVisited === 0) {
+        if (visited.wagashi === 0) {
             show("wagashi1");
-        } else if (wagashiVisited === 1) {
+        } else if (visited.wagashi === 1) {
             show("wagashi2");
-        } else if (wagashiVisited === 2) {
+        } else if (visited.wagashi === 2) {
             show("wagashi3");
         } else {
-            show("wagashi4");
+            show("wagashi3b");
         }
     } else if (id === "map_1_0_0") {
         show("space1");
@@ -877,38 +874,38 @@ function runCommands(cmds = []) {
         }
         else if (cmd.startsWith("foods(")) {
             const value = Number(cmd.match(/foods\(([-\d]+)\)/)?.[1] || 0);
-            foodsVisited += value;
-            if (foodsVisited < 0) foodsVisited = 0;
-            localStorage.setItem("foodsVisited", foodsVisited);
+            visited.foods += value;
+            if (visited.foods < 0) visited.foods = 0;
+            localStorage.setItem("foodsVisited", visited.foods);
         }
         else if (cmd.startsWith("donut(")) {
             const value = Number(cmd.match(/donut\(([-\d]+)\)/)?.[1] || 0);
-            donutVisited += value;
-            if (donutVisited < 0) donutVisited = 0;
-            localStorage.setItem("donutVisited", donutVisited);
+            visited.donut += value;
+            if (visited.donut < 0) visited.donut = 0;
+            localStorage.setItem("donutVisited", visited.donut);
         } else if (cmd.startsWith("wagashi(")) {
             const value = Number(cmd.match(/wagashi\(([-\d]+)\)/)?.[1] || 0);
-            wagashiVisited += value;
-            if (wagashiVisited < 0) wagashiVisited = 0;
-            localStorage.setItem("wagashiVisited", wagashiVisited);
+            visited.wagashi += value;
+            if (visited.wagashi < 0) visited.wagashi = 0;
+            localStorage.setItem("wagashiVisited", visited.wagashi);
         }
         else if (cmd.startsWith("wear(")) {
             const value = Number(cmd.match(/wear\(([-\d]+)\)/)?.[1] || 0);
-            wearVisited += value;
-            if (wearVisited < 0) wearVisited = 0;
-            localStorage.setItem("wearVisited", wearVisited);
+            visited.wear += value;
+            if (visited.wear < 0) visited.wear = 0;
+            localStorage.setItem("wearVisited", visited.wear);
         }
         else if (cmd.startsWith("books(")) {
             const value = Number(cmd.match(/books\(([-\d]+)\)/)?.[1] || 0);
-            booksVisited += value;
-            if (booksVisited < 0) booksVisited = 0;
-            localStorage.setItem("booksVisited", booksVisited);
+            visited.books += value;
+            if (visited.books < 0) visited.books = 0;
+            localStorage.setItem("booksVisited", visited.books);
         }
         else if (cmd.startsWith("goods(")) {
             const value = Number(cmd.match(/goods\(([-\d]+)\)/)?.[1] || 0);
-            goodsVisited += value;
-            if (goodsVisited < 0) goodsVisited = 0;
-            localStorage.setItem("goodsVisited", goodsVisited);
+            visited.goods += value;
+            if (visited.goods < 0) visited.goods = 0;
+            localStorage.setItem("goodsVisited", visited.goods);
         }
 
     });
