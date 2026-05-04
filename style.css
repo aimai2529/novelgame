@@ -9,12 +9,21 @@ body {
     font-family: sans-serif;
 }
 
+
 /* 外側中央寄せ */
 .outer {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+@media (min-width:801px) {
+    .outer {
+        background: no-repeat center/cover url('./img/background.png');
+        justify-content: left;
+        padding-left: 20vw;
+    }
 }
 
 /* デバイス風フレーム（PC時のみ強調） */
@@ -29,6 +38,9 @@ body {
         border-radius: 30px;
         background: #000;
         padding: 10px;
+        box-shadow: 0 0 10px #000;
+        min-width: 360px;
+        max-width: 25vw;
     }
 }
 
@@ -36,8 +48,8 @@ body {
 .screen {
     position: relative;
     width: 100%;
+    height: 100vh;
     min-width: 300px;
-    height: 80vh;
     max-height: 800px;
     background: #d4e8f0;
     border-radius: 20px;
@@ -45,6 +57,12 @@ body {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     scrollbar-width: none;
+}
+
+@media (min-width:401px) {
+    .screen {
+        height: 80vh;
+    }
 }
 
 .chat,
@@ -131,20 +149,30 @@ body {
 .content {
     padding: 16px;
     background: #fff;
+    padding-bottom: 80px;
+    height: fit-content;
+    min-height: 100%;
 }
 
 h1 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 2/1;
+    object-fit: cover;
 }
 
 .summary {
-    font-size: 14px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 30px;
 }
 
 .notice {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
 }
 
