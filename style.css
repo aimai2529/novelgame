@@ -20,7 +20,7 @@ body {
 
 @media (min-width:801px) {
     .outer {
-        background: no-repeat center/cover url('./img/background.png');
+        background: no-repeat center/cover url('./img/background.webp');
         justify-content: left;
         padding-left: 20vw;
     }
@@ -168,6 +168,12 @@ h1 {
 
 .summary {
     font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.attention {
+    font-size: 20px;
+    color: #c51111;
     margin-bottom: 30px;
 }
 

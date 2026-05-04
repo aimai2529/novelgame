@@ -47,10 +47,28 @@ const storage = {
 let remainingTargets = storage.getNumber("remainingTargets", 4);
 
 let executedScenes = storage.getJSON("executedScenes", []);
+let visitedEndings = storage.getJSON("visitedEndings", []);
+
+function recordEnding(id) {
+    if (!visitedEndings.includes(id)) {
+        visitedEndings.push(id);
+        storage.set("visitedEndings", visitedEndings);
+    }
+}
 
 const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
+
+const randomLines = [
+    "なぁなぁ、カレー作るんならシーフードカレーにしようぜ！エビ入れようエビ！え？海鮮は高い？……そっか",
+    "このパジャマ？いいだろ、もう5年ぐらい着てるわ。",
+    "なんだよこっちじろじろ見て。早く買い物行けよ",
+    "なんだよ、なんか俺の顔についてる？",
+    "うわああああああ！！！虫！でた！！！！！ぎゃあ！！！飛ぶな！！！",
+    "冷静に考えてさ、カメラ構えながら買い物してるの、不審者じゃね？？…………あああぁごめんごめんそんなことないから！！やめないで！！",
+    "うーん、カップ麺一つじゃ、夕飯には足りないんだよな～",
+];
 
 const itemDB = {
     "note": {
@@ -113,6 +131,7 @@ let san = storage.getNumber("san", 3);
 let sanZeroTriggered = false;
 let sanZeroPending = false;
 let sanZeroAdvance = false;
+let pendingExitBranch = false;
 
 const importantImage = [
     "map_floor1.png",
@@ -197,6 +216,8 @@ async function loadStory() {
         "story/wagashi2.json",
         "story/wagashi3.json",
         "story/wagashi3b.json",
+        // "story/wear1.json",
+        "story/closing.json",
         "story/exit.json"
     ];
 
@@ -510,6 +531,7 @@ function unlockMap() {
 
 function locationLoad(id) {
     if (remainingTargets <= 0) {
+        pendingExitBranch = true;
         show("closing_event");
         return;
     }
@@ -588,6 +610,21 @@ function getExitScene() {
     if (hasCarrot && hasMeat && hasCurry1) return "exit02";
     if (hasCarrot && hasMeat && hasCurry2) return "exit03";
     return "exit01";
+}
+
+function getClosingScene() {
+    if (visited.wagashi >= 3) {
+        return "closing04";
+    }
+
+    const hasCarrot = hasItem("carrot");
+    const hasMeat = hasItem("meat");
+    const hasCurry1 = hasItem("curry1");
+    const hasCurry2 = hasItem("curry2");
+
+    if (hasCarrot && hasMeat && hasCurry1) return "closing02";
+    if (hasCarrot && hasMeat && hasCurry2) return "closing03";
+    return "closing01";
 }
 
 //正気度関連
@@ -1000,6 +1037,16 @@ function show(id) {
     clearStill();
     clearScreen();
     returnSceneId = null;
+
+    if (current?.id === "closing_event" && pendingExitBranch) {
+        current.next = getClosingScene();
+        pendingExitBranch = false;
+    }
+
+    if (current?.id?.startsWith("end")) {
+        recordEnding(current.id);
+    }
+
     updateSan();
     if (san === 0 && !sanZeroAdvance) return;
 
@@ -1049,7 +1096,7 @@ function show(id) {
         nameBox.textContent = "";
     }
 
-    const speed = current.speed ?? 50;
+    const speed = current.speed ?? 60;
     const typingPromise = typeText(current.text, speed);
 
     choicesBox.innerHTML = "";
@@ -1076,7 +1123,14 @@ function show(id) {
                         typingTimer = null;
                     }
                     typingDone = false;
-                    show(choice.next);
+
+                    const nextTarget = choice.next;
+                    if (typeof nextTarget === "string" && nextTarget.startsWith("open:")) {
+                        window.location.href = nextTarget.slice(5);
+                        return;
+                    }
+
+                    show(nextTarget);
                 };
                 choicesBox.appendChild(btn);
             });
@@ -1109,6 +1163,29 @@ function show(id) {
             };
         }
     });
+
+
+    if (current.id === "search" && face) {
+        face.style.cursor = "pointer";
+        face.onclick = () => {
+            const randomLine = randomLines[Math.floor(Math.random() * randomLines.length)];
+            const textEl = document.getElementById("text");
+            const nameEl = document.getElementById("name");
+            if (textEl && nameEl) {
+                textEl.classList.remove("ready");
+                nameEl.textContent = "ユウジン";
+                typeText(randomLine).then(() => {
+                    textbox.onclick = () => {
+                        show("search");
+                    };
+                    textEl.classList.add("ready");
+                });
+            }
+        };
+    } else if (current.id !== "search") {
+        face.style.cursor = "auto";
+        face.onclick = null
+    }
 }
 
 loadStory();

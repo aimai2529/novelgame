@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "ヒラギノ角ゴ Pro W3", "游ゴシック", "Yu Gothic", sans-serif;
+    background: linear-gradient(180deg, #224558 0%, #11242e 100%);
+    color: #f4f4f8;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+}
+
+.header p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+.links {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #cf8e00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+.button-secondary {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.status {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.endings-list {
+    display: grid;
+    gap: 18px;
+    align-items: start;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.199);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
+}
+
+.card h2 {
+    margin: 0 0 10px;
+    font-size: 1.4rem;
+}
+
+.card p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.card .condition {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card .condition span {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.card img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 14px;
+    margin-top: 14px;
+    display: block;
+}
+
+.card .unknown {
+    color: #b8b8d2;
+}
+
+@media (min-width: 720px) {
+    .endings-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

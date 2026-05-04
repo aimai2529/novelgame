@@ -69,6 +69,7 @@
         "bg": "shop_donut.png",
         "face": "friend_chira.png",
         "commands": [
+            "chara(donut1_normal.png)",
             "mapLock"
         ],
         "choices": [
@@ -90,6 +91,7 @@
         "face": "friend_noodle.png",
         "commands": [
             "getItem(donut)",
+            "clearChara",
             "mapLock"
         ],
         "choices": [
@@ -138,6 +140,7 @@
         "bg": "shop_donut.png",
         "face": "friend_noodle.png",
         "commands": [
+            "clearChara",
             "mapLock"
         ],
         "choices": [
