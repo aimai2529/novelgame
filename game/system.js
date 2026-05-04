@@ -216,6 +216,7 @@ async function loadStory() {
         "story/wagashi2.json",
         "story/wagashi3.json",
         "story/wagashi3b.json",
+        // "story/wear1.json",
         "story/closing.json",
         "story/exit.json"
     ];

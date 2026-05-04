@@ -1,0 +1,235 @@
+[
+    {
+        "id": "wear1",
+        "name": "ユウジン",
+        "text": "お？服屋寄っていくのか？",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "ちょっとだけ見ていく",
+                "next": "wear1_B"
+            },
+            {
+                "label": "やっぱやめとく",
+                "next": "wear1_A"
+            }
+        ]
+    },
+    {
+        "id": "wear1_A",
+        "name": "ユウジン",
+        "text": "そうか。そしたらどこ行くんだ？",
+        "bg": "shop_wear.png",
+        "face": "friend_shikushiku.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock"
+        ],
+        "next": "search"
+    },
+    {
+        "id": "wear1_B",
+        "name": "ユウジン",
+        "text": "ふっふっふ……オシャレ代表の俺が、いいコーデを見繕ってやろう！",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "オシャレ代表……？",
+                "next": "wear1_C"
+            },
+            {
+                "label": "エビの服しか持ってないのに？",
+                "next": "wear1_C"
+            }
+        ]
+    },
+    {
+        "id": "wear1_C",
+        "name": "ユウジン",
+        "text": "いいだろ！！エビ！！かわいいだろ！！！",
+        "bg": "shop_wear.png",
+        "face": "friend_shikushiku.png",
+        "commands": [
+            "mapLock"
+        ],
+        "next": "wear1_D"
+    },
+    {
+        "id": "wear1_D",
+        "name": "ユウジン",
+        "text": "服屋といえばさ、よく店員が話しかけてくるじゃん？お前は話しかけられるのヘーキな人？",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "普通に平気だけど",
+                "next": "wear1_E"
+            },
+            {
+                "label": "ちょっと苦手かも",
+                "next": "wear1_E"
+            }
+        ]
+    },
+    {
+        "id": "wear1_E",
+        "name": "ユウジン",
+        "text": "そうなのか～\n俺は好きだぜ！服屋の店員って、十中八九ほめてくれるから、気分良くない？",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "確かに",
+                "next": "wear1_F"
+            },
+            {
+                "label": "お気楽だな",
+                "next": "wear1_F"
+            }
+        ]
+    },
+    {
+        "id": "wear1_F",
+        "name": "フクヤ",
+        "text": "いらっしゃいませ！何かお探しっすか？",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "あ、いや特には……",
+                "next": "wear1_G"
+            },
+            {
+                "label": "今日は見てるだけで……",
+                "next": "wear1_G"
+            }
+        ]
+    },
+    {
+        "id": "wear1_G",
+        "name": "フクヤ",
+        "text": "ん～～～～～わかった！！お客さん、デートのために、新しい服を身繕いに来たんだね★",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "……は？",
+                "next": "wear1_H"
+            },
+            {
+                "label": "いやそんなこと一言も……",
+                "next": "wear1_H"
+            }
+        ]
+    },
+    {
+        "id": "wear1_H",
+        "name": "フクヤ",
+        "text": "ボクもここにきて長いからね～～～一目見ればわかるのさ★その人が何を欲しているのか！",
+        "bg": "shop_wear.png",
+        "face": "friend_wara.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "いや間違ってますけど",
+                "next": "wear1_I"
+            },
+            {
+                "label": "ほんとに長いんです……？",
+                "next": "wear1_I"
+            }
+        ]
+    },
+    {
+        "id": "wear1_I",
+        "name": "フクヤ",
+        "text": "デート、うんうん、いいねぇ！その顔はきっと……初デートだ★\nでも最初からグイグイ行ったらダメだぞ！3回はデートしないとね！",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "は、はぁ……",
+                "next": "wear1_J"
+            },
+            {
+                "label": "（黙ってすっと店を出る）",
+                "next": "wear1_L"
+            }
+        ]
+    },
+    {
+        "id": "wear1_J",
+        "name": "フクヤ",
+        "text": "ボクは服マスターでもあり、恋愛マスターでもあるからね★人間っていうのは、積極性に惹かれていくものなのさ！",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "…………",
+                "next": "wear1_K"
+            },
+            {
+                "label": "（黙ってすっと店を出る）",
+                "next": "wear1_L"
+            }
+        ]
+    },
+    {
+        "id": "wear1_K",
+        "name": "フクヤ",
+        "text": "でもバランスを見誤ったらいけない！そしてそして★それは服にも通じるものがあるんだ！例えば今日のボクのファッションなんて、いいバランスだろう！",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "mapLock"
+        ],
+        "choices": [
+            {
+                "label": "（黙ってすっと店を出る）",
+                "next": "wear1_L"
+            }
+        ]
+    },
+    {
+        "id": "wear1_L",
+        "name": "ユウジン",
+        "text": "……なんだあいつ。あれは……話しかけられたくないかも、なぁ…………\nま！気を取り直してほかのところ行こうぜ！！",
+        "bg": "shop_wear.png",
+        "face": "friend_noodle.png",
+        "commands": [
+            "overlay(map, 'クリックで移動')",
+            "mapUnlock",
+            "target(-1)",
+            "wear(1)"
+        ],
+        "next": "search"
+    }
+]

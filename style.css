@@ -171,6 +171,12 @@ h1 {
     margin-bottom: 30px;
 }
 
+.attention {
+    font-size: 20px;
+    color: #c51111;
+    margin-bottom: 30px;
+}
+
 .notice {
     font-size: 14px;
     color: #666;
