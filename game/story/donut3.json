@@ -69,6 +69,7 @@
         "bg": "shop_donut.png",
         "face": "friend_chira.png",
         "commands": [
+            "chara(donut1_normal.png)",
             "mapLock"
         ],
         "choices": [
@@ -89,6 +90,7 @@
         "bg": "shop_donut.png",
         "face": "friend_noodle.png",
         "commands": [
+            "chara(donut1_normal.png)",
             "mapLock"
         ],
         "next": "donut3_F"
@@ -100,6 +102,7 @@
         "bg": "shop_donut.png",
         "face": "friend_noodle.png",
         "commands": [
+            "clearChara",
             "mapLock"
         ],
         "choices": [
@@ -134,6 +137,7 @@
         "bg": "shop_donut.png",
         "face": "friend_noodle.png",
         "commands": [
+            "chara(donut1_normal.png)",
             "mapLock"
         ],
         "next": "donut3_I"
@@ -145,6 +149,7 @@
         "bg": "shop_donut.png",
         "face": "friend_noodle.png",
         "commands": [
+            "clearChara",
             "mapLock"
         ],
         "choices": [

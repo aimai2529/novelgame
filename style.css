@@ -20,7 +20,7 @@ body {
 
 @media (min-width:801px) {
     .outer {
-        background: no-repeat center/cover url('./img/background.png');
+        background: no-repeat center/cover url('./img/background.webp');
         justify-content: left;
         padding-left: 20vw;
     }

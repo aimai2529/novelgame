@@ -60,6 +60,16 @@ const face = document.getElementById("call-face");
 function showEl(id) { const el = document.getElementById(id); if (el) el.style.display = ""; }
 function hideEl(id) { const el = document.getElementById(id); if (el) el.style.display = "none"; }
 
+const randomLines = [
+    "なぁなぁ、カレー作るんならシーフードカレーにしようぜ！エビ入れようエビ！え？海鮮は高い？……そっか",
+    "このパジャマ？いいだろ、もう5年ぐらい着てるわ。",
+    "なんだよこっちじろじろ見て。早く買い物行けよ",
+    "なんだよ、なんか俺の顔についてる？",
+    "うわああああああ！！！虫！でた！！！！！ぎゃあ！！！飛ぶな！！！",
+    "冷静に考えてさ、カメラ構えながら買い物してるの、不審者じゃね？？…………あああぁごめんごめんそんなことないから！！やめないで！！",
+    "うーん、カップ麺一つじゃ、夕飯には足りないんだよな～",
+];
+
 const itemDB = {
     "note": {
         name: "買い物メモ",
@@ -1085,7 +1095,7 @@ function show(id) {
         nameBox.textContent = "";
     }
 
-    const speed = current.speed ?? 50;
+    const speed = current.speed ?? 60;
     const typingPromise = typeText(current.text, speed);
 
     choicesBox.innerHTML = "";
@@ -1152,6 +1162,29 @@ function show(id) {
             };
         }
     });
+
+
+    if (current.id === "search" && face) {
+        face.style.cursor = "pointer";
+        face.onclick = () => {
+            const randomLine = randomLines[Math.floor(Math.random() * randomLines.length)];
+            const textEl = document.getElementById("text");
+            const nameEl = document.getElementById("name");
+            if (textEl && nameEl) {
+                textEl.classList.remove("ready");
+                nameEl.textContent = "ユウジン";
+                typeText(randomLine).then(() => {
+                    textbox.onclick = () => {
+                        show("search");
+                    };
+                    textEl.classList.add("ready");
+                });
+            }
+        };
+    } else if (current.id !== "search") {
+        face.style.cursor = "auto";
+        face.onclick = null
+    }
 }
 
 loadStory();
