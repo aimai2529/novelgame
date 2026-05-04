@@ -139,7 +139,7 @@
         "commands": [
             "mapLock"
         ],
-        "next": "end3"
+        "next": ""
     },
     {
         "id": "end01",
@@ -220,6 +220,54 @@
         "next": "loop"
     },
     {
+        "id": "end06",
+        "text": "END.食べすぎにはご用心",
+        "speed": 100,
+        "commands": [
+            "textNormal",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
+        "id": "end07",
+        "text": "END.駆け込め！牛丼屋",
+        "speed": 100,
+        "commands": [
+            "textNormal",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
+        "id": "end08",
+        "text": "END.一人のカップ麺",
+        "speed": 100,
+        "commands": [
+            "textNormal",
+            "show(textbox)",
+            "hide(face)",
+            "hide(map)",
+            "hide(items)",
+            "hide(status)",
+            "hide(hud-top-left)",
+            "hide(video)"
+        ],
+        "next": "loop"
+    },
+    {
         "id": "loop",
         "text": "もう一度遊ぶ？",
         "commands": [
@@ -239,8 +287,8 @@
                 "next": "start"
             },
             {
-                "label": "yes",
-                "next": "start"
+                "label": "エンド集を見る",
+                "next": "open:../endings/index.html"
             }
         ]
     }

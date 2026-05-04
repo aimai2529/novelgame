@@ -1,0 +1,50 @@
+[
+    {
+        "id": "end01",
+        "title": "もうエビの寿司は飽きあき",
+        "condition": "メモに書いてある材料を持たずに出口から帰宅する",
+        "still": "still_ebi.png"
+    },
+    {
+        "id": "end02",
+        "title": "二人のカップ麺",
+        "condition": "メモに書いてある材料を持たずに出口から帰宅する",
+        "still": null
+    },
+    {
+        "id": "end03",
+        "title": "このカレーは全部自分の",
+        "condition": "メモに書いてある材料をそろえ、ユウジンにおすそ分けをしない",
+        "still": null
+    },
+    {
+        "id": "end04",
+        "title": "カレー作りすぎちゃって",
+        "condition": "メモに書いてある材料をそろえ、ユウジンにおすそ分けをする",
+        "still": null
+    },
+    {
+        "id": "end05",
+        "title": "みんなの笑顔のために",
+        "condition": "食品売り場にたくさん訪れる",
+        "still": "still_tenin3.png"
+    },
+    {
+        "id": "end06",
+        "title": "食べすぎにはご用心",
+        "condition": "和菓子を食べすぎて帰る",
+        "still": null
+    },
+    {
+        "id": "end07",
+        "title": "駆け込め！牛丼屋",
+        "condition": "メモに書いてある材料を買わずに閉店時間を迎える",
+        "still": null
+    },
+    {
+        "id": "end08",
+        "title": "一人のカップ麺",
+        "condition": "メモに書いてある材料を買わずに閉店時間を迎える",
+        "still": null
+    }
+]

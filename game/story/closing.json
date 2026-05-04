@@ -1,120 +1,56 @@
 [
     {
-        "id": "exit01",
+        "id": "closing01",
         "name": "ユウジン",
-        "text": "ちょちょちょ、帰るのか？夕飯の材料は？？",
-        "bg": "exit.png",
-        "face": "friend_surprised.png",
-        "commands": [
-            "mapLock"
-        ],
-        "choices": [
-            {
-                "label": "うん。帰る",
-                "next": "exit01_B"
-            },
-            {
-                "label": "帰るわけないじゃん",
-                "next": "exit01_A"
-            }
-        ]
-    },
-    {
-        "id": "exit01_A",
-        "name": "ユウジン",
-        "text": "そうだよな、びっくりした……次はどこいく？",
-        "bg": "supermarket.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
-        "id": "exit01_B",
-        "name": "ユウジン",
-        "text": "お、おう……お前がそれでいいんならいいんだけどよ。夕飯どうすんだよ\n……うちきてカップ麺食うか？",
+        "text": "お前…………夕飯の材料結局買ってねぇじゃん！！夕飯どうすんだよ…………",
         "bg": "exit.png",
         "face": "friend_noodle.png",
         "choices": [
             {
                 "label": "いや、どこかで食べて帰るよ",
-                "next": "exit01_C"
+                "next": "closing01_C"
             },
             {
-                "label": "……じゃあ、そうしようかな",
-                "next": "exit01_D"
+                "label": "カップ麺、食べようかな",
+                "next": "closing01_D"
             }
         ]
     },
     {
-        "id": "exit01_C",
+        "id": "closing01_C",
         "name": "ユウジン",
-        "text": "そうか、じゃあ寿司だな！回転寿司行こう。俺が何食べるか選ぶからさ〜！そのまま通話繋げとけよ〜！",
+        "text": "そうか、じゃあまぁサクッと牛丼、とかか？ちゃっちゃと食って帰れよ～",
         "bg": "exit.png",
         "face": "friend_aori.png",
-        "next": "end01"
+        "next": "end07"
     },
     {
-        "id": "exit01_D",
+        "id": "closing01_D",
         "name": "ユウジン",
-        "text": "じゃ、お湯沸かして待ってるな！わかってると思うけど、俺ん家のカップ麺はシーフード一択だから。文句言うなよ〜",
+        "text": "俺がカップ麺食うっていうと、健康に気を遣えっていうくせに～。まあいいや、早く帰れよ～",
         "bg": "exit.png",
         "face": "friend_aori.png",
-        "next": "end02"
+        "next": "end08"
     },
     {
-        "id": "exit02",
+        "id": "closing02",
         "name": "ユウジン",
-        "text": "お、帰るのか？",
-        "bg": "exit.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "mapLock"
-        ],
-        "choices": [
-            {
-                "label": "うん。帰る",
-                "next": "exit02_B"
-            },
-            {
-                "label": "まだ帰らない",
-                "next": "exit02_A"
-            }
-        ]
-    },
-    {
-        "id": "exit02_A",
-        "name": "ユウジン",
-        "text": "まだ買い物してくのか？\nほどほどにしとけよ～",
-        "bg": "supermarket.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
-        "id": "exit02_B",
-        "name": "ユウジン",
-        "text": "うんうん、ちゃんと買うもん買えてて偉いな～",
+        "text": "まあでも、ちゃんと買うもん買えてて偉いな～",
         "bg": "exit.png",
         "face": "friend_noodle.png",
         "choices": [
             {
                 "label": "そりゃどーも",
-                "next": "exit02_C"
+                "next": "closing02_C"
             },
             {
                 "label": "馬鹿にしてるだろ",
-                "next": "exit02_C"
+                "next": "closing02_C"
             }
         ]
     },
     {
-        "id": "exit02_C",
+        "id": "closing02_C",
         "name": "ユウジン",
         "text": "まあまあ、ほら、早く帰って作らないと！それで俺におすそ分けしに来てくれるんだろ？",
         "bg": "exit.png",
@@ -122,16 +58,16 @@
         "choices": [
             {
                 "label": "行かないけど……？",
-                "next": "exit02_D"
+                "next": "closing02_D"
             },
             {
                 "label": "そうだな",
-                "next": "exit02_E"
+                "next": "closing02_E"
             }
         ]
     },
     {
-        "id": "exit02_D",
+        "id": "closing02_D",
         "name": "ユウジン",
         "text": "ちぇ、だめか～……\n……それはそれとして、気を付けて帰れよな～",
         "bg": "exit.png",
@@ -139,7 +75,7 @@
         "next": "end03"
     },
     {
-        "id": "exit02_E",
+        "id": "closing02_E",
         "name": "ユウジン",
         "text": "……マジで……？！冗談のつもりだったんだけど……\nいや、食いてえ！お前のカレー！楽しみにしてるな！",
         "bg": "exit.png",
@@ -147,7 +83,7 @@
         "next": "end04"
     },
     {
-        "id": "exit03",
+        "id": "closing03",
         "name": "ユウジン",
         "text": "お、帰るのか？",
         "bg": "exit.png",
@@ -158,16 +94,16 @@
         "choices": [
             {
                 "label": "うん。帰る",
-                "next": "exit03_B"
+                "next": "closing03_B"
             },
             {
                 "label": "まだ帰らない",
-                "next": "exit02_A"
+                "next": "closing02_A"
             }
         ]
     },
     {
-        "id": "exit03_B",
+        "id": "closing03_B",
         "name": "ユウジン",
         "text": "うんうん、ちゃんと買うもん買えてて偉いな～",
         "bg": "exit.png",
@@ -175,16 +111,16 @@
         "choices": [
             {
                 "label": "そりゃどーも",
-                "next": "exit03_C"
+                "next": "closing03_C"
             },
             {
                 "label": "馬鹿にしてるだろ",
-                "next": "exit03_C"
+                "next": "closing03_C"
             }
         ]
     },
     {
-        "id": "exit03_C",
+        "id": "closing03_C",
         "name": "ユウジン",
         "text": "まあまあ、ほら、早く帰って作らないと！それで俺におすそ分けしに来てくれるんだろ？",
         "bg": "exit.png",
@@ -192,16 +128,16 @@
         "choices": [
             {
                 "label": "行かないけど……？",
-                "next": "exit03_D"
+                "next": "closing03_D"
             },
             {
                 "label": "辛いの、苦手じゃなかった？",
-                "next": "exit03_E"
+                "next": "closing03_E"
             }
         ]
     },
     {
-        "id": "exit03_D",
+        "id": "closing03_D",
         "name": "ユウジン",
         "text": "ちぇ～……ていうか、そもそも辛口のカレー作るんだもんな……\n……ま、気を付けて帰れよな～",
         "bg": "exit.png",
@@ -209,7 +145,7 @@
         "next": "end03"
     },
     {
-        "id": "exit03_E",
+        "id": "closing03_E",
         "name": "ユウジン",
         "text": "そうじゃん、辛口のルー買ってたわ。な～～～んで辛口にしちゃったんだよ～～～",
         "bg": "exit.png",
@@ -217,39 +153,7 @@
         "next": "end03"
     },
     {
-        "id": "exit04",
-        "name": "ユウジン",
-        "text": "お、帰るのか？",
-        "bg": "exit.png",
-        "face": "friend_surprised.png",
-        "commands": [
-            "mapLock"
-        ],
-        "choices": [
-            {
-                "label": "今日はもう帰る",
-                "next": "exit04_B"
-            },
-            {
-                "label": "もう少しだけ見ていく",
-                "next": "exit02_A"
-            }
-        ]
-    },
-    {
-        "id": "exit04_A",
-        "name": "ユウジン",
-        "text": "おう、そうだな。もうちょっと運動してから帰らないとな！",
-        "bg": "supermarket.png",
-        "face": "friend_noodle.png",
-        "commands": [
-            "overlay(map, 'クリックで移動')",
-            "mapUnlock"
-        ],
-        "next": "search"
-    },
-    {
-        "id": "exit04_B",
+        "id": "closing04",
         "name": "ユウジン",
         "text": "んで、どうだ？めっちゃ和菓子食ってたけどさ、その…………夕飯食えるか？",
         "bg": "exit.png",
@@ -257,16 +161,16 @@
         "choices": [
             {
                 "label": "…………無理かも",
-                "next": "exit04_C"
+                "next": "closing04_C"
             },
             {
                 "label": "おなかいっぱい……",
-                "next": "exit04_C"
+                "next": "closing04_C"
             }
         ]
     },
     {
-        "id": "exit04_C",
+        "id": "closing04_C",
         "name": "ユウジン",
         "text": "ほ～～らいわんこっちゃない！和菓子なんておなかにたまるんだから！ほらだって、羊羹って非常食としていいっていうし！",
         "bg": "exit.png",
@@ -274,16 +178,16 @@
         "choices": [
             {
                 "label": "なんの話だよ",
-                "next": "exit04_D"
+                "next": "closing04_D"
             },
             {
                 "label": "お前もしょっちゅうやってるんだろ",
-                "next": "exit04_D"
+                "next": "closing04_D"
             }
         ]
     },
     {
-        "id": "exit04_D",
+        "id": "closing04_D",
         "name": "ユウジン",
         "text": "もうとにかくっ！早く帰って早く寝ろよっ！",
         "bg": "exit.png",
