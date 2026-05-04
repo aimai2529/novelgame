@@ -1028,7 +1028,7 @@ function show(id) {
     returnSceneId = null;
 
     if (current?.id === "closing_event" && pendingExitBranch) {
-        current.next = getExitScene();
+        current.next = getClosingScene();
         pendingExitBranch = false;
     }
 
