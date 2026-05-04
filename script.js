@@ -2,11 +2,8 @@ const messages = [
     { text: "今からカップ麵食うんだけどさ、通話してもいいか？", side: "left", icon: "icon.png" },
     { text: "既読無視するな！泣くぞ！", side: "left", icon: "icon.png" },
     { text: "不在着信", side: "left", icon: "icon.png" },
-    { text: "おい！！", side: "left", icon: "icon.png" },
-    { text: "もしもーし？", side: "left", icon: "icon.png" },
     { text: "暇なんだよ～頼む！", side: "left", icon: "icon.png" },
-    { text: "もうかけるからな！！！", side: "left", icon: "icon.png" },
-    { text: "どうせ見てんだから出ろよ！！？", side: "left", icon: "icon.png" },
+    { text: "どうせ見てんだから出ろよ～～！", side: "left", icon: "icon.png" },
     { text: "不在着信", side: "left", icon: "icon.png" },
     { text: "わかった、今度寿司おごる", side: "left", icon: "icon.png" },
     { text: "今から夕飯の材料買いに行くんだけど……", side: "right" },
@@ -48,7 +45,7 @@ function addMessage() {
     chat.scrollTop = chat.scrollHeight;
 
     index++;
-    setTimeout(addMessage, 1000);
+    setTimeout(addMessage, 1200);
 }
 
 // 🔥 スクロール検知
